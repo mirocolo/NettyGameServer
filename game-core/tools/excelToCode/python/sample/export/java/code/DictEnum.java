@@ -3,5 +3,5 @@
 package com.snowcattle.game.wolfshoot.service.dict.entity;
 
 public enum DictEnum {
-    EXAMPLE,             // 这是一张范例表
+	EXAMPLE,             // 这是一张范例表
 };

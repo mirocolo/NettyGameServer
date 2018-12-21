@@ -9,15 +9,14 @@ import java.net.URL;
 
 /**
  *
- *
  */
 public final class JdomUtils {
 	public static final String ARRAY_SEPARATOR = ";";
 
-    private JdomUtils() {
-    }
+	private JdomUtils() {
+	}
 
-    public static Element getRootElemet(String xmlPath) {
+	public static Element getRootElemet(String xmlPath) {
 		SAXBuilder builder = new SAXBuilder();
 //		builder.setValidation(false);
 		Document doc;

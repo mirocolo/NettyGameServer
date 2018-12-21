@@ -5,6 +5,7 @@ import com.snowcattle.game.common.constant.GlobalConstants;
 import com.snowcattle.game.common.constant.ServiceName;
 import com.snowcattle.game.common.util.ExecutorUtil;
 import com.snowcattle.game.service.IService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Map.Entry;
@@ -20,12 +21,13 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RPCFutureService implements IService {
 
+	private final ConcurrentHashMap<String, RPCFuture> pendingRPC = new ConcurrentHashMap<>();
+	private ScheduledExecutorService executorService;
+
 	@Override
 	public String getId() {
 		return ServiceName.RPCFutureService;
 	}
-
-	private ScheduledExecutorService executorService;
 
 	@Override
 	public void startup() throws Exception {
@@ -38,16 +40,16 @@ public class RPCFutureService implements IService {
 				Set<Entry<String, RPCFuture>> entrySet = pendingRPC.entrySet();
 				for (Entry<String, RPCFuture> entry : entrySet) {
 					RPCFuture rpcFuture = entry.getValue();
-					if(rpcFuture.isTimeout()){
+					if (rpcFuture.isTimeout()) {
 						String requestId = entry.getKey();
 						boolean removeFlag = removeRPCFuture(requestId, rpcFuture);
-						if(removeFlag) {
+						if (removeFlag) {
 //							rpcFuture.done(rpcResponse);
 						}
 					}
 				}
 			}
-		}, 1, 1,TimeUnit.MINUTES);
+		}, 1, 1, TimeUnit.MINUTES);
 	}
 
 	@Override
@@ -55,26 +57,28 @@ public class RPCFutureService implements IService {
 		ExecutorUtil.shutdownAndAwaitTermination(executorService, 60L, TimeUnit.MILLISECONDS);
 	}
 
-	private final ConcurrentHashMap<String, RPCFuture> pendingRPC = new ConcurrentHashMap<>();
-
-	public RPCFuture getRPCFuture(String requestId){
-		if(pendingRPC.get(requestId)!=null){
+	public RPCFuture getRPCFuture(String requestId) {
+		if (pendingRPC.get(requestId) != null) {
 			return pendingRPC.get(requestId);
 		}
 		return null;
 	}
-	public void addRPCFuture(String requestId, RPCFuture rpcFuture){
+
+	public void addRPCFuture(String requestId, RPCFuture rpcFuture) {
 		pendingRPC.put(requestId, rpcFuture);
 	}
-	public ConcurrentHashMap<String, RPCFuture> getPendingRPC(){
+
+	public ConcurrentHashMap<String, RPCFuture> getPendingRPC() {
 		return pendingRPC;
 	}
-	public boolean removeRPCFuture(String requestId, RPCFuture rpcFuture){
+
+	public boolean removeRPCFuture(String requestId, RPCFuture rpcFuture) {
 		return pendingRPC.remove(requestId, rpcFuture);
 	}
-	public void clearPendRPC(){
+
+	public void clearPendRPC() {
 		pendingRPC.clear();
 	}
-	
+
 }
 

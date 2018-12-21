@@ -1,50 +1,49 @@
 package com.snowcattle.game.db.service.async.thread;
 
 import com.snowcattle.game.db.common.Loggers;
+
 import org.slf4j.Logger;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by jwp on 2017/4/18.
- * 监视器
+ * Created by jwp on 2017/4/18. 监视器
  */
-public class AsyncDbOperationMonitor{
+public class AsyncDbOperationMonitor {
 
-    private final Logger logger = Loggers.dbServerLogger;
-    public AsyncDbOperationMonitor() {
-        this.count = new AtomicLong();
-    }
+	private final Logger logger = Loggers.dbServerLogger;
+	private final boolean totalFlag = true;
+	public AtomicLong count;
 
-    public AtomicLong count;
+	//    public long startTime;
+	public long startTime = System.currentTimeMillis();
 
-//    public long startTime;
+	public AsyncDbOperationMonitor() {
+		this.count = new AtomicLong();
+	}
 
-    private final boolean totalFlag = true;
-    public long startTime = System.currentTimeMillis();
+	public void start() {
+		if (!totalFlag) {
+			this.count.set(0);
+			startTime = System.currentTimeMillis();
+		}
 
-    public void start(){
-        if(!totalFlag){
-            this.count.set(0);
-            startTime = System.currentTimeMillis();
-        }
+	}
 
-    }
-    public void monitor(){
-        this.count.getAndIncrement();
-    }
+	public void monitor() {
+		this.count.getAndIncrement();
+	}
 
-    public void stop()
-    {
-        if(!totalFlag) {
-            this.count.set(0);
-        }
-    }
+	public void stop() {
+		if (!totalFlag) {
+			this.count.set(0);
+		}
+	}
 
-    public void printInfo(String opeartionName){
-        long endTime = System.currentTimeMillis();
-        long useTime = endTime - startTime;
-        logger.debug("operation " + opeartionName + " count " + count.get() + "use time" + useTime);
-    }
+	public void printInfo(String opeartionName) {
+		long endTime = System.currentTimeMillis();
+		long useTime = endTime - startTime;
+		logger.debug("operation " + opeartionName + " count " + count.get() + "use time" + useTime);
+	}
 
 }

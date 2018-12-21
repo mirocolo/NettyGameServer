@@ -11,57 +11,60 @@ import java.util.Random;
  * Created by jiangwenping on 17/4/10.
  */
 public class Bar {
-    public static final SerializeConfig mapping = new SerializeConfig();
-    private String barName;
-    private int barAge;
-    private Date barDate = new Date();
-    static {
-        mapping.put(Date.class, new SimpleDateFormatSerializer("yyyy-MM-dd"));
-    }
-    {
-        Random r = new Random();
-        barName = "sss_"+String.valueOf(r.nextFloat());
-        barAge = r.nextInt();
-    }
+	public static final SerializeConfig mapping = new SerializeConfig();
 
-    public static void main(String[] args) {
-        Object obj = JSON.toJSON(new Bar());
-        String x1 = JSON.toJSONString(new Bar(), true);
-        System.out.println(x1);
-        String x2 = JSON.toJSONString(new Bar(), mapping);
-        System.out.println(x2);
-    }
+	static {
+		mapping.put(Date.class, new SimpleDateFormatSerializer("yyyy-MM-dd"));
+	}
 
-    public String getBarName() {
-        return barName;
-    }
+	private String barName;
+	private int barAge;
+	private Date barDate = new Date();
 
-    public void setBarName(String barName) {
-        this.barName = barName;
-    }
+	{
+		Random r = new Random();
+		barName = "sss_" + String.valueOf(r.nextFloat());
+		barAge = r.nextInt();
+	}
 
-    public int getBarAge() {
-        return barAge;
-    }
+	public static void main(String[] args) {
+		Object obj = JSON.toJSON(new Bar());
+		String x1 = JSON.toJSONString(new Bar(), true);
+		System.out.println(x1);
+		String x2 = JSON.toJSONString(new Bar(), mapping);
+		System.out.println(x2);
+	}
 
-    public void setBarAge(int barAge) {
-        this.barAge = barAge;
-    }
+	public String getBarName() {
+		return barName;
+	}
 
-    public Date getBarDate() {
-        return barDate;
-    }
+	public void setBarName(String barName) {
+		this.barName = barName;
+	}
 
-    public void setBarDate(Date barDate) {
-        this.barDate = barDate;
-    }
+	public int getBarAge() {
+		return barAge;
+	}
 
-    @Override
-    public String toString() {
-        return "Bar{" +
-                "barName='" + barName + '\'' +
-                ", barAge=" + barAge +
-                ", barDate=" + barDate +
-                '}';
-    }
+	public void setBarAge(int barAge) {
+		this.barAge = barAge;
+	}
+
+	public Date getBarDate() {
+		return barDate;
+	}
+
+	public void setBarDate(Date barDate) {
+		this.barDate = barDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Bar{" +
+				"barName='" + barName + '\'' +
+				", barAge=" + barAge +
+				", barDate=" + barDate +
+				'}';
+	}
 }

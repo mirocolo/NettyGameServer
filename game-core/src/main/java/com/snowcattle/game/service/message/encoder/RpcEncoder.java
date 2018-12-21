@@ -2,6 +2,7 @@ package com.snowcattle.game.service.message.encoder;
 
 import com.snowcattle.game.bootstrap.manager.LocalMananger;
 import com.snowcattle.game.service.rpc.serialize.IRpcSerialize;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
@@ -11,20 +12,20 @@ import io.netty.handler.codec.MessageToByteEncoder;
  */
 public class RpcEncoder extends MessageToByteEncoder {
 
-    private final Class<?> genericClass;
+	private final Class<?> genericClass;
 
-    public RpcEncoder(Class<?> genericClass) {
-        this.genericClass = genericClass;
-    }
+	public RpcEncoder(Class<?> genericClass) {
+		this.genericClass = genericClass;
+	}
 
-    @Override
-    public void encode(ChannelHandlerContext ctx, Object in, ByteBuf out) throws Exception {
-        if (genericClass.isInstance(in)) {
-            IRpcSerialize IRpcSerialize = LocalMananger.getInstance().getLocalSpringBeanManager().getProtostuffSerialize();
-            byte[] data = IRpcSerialize.serialize(in);
-            //byte[] data = JsonUtil.serialize(in); // Not use this, have some bugs
-            out.writeInt(data.length);
-            out.writeBytes(data);
-        }
-    }
+	@Override
+	public void encode(ChannelHandlerContext ctx, Object in, ByteBuf out) throws Exception {
+		if (genericClass.isInstance(in)) {
+			IRpcSerialize IRpcSerialize = LocalMananger.getInstance().getLocalSpringBeanManager().getProtostuffSerialize();
+			byte[] data = IRpcSerialize.serialize(in);
+			//byte[] data = JsonUtil.serialize(in); // Not use this, have some bugs
+			out.writeInt(data.length);
+			out.writeBytes(data);
+		}
+	}
 }

@@ -10,11 +10,11 @@ import com.snowcattle.game.service.message.registry.MessageRegistry;
  * Created by jiangwenping on 2017/6/28.
  */
 public class ProxyClient extends GameClient {
-    public static void main(String[] args) throws Exception {
-        TestStartUp.startUpWithSpring();
-        LocalSpringServiceManager localSpringServiceManager = LocalMananger.getInstance().getLocalSpringServiceManager();
-        localSpringServiceManager.setMessageRegistry(LocalMananger.getInstance().get(MessageRegistry.class));
+	public static void main(String[] args) throws Exception {
+		TestStartUp.startUpWithSpring();
+		LocalSpringServiceManager localSpringServiceManager = LocalMananger.getInstance().getLocalSpringServiceManager();
+		localSpringServiceManager.setMessageRegistry(LocalMananger.getInstance().get(MessageRegistry.class));
 
-        new GameClient().connect("127.0.0.1", 9090);
-    }
+		new GameClient().connect("127.0.0.1", 9090);
+	}
 }

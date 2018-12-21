@@ -2,6 +2,6 @@
 <services>
     <service boenum="proxy"/>
     <service boenum="world"/>
-    <service boenum="game" />
-    <service boenum="db" />
+    <service boenum="game"/>
+    <service boenum="db"/>
 </services>

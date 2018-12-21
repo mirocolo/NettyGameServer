@@ -43,69 +43,69 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class WebSocketIndexPageHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-    private final String websocketPath;
+	private final String websocketPath;
 
-    public WebSocketIndexPageHandler(String websocketPath) {
-        this.websocketPath = websocketPath;
-    }
+	public WebSocketIndexPageHandler(String websocketPath) {
+		this.websocketPath = websocketPath;
+	}
 
-    @Override
-    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
-        // Handle a bad request.
-        if (!req.decoderResult().isSuccess()) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
-            return;
-        }
+	private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
+		// Generate an error page if response getStatus code is not OK (200).
+		if (res.status().code() != 200) {
+			ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
+			res.content().writeBytes(buf);
+			buf.release();
+			HttpUtil.setContentLength(res, res.content().readableBytes());
+		}
 
-        // Allow only GET methods.
-        if (req.method() != GET) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
-            return;
-        }
+		// Send the response and close the connection if necessary.
+		ChannelFuture f = ctx.channel().writeAndFlush(res);
+		if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
+			f.addListener(ChannelFutureListener.CLOSE);
+		}
+	}
 
-        // Send the index page
-        if ("/".equals(req.uri()) || "/index.html".equals(req.uri())) {
-            String webSocketLocation = getWebSocketLocation(ctx.pipeline(), req, websocketPath);
-            ByteBuf content = WebSocketServerIndexPage.getContent(webSocketLocation);
-            FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
+	private static String getWebSocketLocation(ChannelPipeline cp, HttpRequest req, String path) {
+		String protocol = "ws";
+		if (cp.get(SslHandler.class) != null) {
+			// SSL in use so use Secure WebSockets
+			protocol = "wss";
+		}
+		return protocol + "://" + req.headers().get(HttpHeaderNames.HOST) + path;
+	}
 
-            res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
-            HttpUtil.setContentLength(res, content.readableBytes());
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
+		// Handle a bad request.
+		if (!req.decoderResult().isSuccess()) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
+			return;
+		}
 
-            sendHttpResponse(ctx, req, res);
-        } else {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND));
-        }
-    }
+		// Allow only GET methods.
+		if (req.method() != GET) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
+			return;
+		}
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
+		// Send the index page
+		if ("/".equals(req.uri()) || "/index.html".equals(req.uri())) {
+			String webSocketLocation = getWebSocketLocation(ctx.pipeline(), req, websocketPath);
+			ByteBuf content = WebSocketServerIndexPage.getContent(webSocketLocation);
+			FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
 
-    private static void sendHttpResponse(ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
-        // Generate an error page if response getStatus code is not OK (200).
-        if (res.status().code() != 200) {
-            ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
-            res.content().writeBytes(buf);
-            buf.release();
-            HttpUtil.setContentLength(res, res.content().readableBytes());
-        }
+			res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
+			HttpUtil.setContentLength(res, content.readableBytes());
 
-        // Send the response and close the connection if necessary.
-        ChannelFuture f = ctx.channel().writeAndFlush(res);
-        if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
-            f.addListener(ChannelFutureListener.CLOSE);
-        }
-    }
+			sendHttpResponse(ctx, req, res);
+		} else {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND));
+		}
+	}
 
-    private static String getWebSocketLocation(ChannelPipeline cp, HttpRequest req, String path) {
-        String protocol = "ws";
-        if (cp.get(SslHandler.class) != null) {
-            // SSL in use so use Secure WebSockets
-            protocol = "wss";
-        }
-        return protocol + "://" + req.headers().get(HttpHeaderNames.HOST) + path;
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		ctx.close();
+	}
 }

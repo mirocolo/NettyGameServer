@@ -9,27 +9,27 @@ import com.snowcattle.game.thread.executor.OrderedQueuePoolExecutor;
  */
 public final class QueuePoolExecutorTest {
 
-    private QueuePoolExecutorTest() {
-    }
+	private QueuePoolExecutorTest() {
+	}
 
-    public static void main(String[] args) {
-        testOrder();
+	public static void main(String[] args) {
+		testOrder();
 //        testNoOrder();
-    }
+	}
 
-    public static void testOrder(){
-        OrderedQueuePoolExecutor orderedQueuePoolExecutor = new OrderedQueuePoolExecutor("orderpool", 5, Integer.MAX_VALUE);
-        int maxSize = 50;
-        for(int i = 0 ; i < maxSize; i++) {
-            orderedQueuePoolExecutor.addTask(1, new TestWorker(i));
-        }
-    }
+	public static void testOrder() {
+		OrderedQueuePoolExecutor orderedQueuePoolExecutor = new OrderedQueuePoolExecutor("orderpool", 5, Integer.MAX_VALUE);
+		int maxSize = 50;
+		for (int i = 0; i < maxSize; i++) {
+			orderedQueuePoolExecutor.addTask(1, new TestWorker(i));
+		}
+	}
 
-    public static void testNoOrder(){
-        NonOrderedQueuePoolExecutor nonOrderedQueuePoolExecutor = new NonOrderedQueuePoolExecutor(5);
-        int maxSize = 50;
-        for(int i = 0 ; i < maxSize; i++) {
-            nonOrderedQueuePoolExecutor.executeWork(new TestWorker(i));
-        }
-    }
+	public static void testNoOrder() {
+		NonOrderedQueuePoolExecutor nonOrderedQueuePoolExecutor = new NonOrderedQueuePoolExecutor(5);
+		int maxSize = 50;
+		for (int i = 0; i < maxSize; i++) {
+			nonOrderedQueuePoolExecutor.executeWork(new TestWorker(i));
+		}
+	}
 }

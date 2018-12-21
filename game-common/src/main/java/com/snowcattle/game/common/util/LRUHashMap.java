@@ -5,29 +5,34 @@ import java.util.Map.Entry;
 
 /**
  * 提供LRU算法的Map实现
- * 
- * 
- * @param <K>
- * @param <V>
  */
 public class LRUHashMap<K, V> extends LinkedHashMap<K, V> {
 	private static final long serialVersionUID = 1L;
-	/** 最大个数 */
+	/**
+	 * 最大个数
+	 */
 	private final int maxSize;
-	/** 淘汰策略 */
-    private final transient EvictPolicy<V> evictPolicy;
-	/** 命中次数 */
-	private long hitCount = 0;
-	/** 未命中次数 */
-	private long missCount = 0;
-
-	/** 默认的淘汰策略:总是淘汰 */
-    private final transient EvictPolicy<V> DEFAULT = new EvictPolicy<V>() {
+	/**
+	 * 淘汰策略
+	 */
+	private final transient EvictPolicy<V> evictPolicy;
+	/**
+	 * 默认的淘汰策略:总是淘汰
+	 */
+	private final transient EvictPolicy<V> DEFAULT = new EvictPolicy<V>() {
 		@Override
 		public boolean evict(V value) {
 			return true;
 		}
 	};
+	/**
+	 * 命中次数
+	 */
+	private long hitCount = 0;
+	/**
+	 * 未命中次数
+	 */
+	private long missCount = 0;
 
 	public LRUHashMap(int maxSize, EvictPolicy<V> evictPolicy) {
 		super(10, 0.75f, true);
@@ -69,8 +74,6 @@ public class LRUHashMap<K, V> extends LinkedHashMap<K, V> {
 
 	/**
 	 * 取得命中率
-	 * 
-	 * @return
 	 */
 	public float getHitRate() {
 		final long _hitCount = this.hitCount;
@@ -86,12 +89,10 @@ public class LRUHashMap<K, V> extends LinkedHashMap<K, V> {
 
 	/**
 	 * 获取LRUHashMap的统计信息
-	 * 
-	 * @return
 	 */
 	public String getStatistics() {
 		return "cache size:" + size() + '/' + this.maxSize + ",hit:" + getHitCount() + ",miss:" + getMissCount() + ",hitRate:"
-               + (int) (getHitRate() * 100) + '%';
+				+ (int) (getHitRate() * 100) + '%';
 	}
 
 	@Override

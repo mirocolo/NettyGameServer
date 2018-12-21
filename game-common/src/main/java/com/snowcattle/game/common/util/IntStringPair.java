@@ -5,7 +5,7 @@ public class IntStringPair {
 	private int key;
 	private String value;
 
-	public IntStringPair(int key,String value){
+	public IntStringPair(int key, String value) {
 		this.key = key;
 		this.value = value;
 	}

@@ -4,20 +4,21 @@ import java.util.BitSet;
 
 /**
  * 基于数组实现的字符串属性值对象
- *
- *
  */
 public final class StringPropertyArray implements Cloneable {
-	/** 保存字符串 */
+	/**
+	 * 保存字符串
+	 */
 	private final String[] values;
-	/** 数值是否修改的标识 */
+	/**
+	 * 数值是否修改的标识
+	 */
 	private final BitSet bitSet;
 
 	/**
 	 * 创建一个有size个数据的数值属性集合
 	 *
-	 * @param size
-	 *            数据的个数
+	 * @param size 数据的个数
 	 */
 	public StringPropertyArray(int size) {
 		values = new String[size];
@@ -33,8 +34,7 @@ public final class StringPropertyArray implements Cloneable {
 	/**
 	 * 从指定的数值对象src拷贝数据到本实例
 	 *
-	 * @param src
-	 *            数据的来源
+	 * @param src 数据的来源
 	 */
 	public void copyFrom(StringPropertyArray src) {
 		System.arraycopy(src.values, 0, values, 0, values.length);
@@ -43,10 +43,7 @@ public final class StringPropertyArray implements Cloneable {
 	/**
 	 * 设置index对应的值为value
 	 *
-	 * @param index
-	 * @param value
-	 * @throws ArrayIndexOutOfBoundsException
-	 *             如果index<0 或者 index>=size时会抛出此异常
+	 * @throws ArrayIndexOutOfBoundsException 如果index<0 或者 index>=size时会抛出此异常
 	 */
 	public void setString(int index, String value) {
 		String _o = values[index];
@@ -59,10 +56,7 @@ public final class StringPropertyArray implements Cloneable {
 	/**
 	 * 取得index对应的String值
 	 *
-	 * @param index
-	 * @return
-	 * @throws ArrayIndexOutOfBoundsException
-	 *             如果index<0 或者 index>=size时会抛出此异常
+	 * @throws ArrayIndexOutOfBoundsException 如果index<0 或者 index>=size时会抛出此异常
 	 */
 	public String getString(int index) {
 		return values[index];
@@ -70,8 +64,6 @@ public final class StringPropertyArray implements Cloneable {
 
 	/**
 	 * 是否有修改
-	 *
-	 * @return
 	 */
 	public boolean isChanged() {
 		return !this.bitSet.isEmpty();
@@ -87,7 +79,7 @@ public final class StringPropertyArray implements Cloneable {
 	/**
 	 * 取得被修改过的的属性索引及其对应的值
 	 *
-	 * @return 一个2维数组,第二维的长度为2,changed[][0]标识属性的int类型的索引,changed[][1]标识属性的值
+	 * @return 一个2维数组, 第二维的长度为2, changed[][0]标识属性的int类型的索引, changed[][1]标识属性的值
 	 */
 	public Object[][] getChanged() {
 		Object[][] changed = new Object[bitSet.cardinality()][2];
@@ -100,8 +92,6 @@ public final class StringPropertyArray implements Cloneable {
 
 	/**
 	 * 取得属性的个数
-	 *
-	 * @return
 	 */
 	public int size() {
 		return this.values.length;

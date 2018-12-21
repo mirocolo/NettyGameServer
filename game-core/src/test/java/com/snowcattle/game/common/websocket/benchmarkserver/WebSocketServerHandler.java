@@ -36,119 +36,122 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 
-import static io.netty.handler.codec.http.HttpMethod.*;
-import static io.netty.handler.codec.http.HttpResponseStatus.*;
-import static io.netty.handler.codec.http.HttpVersion.*;
+import static io.netty.handler.codec.http.HttpMethod.GET;
+import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static io.netty.handler.codec.http.HttpResponseStatus.FORBIDDEN;
+import static io.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
+import static io.netty.handler.codec.http.HttpResponseStatus.OK;
+import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 /**
  * Handles handshakes and messages
  */
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static final String WEBSOCKET_PATH = "/websocket";
+	private static final String WEBSOCKET_PATH = "/websocket";
 
-    private WebSocketServerHandshaker handshaker;
+	private WebSocketServerHandshaker handshaker;
 
-    @Override
-    public void channelRead0(ChannelHandlerContext ctx, Object msg) {
-        if (msg instanceof FullHttpRequest) {
-            handleHttpRequest(ctx, (FullHttpRequest) msg);
-        } else if (msg instanceof WebSocketFrame) {
-            handleWebSocketFrame(ctx, (WebSocketFrame) msg);
-        }
-    }
+	private static void sendHttpResponse(
+			ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
+		// Generate an error page if response getStatus code is not OK (200).
+		if (res.status().code() != 200) {
+			ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
+			res.content().writeBytes(buf);
+			buf.release();
+			HttpUtil.setContentLength(res, res.content().readableBytes());
+		}
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
+		// Send the response and close the connection if necessary.
+		ChannelFuture f = ctx.channel().writeAndFlush(res);
+		if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
+			f.addListener(ChannelFutureListener.CLOSE);
+		}
+	}
 
-    private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        // Handle a bad request.
-        if (!req.decoderResult().isSuccess()) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
-            return;
-        }
+	private static String getWebSocketLocation(FullHttpRequest req) {
+		String location = req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
+		if (WebSocketServer.SSL) {
+			return "wss://" + location;
+		} else {
+			return "ws://" + location;
+		}
+	}
 
-        // Allow only GET methods.
-        if (req.method() != GET) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
-            return;
-        }
+	@Override
+	public void channelRead0(ChannelHandlerContext ctx, Object msg) {
+		if (msg instanceof FullHttpRequest) {
+			handleHttpRequest(ctx, (FullHttpRequest) msg);
+		} else if (msg instanceof WebSocketFrame) {
+			handleWebSocketFrame(ctx, (WebSocketFrame) msg);
+		}
+	}
 
-        // Send the demo page and favicon.ico
-        if ("/".equals(req.uri())) {
-            ByteBuf content = WebSocketServerBenchmarkPage.getContent(getWebSocketLocation(req));
-            FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) {
+		ctx.flush();
+	}
 
-            res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
-            HttpUtil.setContentLength(res, content.readableBytes());
+	private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
+		// Handle a bad request.
+		if (!req.decoderResult().isSuccess()) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
+			return;
+		}
 
-            sendHttpResponse(ctx, req, res);
-            return;
-        }
-        if ("/favicon.ico".equals(req.uri())) {
-            FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND);
-            sendHttpResponse(ctx, req, res);
-            return;
-        }
+		// Allow only GET methods.
+		if (req.method() != GET) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
+			return;
+		}
 
-        // Handshake
-        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
-        handshaker = wsFactory.newHandshaker(req);
-        if (handshaker == null) {
-            WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
-        } else {
-            handshaker.handshake(ctx.channel(), req);
-        }
-    }
+		// Send the demo page and favicon.ico
+		if ("/".equals(req.uri())) {
+			ByteBuf content = WebSocketServerBenchmarkPage.getContent(getWebSocketLocation(req));
+			FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, OK, content);
 
-    private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+			res.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
+			HttpUtil.setContentLength(res, content.readableBytes());
 
-        // Check for closing frame
-        if (frame instanceof CloseWebSocketFrame) {
-            handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
-        } else if (frame instanceof PingWebSocketFrame) {
-            ctx.write(new PongWebSocketFrame(frame.content().retain()));
-        } else if (frame instanceof TextWebSocketFrame) {
-            // Echo the frame
-            ctx.write(frame.retain());
-        } else if (frame instanceof BinaryWebSocketFrame) {
-            // Echo the frame
-            ctx.write(frame.retain());
-        }
-    }
+			sendHttpResponse(ctx, req, res);
+			return;
+		}
+		if ("/favicon.ico".equals(req.uri())) {
+			FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND);
+			sendHttpResponse(ctx, req, res);
+			return;
+		}
 
-    private static void sendHttpResponse(
-            ChannelHandlerContext ctx, FullHttpRequest req, FullHttpResponse res) {
-        // Generate an error page if response getStatus code is not OK (200).
-        if (res.status().code() != 200) {
-            ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
-            res.content().writeBytes(buf);
-            buf.release();
-            HttpUtil.setContentLength(res, res.content().readableBytes());
-        }
+		// Handshake
+		WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
+				getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
+		handshaker = wsFactory.newHandshaker(req);
+		if (handshaker == null) {
+			WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
+		} else {
+			handshaker.handshake(ctx.channel(), req);
+		}
+	}
 
-        // Send the response and close the connection if necessary.
-        ChannelFuture f = ctx.channel().writeAndFlush(res);
-        if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
-            f.addListener(ChannelFutureListener.CLOSE);
-        }
-    }
+	private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
+		// Check for closing frame
+		if (frame instanceof CloseWebSocketFrame) {
+			handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
+		} else if (frame instanceof PingWebSocketFrame) {
+			ctx.write(new PongWebSocketFrame(frame.content().retain()));
+		} else if (frame instanceof TextWebSocketFrame) {
+			// Echo the frame
+			ctx.write(frame.retain());
+		} else if (frame instanceof BinaryWebSocketFrame) {
+			// Echo the frame
+			ctx.write(frame.retain());
+		}
+	}
 
-    private static String getWebSocketLocation(FullHttpRequest req) {
-        String location =  req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
-        if (WebSocketServer.SSL) {
-            return "wss://" + location;
-        } else {
-            return "ws://" + location;
-        }
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		ctx.close();
+	}
 }

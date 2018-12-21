@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 public @interface MessageCommandAnnotation {
 	/**
-	 * @return
+	 *
 	 */
 	int command();
 }

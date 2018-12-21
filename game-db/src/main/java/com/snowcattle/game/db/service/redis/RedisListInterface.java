@@ -1,13 +1,12 @@
 package com.snowcattle.game.db.service.redis;
 
 
-
 /**
  * 列表类型的缓存对象
- * 
  */
-public interface RedisListInterface{
+public interface RedisListInterface {
 	public String getShardingKey();
+
 	public String getRedisKeyEnumString();
 
 	/**

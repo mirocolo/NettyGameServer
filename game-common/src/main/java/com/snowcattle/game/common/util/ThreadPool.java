@@ -1,42 +1,52 @@
 package com.snowcattle.game.common.util;
 
-import java.util.concurrent.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
  * 创建线程池
- *
- *
  */
 public class ThreadPool {
 
-	/** 日志 */
+	/**
+	 * 日志
+	 */
 	private static final Logger logger = LoggerFactory.getLogger(ThreadPool.class);
-	/** 核心线程个数 */
+	/**
+	 * 核心线程个数
+	 */
 	private final int coreSize;
-	/** 最多线程个数 */
+	/**
+	 * 最多线程个数
+	 */
 	private final int maxSize;
-	/** 空闲线程保留时间 */
+	/**
+	 * 空闲线程保留时间
+	 */
 	private final int keepAliveTime;
-	/** 堵塞队列 */
+	/**
+	 * 堵塞队列
+	 */
 	private final BlockingQueue<Runnable> workQueue;
-	/** 被拒绝任务处理策略 */
+	/**
+	 * 被拒绝任务处理策略
+	 */
 	private final RejectedExecutionHandler handler;
-	/** 线程池 */
-	private ThreadPoolExecutor threadPool;
 	/*线程工厂*/
 	private final ThreadFactory threadFactory;
 	/**
+	 * 线程池
+	 */
+	private ThreadPoolExecutor threadPool;
+
+	/**
 	 * 初始化
-	 *
-	 * @param coreSize
-	 * @param maxSize
-	 * @param keepAliveTime
-	 * @param workQueue
-	 * @param threadFactory
-	 * @param handler
 	 */
 	public ThreadPool(int coreSize, int maxSize, int keepAliveTime, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler) {
 		if (coreSize < 0 || keepAliveTime < 0 || coreSize > maxSize || maxSize <= 0 || workQueue == null || threadFactory == null || handler == null) {
@@ -52,8 +62,6 @@ public class ThreadPool {
 
 	/**
 	 * 创建线程池
-	 *
-	 * @return
 	 */
 	public boolean start() {
 		// 创建线程池
@@ -61,7 +69,7 @@ public class ThreadPool {
 			if (logger.isInfoEnabled()) {
 				logger.info("Start create a threedPool with parameters like [ coreSize : " + this.coreSize + " maxSize : " + this.maxSize + " keepAliveTime : " + this.keepAliveTime);
 			}
-			threadPool = new ThreadPoolExecutor(coreSize, maxSize, keepAliveTime, TimeUnit.SECONDS, workQueue,threadFactory,  handler);
+			threadPool = new ThreadPoolExecutor(coreSize, maxSize, keepAliveTime, TimeUnit.SECONDS, workQueue, threadFactory, handler);
 			if (logger.isInfoEnabled()) {
 				logger.info("Create success.");
 			}
@@ -75,7 +83,6 @@ public class ThreadPool {
 
 	/**
 	 * 关闭线程池
-	 *
 	 */
 	public void stop() {
 		if (isStart()) {
@@ -86,8 +93,6 @@ public class ThreadPool {
 
 	/**
 	 * 判断是否打开线程池
-	 *
-	 * @return
 	 */
 	public boolean isStart() {
 		if (threadPool != null && !threadPool.isShutdown()) {
@@ -110,8 +115,6 @@ public class ThreadPool {
 
 	/**
 	 * 添加任务
-	 *
-	 * @param task
 	 */
 	public void addTask(Runnable task) {
 		this.threadPool.execute(task);

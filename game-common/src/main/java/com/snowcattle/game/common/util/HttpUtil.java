@@ -1,6 +1,7 @@
 package com.snowcattle.game.common.util;
 
 import com.snowcattle.game.common.constant.CommonErrorLogInfo;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -21,8 +22,6 @@ import java.net.URLEncoder;
 
 /**
  * Http请求工具
- * 
- * 
  */
 public final class HttpUtil {
 	private static final Logger logger = LoggerFactory.getLogger("HttpUtil");
@@ -30,21 +29,24 @@ public final class HttpUtil {
 	private static final int DEFAULT_TIMEOUT = 5;
 
 	private static final String CHARSET = "charset=";
-	/** 连接超时,默认5秒 */
+	/**
+	 * 连接超时,默认5秒
+	 */
 	private static final int DEFAULT_CONNECT_TIMEOUT = 5000;
-	/** 读取超时,默认5秒 */
+	/**
+	 * 读取超时,默认5秒
+	 */
 	private static final int DEFAULT_READ_TIMEOUT = 5000;
-	/** 连接local的参数编码 */
+	/**
+	 * 连接local的参数编码
+	 */
 	private static final String DEFAULT_ENCODE_TYPE = "utf-8";
 
-    private HttpUtil() {
-    }
+	private HttpUtil() {
+	}
 
-    /**
+	/**
 	 * 按照utf-8的编码格式进行编码
-	 * 
-	 * @param param
-	 * @return
 	 */
 	public static String encode(String param) {
 		try {
@@ -60,7 +62,7 @@ public final class HttpUtil {
 			return param;
 		}
 	}
-	
+
 	public static String decode(String param, String defaultVal) {
 		try {
 			return URLDecoder.decode(param, DEFAULT_ENCODE_TYPE);
@@ -78,10 +80,6 @@ public final class HttpUtil {
 
 	/**
 	 * 获取指定地址的内容,如果能够从URLConnection中可以解析出编码则使用解析出的编码;否则就使用GBK编码
-	 * 
-	 * @param requestUrl
-	 * @return
-	 * @throws IOException
 	 */
 	public static String getUrl(String requestUrl) throws IOException {
 		final long _begin = System.nanoTime();
@@ -123,12 +121,9 @@ public final class HttpUtil {
 
 	/**
 	 * 对url的参数进行编码，并返回编码后的url
-	 * 
-	 * @param requestParmUrl
-	 *            带参数的url请求
-	 * @param params
-	 *            ulr中的参数
-	 * @return
+	 *
+	 * @param requestParmUrl 带参数的url请求
+	 * @param params         ulr中的参数
 	 */
 	public static String encodeUrl(String requestParmUrl, Object... params) {
 		// 对所有的字符类型参数进行编码
@@ -143,13 +138,10 @@ public final class HttpUtil {
 
 	/**
 	 * 带参数的url请求, 会先对URL中的参数进行编码
-	 * 
-	 * @param requestParmUrl
-	 *            请求的url
-	 * @param params
-	 *            请求的参数
+	 *
+	 * @param requestParmUrl 请求的url
+	 * @param params         请求的参数
 	 * @return 返回的结果
-	 * @throws IOException
 	 */
 	public static String getUrl(String requestParmUrl, Object... params) throws IOException {
 		String _url = encodeUrl(requestParmUrl, params);
@@ -158,9 +150,6 @@ public final class HttpUtil {
 
 	/**
 	 * 尝试解析Http请求的编码格式,如果没有解析到则使用GBK编码(主要考虑到Local平台的返回编码是gb2312的)
-	 * 
-	 * @param urlConnection
-	 * @return
 	 */
 	static String parseEncoding(HttpURLConnection urlConnection) {
 		String _encoding = urlConnection.getContentEncoding();
@@ -183,9 +172,6 @@ public final class HttpUtil {
 
 	/**
 	 * 访问
-	 * 
-	 * @param url
-	 * @return
 	 */
 	public static String doPost(String url) {
 		StringBuilder stringBuffer = new StringBuilder();
@@ -218,14 +204,14 @@ public final class HttpUtil {
 			if (null != in) {
 				try {
 					in.close();
-                } catch (IOException e) {
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 		return stringBuffer.toString();
 	}
-	
+
 //	public static void main(String args[]) {
 //		String param = "domain=s4.app12345.qqopenapp.com数量的开发建设力度姐夫";
 //		String b = encode(param);

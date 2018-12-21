@@ -13,41 +13,41 @@ import com.snowcattle.game.jdbc.mapper.OrderMapper;
 @DbMapper(mapper = OrderMapper.class)
 public class Order extends BaseLongIDEntity implements RedisInterface {
 
-    private static final long serialVersionUID = -4432810780168174210L;
-    @FieldSave
-    private String status;
+	private static final long serialVersionUID = -4432810780168174210L;
+	@FieldSave
+	private String status;
 
-    /**
-     * @return status
-     */
-    public String getStatus() {
-        return status;
-    }
+	/**
+	 * @return status
+	 */
+	public String getStatus() {
+		return status;
+	}
 
-    /**
-     * @param status
-     */
-    @MethodSaveProxy(proxy="status")
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	/**
+	 *
+	 */
+	@MethodSaveProxy(proxy = "status")
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + getId() +
-                ", userId=" + getUserId() +
-                ", status='" + status + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Order{" +
+				"orderId=" + getId() +
+				", userId=" + getUserId() +
+				", status='" + status + '\'' +
+				'}';
+	}
 
-    @Override
-    public String getUnionKey() {
-        return String.valueOf(getUserId()+ EntityUtils.ENTITY_SPLIT_STRING + getId());
-    }
+	@Override
+	public String getUnionKey() {
+		return String.valueOf(getUserId() + EntityUtils.ENTITY_SPLIT_STRING + getId());
+	}
 
-    @Override
-    public String getRedisKeyEnumString() {
-        return "od#";
-    }
+	@Override
+	public String getRedisKeyEnumString() {
+		return "od#";
+	}
 }

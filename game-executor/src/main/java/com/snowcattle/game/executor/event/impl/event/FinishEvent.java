@@ -7,18 +7,17 @@ import com.snowcattle.game.executor.event.EventType;
 import java.io.Serializable;
 
 /**
- * Created by jiangwenping on 17/1/11.
- * dispatch 使用
+ * Created by jiangwenping on 17/1/11. dispatch 使用
  */
-public class FinishEvent <ID extends Serializable> extends CycleEvent {
-    public FinishEvent(EventType eventType, ID eventId,EventParam... parms){
+public class FinishEvent<ID extends Serializable> extends CycleEvent {
+	public FinishEvent(EventType eventType, ID eventId, EventParam... parms) {
 //        setEventType(eventType);
 //        setParams(parms);
-        super(eventType, eventId, parms);
-    }
+		super(eventType, eventId, parms);
+	}
 
-    public void call() {
+	public void call() {
 //        EventParam[] eventParams = getParams();
 //        System.out.println(eventParams[0].getT() + "float"+ eventParams[1].getT());
-    }
+	}
 }

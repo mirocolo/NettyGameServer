@@ -1,6 +1,7 @@
 package com.snowcattle.game.net.client.tcp;
 
 import com.snowcattle.game.TestStartUp;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -16,30 +17,30 @@ import io.netty.handler.logging.LoggingHandler;
 
 public class GameClient {
 
-    public static void main(String[] args) throws Exception {
-        TestStartUp.startUpWithSpring();
+	public static void main(String[] args) throws Exception {
+		TestStartUp.startUpWithSpring();
 
-        new GameClient().connect("127.0.0.1", 7090);
-    }
+		new GameClient().connect("127.0.0.1", 7090);
+	}
 
-    public void connect(String addr, int port) throws Exception {
-        final EventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Bootstrap b = new Bootstrap();
-            b.group(group).channel(NioSocketChannel.class)
-                    .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new LoggingHandler(LogLevel.DEBUG))
-                    .handler(new GameClientChannleInitializer());
-            ChannelFuture f = b.connect(addr, port).sync();
-            System.out.println("连接服务器:" + f.channel().remoteAddress() + ",本地地址:" + f.channel().localAddress());
-            f.channel().closeFuture().sync();//等待客户端关闭连接
+	public void connect(String addr, int port) throws Exception {
+		final EventLoopGroup group = new NioEventLoopGroup();
+		try {
+			Bootstrap b = new Bootstrap();
+			b.group(group).channel(NioSocketChannel.class)
+					.option(ChannelOption.TCP_NODELAY, true)
+					.handler(new LoggingHandler(LogLevel.DEBUG))
+					.handler(new GameClientChannleInitializer());
+			ChannelFuture f = b.connect(addr, port).sync();
+			System.out.println("连接服务器:" + f.channel().remoteAddress() + ",本地地址:" + f.channel().localAddress());
+			f.channel().closeFuture().sync();//等待客户端关闭连接
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 
-            group.shutdownGracefully();
-        }
-    }
+			group.shutdownGracefully();
+		}
+	}
 }
 

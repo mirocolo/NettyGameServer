@@ -3,44 +3,45 @@ package com.snowcattle.game.service.net.tcp.session;
 import com.snowcattle.game.common.constant.Loggers;
 import com.snowcattle.game.common.exception.NetMessageException;
 import com.snowcattle.game.service.message.AbstractNetMessage;
-import io.netty.channel.Channel;
+
 import org.slf4j.Logger;
 
+import io.netty.channel.Channel;
+
 /**
- * Created by jwp on 2017/2/9.
- * netty会话
+ * Created by jwp on 2017/2/9. netty会话
  */
-public abstract class NettySession implements ISession  {
+public abstract class NettySession implements ISession {
 
-    private static final Logger errorLogger = Loggers.errorLogger;
+	private static final Logger errorLogger = Loggers.errorLogger;
 
-    protected volatile Channel channel;
+	protected volatile Channel channel;
 
 
-    private long playerId;
+	private long playerId;
 
-    public NettySession(Channel s) {
-        channel = s;
-    }
+	public NettySession(Channel s) {
+		channel = s;
+	}
 
-    @Override
-    public boolean isConnected() {
-        if (channel != null) {
-            return channel.isActive();
-        }
-        return false;
-    }
+	@Override
+	public boolean isConnected() {
+		if (channel != null) {
+			return channel.isActive();
+		}
+		return false;
+	}
 
-    @SuppressWarnings({ "rawtypes" })
-    @Override
-    public void write(AbstractNetMessage msg) throws Exception {
-        if (msg != null) {
-            try {
-                channel.writeAndFlush(msg);
-            }catch (Exception e){
-                errorLogger.info("session write msg exception", e);
-                throw new NetMessageException(e);
-            }
+	@SuppressWarnings({"rawtypes"})
+	@Override
+	public void write(AbstractNetMessage msg) throws Exception {
+		if (msg != null) {
+			try {
+				channel.writeAndFlush(msg);
+			} catch (Exception e) {
+				errorLogger.info("session write msg exception", e);
+				throw new NetMessageException(e);
+			}
 
 //			if(msg instanceof ISliceMessage){
 //				final ISliceMessage<BaseMinaMessage> _slices = (ISliceMessage<BaseMinaMessage>) msg;
@@ -53,46 +54,46 @@ public abstract class NettySession implements ISession  {
 //				StatisticsLoggerHelper.logMessageSent(msg);
 //				session.write(msg);
 //			}
-        }
-    }
+		}
+	}
 
-    @Override
-    public void close(boolean immediately) {
-        if (channel != null) {
-            channel.close();
-        }
-    }
+	@Override
+	public void close(boolean immediately) {
+		if (channel != null) {
+			channel.close();
+		}
+	}
 
 
-    public boolean closeOnException() {
-        return true;
-    }
+	public boolean closeOnException() {
+		return true;
+	}
 
-    public long getPlayerId() {
-        return playerId;
-    }
+	public long getPlayerId() {
+		return playerId;
+	}
 
-    public void setPlayerId(long playerId) {
-        this.playerId = playerId;
-    }
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
+	}
 
-    @Override
-    public void write(byte[] msg) throws Exception {
-        if (channel != null) {
-            try {
-                channel.writeAndFlush(msg);
-            }catch (Exception e){
-                errorLogger.info("session write bytes exception", e);
-                throw new NetMessageException(e);
-            }
-        }
-    }
+	@Override
+	public void write(byte[] msg) throws Exception {
+		if (channel != null) {
+			try {
+				channel.writeAndFlush(msg);
+			} catch (Exception e) {
+				errorLogger.info("session write bytes exception", e);
+				throw new NetMessageException(e);
+			}
+		}
+	}
 
-    public Channel getChannel() {
-        return channel;
-    }
+	public Channel getChannel() {
+		return channel;
+	}
 
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
 }

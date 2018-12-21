@@ -1,9 +1,6 @@
 package com.snowcattle.game.common.util;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public final class IsoUtils {
@@ -32,10 +29,10 @@ public final class IsoUtils {
 		initMask();
 	}
 
-    private IsoUtils() {
-    }
+	private IsoUtils() {
+	}
 
-    public static void initMask() {
+	public static void initMask() {
 		int width = TILE_WIDTH;
 		int height = TILE_HEIGHT;
 
@@ -78,16 +75,13 @@ public final class IsoUtils {
 		}
 
 		g2d.dispose();
-    }
+	}
 
 	/**
 	 * 返回tile坐标对应的网格的中点坐标
 	 *
-	 * @param x
-	 *            tile所在列坐标
-	 * @param y
-	 *            tile所在行坐标
-	 * @return
+	 * @param x tile所在列坐标
+	 * @param y tile所在行坐标
 	 */
 	public static Point tile2ImageCoord(int x, int y) {
 		Point rt;
@@ -122,26 +116,26 @@ public final class IsoUtils {
 		int offx = Math.abs(x % TILE_WIDTH);
 		int offy = Math.abs(y % TILE_HEIGHT);
 		switch (masks[offy][offx]) {
-		case AREA_NORTHEAST: {
-			centerCellCoords.x += 1;
-			centerCellCoords.y--;
-			break;
-		}
-		case AREA_NORTHWEST: {
-			// centerCellCoords.x -=
-			centerCellCoords.y--;
-			break;
-		}
-		case AREA_SOUTHEAST: {
-			centerCellCoords.x += 1;
-			centerCellCoords.y++;
-			break;
-		}
-		case AREA_SOUTHWEST: {
-			// centerCellCoords.x
-			centerCellCoords.y++;
-			break;
-		}
+			case AREA_NORTHEAST: {
+				centerCellCoords.x += 1;
+				centerCellCoords.y--;
+				break;
+			}
+			case AREA_NORTHWEST: {
+				// centerCellCoords.x -=
+				centerCellCoords.y--;
+				break;
+			}
+			case AREA_SOUTHEAST: {
+				centerCellCoords.x += 1;
+				centerCellCoords.y++;
+				break;
+			}
+			case AREA_SOUTHWEST: {
+				// centerCellCoords.x
+				centerCellCoords.y++;
+				break;
+			}
 		}
 		// System.out.println("[S2T]("+x+","+y+")<->("+centerCellCoords.x+","+centerCellCoords.y+")");
 		if (x < 0) {
@@ -156,7 +150,7 @@ public final class IsoUtils {
 
 	public static void main(String[] args) {
 		System.out.println(tile2ImageCoord(6, 32));
-		System.out.println(image2TileCoord(1444 , 400));
+		System.out.println(image2TileCoord(1444, 400));
 	}
 
 }

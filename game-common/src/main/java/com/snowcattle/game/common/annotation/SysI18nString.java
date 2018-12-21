@@ -7,9 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * 系统提示用多语言
- *
- *
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

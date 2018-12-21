@@ -8,9 +8,9 @@ import com.snowcattle.game.executor.event.CycleEvent;
  */
 public class CycleDisruptorEventFactory implements EventFactory<CycleEvent> {
 
-    @Override
-    public CycleEvent newInstance() {
-        return new CycleEvent();
-    }
+	@Override
+	public CycleEvent newInstance() {
+		return new CycleEvent();
+	}
 
 }

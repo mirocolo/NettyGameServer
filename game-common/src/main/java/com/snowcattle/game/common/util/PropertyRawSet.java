@@ -6,8 +6,6 @@ import java.util.Map;
 
 /**
  * 按原类型保存的属性集合
- *
- *
  */
 public final class PropertyRawSet<K, V> implements Cloneable {
 
@@ -21,7 +19,7 @@ public final class PropertyRawSet<K, V> implements Cloneable {
 		p = new HashMap<K, V>(pset.p);
 	}
 
-	public PropertyRawSet(Map<K,V> pset){
+	public PropertyRawSet(Map<K, V> pset) {
 		p = new HashMap<K, V>(pset);
 	}
 

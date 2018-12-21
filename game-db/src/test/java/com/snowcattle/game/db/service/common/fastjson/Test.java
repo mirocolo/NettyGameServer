@@ -9,24 +9,24 @@ import com.alibaba.fastjson.serializer.SerializeConfig;
  */
 public class Test {
 
-    private Status status;
+	private Status status;
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public static void main(String[] args) {
-        SerializeConfig config=new SerializeConfig();
+	public static void main(String[] args) {
+		SerializeConfig config = new SerializeConfig();
 //        config.put(Status.class, new StatusSerializer());
-        Test test = new Test();
-        test.setStatus(Status.Completed);
-        String jsonStr= JSON.toJSONString(test, config);
-        ParserConfig.getGlobalInstance().putDeserializer(Status.class, new StatusDeserializer());
-        Test test1=JSON.parseObject(jsonStr, Test.class);
-        System.out.println(test1);
-    }
+		Test test = new Test();
+		test.setStatus(Status.Completed);
+		String jsonStr = JSON.toJSONString(test, config);
+		ParserConfig.getGlobalInstance().putDeserializer(Status.class, new StatusDeserializer());
+		Test test1 = JSON.parseObject(jsonStr, Test.class);
+		System.out.println(test1);
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 }

@@ -8,14 +8,14 @@ import com.snowcattle.game.thread.worker.AbstractWork;
  */
 public class TestWorker extends AbstractWork {
 
-    private final int i;
+	private final int i;
 
-    public TestWorker(int i) {
-        this.i = i;
-    }
+	public TestWorker(int i) {
+		this.i = i;
+	}
 
-    @Override
-    public void run() {
-        System.out.println(i);
-    }
+	@Override
+	public void run() {
+		System.out.println(i);
+	}
 }

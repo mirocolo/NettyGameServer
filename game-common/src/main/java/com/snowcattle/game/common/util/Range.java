@@ -7,10 +7,10 @@ public class Range<T extends Comparable<T>> {
 
 	private T max;
 
-	private Range(){
+	private Range() {
 	}
 
-	public Range(T min, T max){
+	public Range(T min, T max) {
 		this();
 		setMin(min);
 		setMax(max);
@@ -36,7 +36,7 @@ public class Range<T extends Comparable<T>> {
 	/**
 	 * 若value -> [min, max)返回true
 	 */
-	public boolean contains(T value){
+	public boolean contains(T value) {
 		return value.compareTo(min) >= 0 && value.compareTo(max) < 0;
 	}
 

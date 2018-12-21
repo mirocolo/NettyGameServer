@@ -8,9 +8,9 @@ import com.snowcattle.game.service.event.SingleEventConstants;
  * Created by jiangwenping on 2017/5/22.
  */
 @GlobalEventListenerAnnotation
-public class SessionUnRegisterEventListener extends AbstractEventListener{
-    @Override
-    public void initEventType() {
-        register(SingleEventConstants.sessionUnRegister);
-    }
+public class SessionUnRegisterEventListener extends AbstractEventListener {
+	@Override
+	public void initEventType() {
+		register(SingleEventConstants.sessionUnRegister);
+	}
 }

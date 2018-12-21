@@ -5,5 +5,5 @@ import com.snowcattle.game.db.service.jdbc.entity.Tocken;
 /**
  * Created by sunmosh on 2017/4/5.
  */
-public interface TockenMapper extends IDBMapper<Tocken>{
+public interface TockenMapper extends IDBMapper<Tocken> {
 }

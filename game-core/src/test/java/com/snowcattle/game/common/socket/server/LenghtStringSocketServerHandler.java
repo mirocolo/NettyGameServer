@@ -8,27 +8,27 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class LenghtStringSocketServerHandler extends ChannelInboundHandlerAdapter {
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        Thread.sleep(1000L);
+	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		Thread.sleep(1000L);
 //        ByteBuf byteBuffer = (ByteBuf) msg;
 
 //        System.out.println("服务端收到："+byteBuffer.array());
-        ctx.writeAndFlush(msg);
+		ctx.writeAndFlush(msg);
 
-    }
+	}
 
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) {
+		ctx.flush();
+	}
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        // Close the connection when an exception is raised.
-        cause.printStackTrace();
-        ctx.close();
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		// Close the connection when an exception is raised.
+		cause.printStackTrace();
+		ctx.close();
+	}
 
 }

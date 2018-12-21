@@ -4,6 +4,7 @@ import com.snowcattle.game.common.annotation.RpcServiceAnnotation;
 import com.snowcattle.game.common.annotation.RpcServiceBoEnum;
 import com.snowcattle.game.common.enums.BOEnum;
 import com.snowcattle.game.service.rpc.service.client.HelloService;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,9 +15,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HelloServiceImpl implements HelloService {
 
-    @Override
-    public String hello(String name) {
-        return "Hello! " + name;
-    }
+	@Override
+	public String hello(String name) {
+		return "Hello! " + name;
+	}
 }
 

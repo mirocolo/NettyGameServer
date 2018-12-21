@@ -1,10 +1,10 @@
 package com.snowcattle.game.common.zookeeper.zkclient;
 
-import java.util.concurrent.Callable;
-
 import org.I0Itec.zkclient.ZkClient;
 
-public class RetryConnect implements Callable<String>{
+import java.util.concurrent.Callable;
+
+public class RetryConnect implements Callable<String> {
 	private final String path;
 	private ZkClient zk;
 

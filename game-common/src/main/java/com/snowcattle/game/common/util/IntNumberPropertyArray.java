@@ -4,20 +4,21 @@ import java.util.BitSet;
 
 /**
  * 基本数组实现的数值属性值对象
- *
- *
  */
 public final class IntNumberPropertyArray implements Cloneable {
-	/** 保存数值 */
+	/**
+	 * 保存数值
+	 */
 	private final int[] values;
-	/** 数值是否修改的标识 */
+	/**
+	 * 数值是否修改的标识
+	 */
 	private final BitSet bitSet;
 
 	/**
 	 * 创建一个有size个数据的数值属性集合
 	 *
-	 * @param size
-	 *            数据的个数
+	 * @param size 数据的个数
 	 */
 	public IntNumberPropertyArray(int size) {
 		values = new int[size];
@@ -34,8 +35,7 @@ public final class IntNumberPropertyArray implements Cloneable {
 	/**
 	 * 从指定的数值对象src拷贝数据到本实例
 	 *
-	 * @param src
-	 *            数据的来源
+	 * @param src 数据的来源
 	 */
 	public void copyFrom(IntNumberPropertyArray src) {
 		System.arraycopy(src.values, 0, values, 0, values.length);
@@ -45,11 +45,8 @@ public final class IntNumberPropertyArray implements Cloneable {
 	/**
 	 * 设置index对应的值为value
 	 *
-	 * @param index
-	 * @param value
 	 * @return 返回值是是否确实被修改 true,修改;false,未修改
-	 * @throws ArrayIndexOutOfBoundsException
-	 *             如果index<0 或者 index>=size时会抛出此异常
+	 * @throws ArrayIndexOutOfBoundsException 如果index<0 或者 index>=size时会抛出此异常
 	 */
 	public boolean set(int index, int value) {
 		int _o = values[index];
@@ -64,10 +61,7 @@ public final class IntNumberPropertyArray implements Cloneable {
 	/**
 	 * 取得index对应的int值
 	 *
-	 * @param index
-	 * @return
-	 * @throws ArrayIndexOutOfBoundsException
-	 *             如果index<0 或者 index>=size时会抛出此异常
+	 * @throws ArrayIndexOutOfBoundsException 如果index<0 或者 index>=size时会抛出此异常
 	 */
 	public int get(int index) {
 		return values[index];
@@ -76,10 +70,8 @@ public final class IntNumberPropertyArray implements Cloneable {
 	/**
 	 * 增加index对应的int值
 	 *
-	 * @param index
-	 *            属性的索引
-	 * @param value
-	 *            将要增加的值
+	 * @param index 属性的索引
+	 * @param value 将要增加的值
 	 * @return 增加后的值
 	 */
 	public int add(int index, int value) {
@@ -94,8 +86,6 @@ public final class IntNumberPropertyArray implements Cloneable {
 
 	/**
 	 * 是否有修改
-	 *
-	 * @return
 	 */
 	public boolean isChanged() {
 		return !this.bitSet.isEmpty();
@@ -103,11 +93,8 @@ public final class IntNumberPropertyArray implements Cloneable {
 
 	/**
 	 * 判定指定位是否修改
-	 *
-	 * @param index
-	 * @return
 	 */
-	public boolean isChanged(int index){
+	public boolean isChanged(int index) {
 		return this.bitSet.get(index);
 	}
 
@@ -120,8 +107,6 @@ public final class IntNumberPropertyArray implements Cloneable {
 
 	/**
 	 * 取得被修改过的的属性索引:优化修改过的索引及值,返回统一的Object
-	 *
-	 * @return
 	 */
 	public Object[] getChanged() {
 		int[] _indexes = new int[bitSet.cardinality()];
@@ -138,8 +123,6 @@ public final class IntNumberPropertyArray implements Cloneable {
 
 	/**
 	 * 取得属性的个数
-	 *
-	 * @return
 	 */
 	public int size() {
 		return this.values.length;
@@ -157,47 +140,41 @@ public final class IntNumberPropertyArray implements Cloneable {
 
 	/**
 	 * 计算该数据对象的所有数值的和
-	 *
-	 * @return
 	 */
 	public int sum() {
 		int _sum = 0;
-        for (int value : this.values) {
-            _sum += value;
-        }
+		for (int value : this.values) {
+			_sum += value;
+		}
 		return _sum;
 	}
 
 	/**
 	 * 计算由指定的索引数组标识的属性数值的和
 	 *
-	 * @param indexs
-	 *            被计算的属性的索引数组
-	 * @return
+	 * @param indexs 被计算的属性的索引数组
 	 */
 	public int sum(int[] indexs) {
 		int _sum = 0;
-        for (int index : indexs) {
-            _sum += this.values[index];
-        }
+		for (int index : indexs) {
+			_sum += this.values[index];
+		}
 		return _sum;
 	}
 
 	/**
 	 * 计算除了指定的索引数组标识的以外的属性数值的和
 	 *
-	 * @param exceptIndexs
-	 *            被排除的属性的索引数组
-	 * @return
+	 * @param exceptIndexs 被排除的属性的索引数组
 	 */
 	public int sumExcept(final int[] exceptIndexs) {
 		int _sum = 0;
-        for (int value : values) {
-            _sum += value;
-        }
-        for (int exceptIndex : exceptIndexs) {
-            _sum -= this.values[exceptIndex];
-        }
+		for (int value : values) {
+			_sum += value;
+		}
+		for (int exceptIndex : exceptIndexs) {
+			_sum -= this.values[exceptIndex];
+		}
 		return _sum;
 	}
 

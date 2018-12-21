@@ -12,22 +12,22 @@ import com.snowcattle.game.service.message.command.MessageCommandIndex;
 @MessageCommandAnnotation(command = MessageCommandIndex.COMMON_RESPONSE_MESSAGE)
 public class CommonResponseServerMessage extends AbstractNetProtoBufTcpMessage {
 
-    @Override
-    public void decoderNetProtoBufMessageBody() throws Exception {
-        byte[] bytes = getNetMessageBody().getBytes();
-        CommonMessageProBuf.CommonResponseServerProBuf req = CommonMessageProBuf.CommonResponseServerProBuf.parseFrom(bytes);
-    }
+	@Override
+	public void decoderNetProtoBufMessageBody() throws Exception {
+		byte[] bytes = getNetMessageBody().getBytes();
+		CommonMessageProBuf.CommonResponseServerProBuf req = CommonMessageProBuf.CommonResponseServerProBuf.parseFrom(bytes);
+	}
 
-    @Override
-    public void release() throws CodecException {
+	@Override
+	public void release() throws CodecException {
 
-    }
+	}
 
-    @Override
-    public void encodeNetProtoBufMessageBody() throws Exception {
-        CommonMessageProBuf.CommonResponseServerProBuf.Builder builder = CommonMessageProBuf.CommonResponseServerProBuf.newBuilder();
-        byte[] bytes = builder.build().toByteArray();
-        getNetMessageBody().setBytes(bytes);
-    }
+	@Override
+	public void encodeNetProtoBufMessageBody() throws Exception {
+		CommonMessageProBuf.CommonResponseServerProBuf.Builder builder = CommonMessageProBuf.CommonResponseServerProBuf.newBuilder();
+		byte[] bytes = builder.build().toByteArray();
+		getNetMessageBody().setBytes(bytes);
+	}
 
 }

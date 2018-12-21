@@ -5,56 +5,55 @@ import com.snowcattle.game.service.net.tcp.session.NettyTcpNetMessageSender;
 
 /**
  * Created by jiangwenping on 17/2/20.
- *
  */
-public class GamePlayer implements  IPlayer, ILongId {
+public class GamePlayer implements IPlayer, ILongId {
 
-    //玩家id
-    private long playerId;
-    //玩家的udptoken
-    private int udpToken;
+	//玩家id
+	private long playerId;
+	//玩家的udptoken
+	private int udpToken;
 
-    private NettyTcpNetMessageSender nettyTcpNetMessageSender;
+	private NettyTcpNetMessageSender nettyTcpNetMessageSender;
 
-    public GamePlayer(NettyTcpNetMessageSender nettyTcpNetMessageSender, long playerId, int udpToken) {
-        this.nettyTcpNetMessageSender = nettyTcpNetMessageSender;
-        this.playerId = playerId;
-        this.udpToken = udpToken;
-    }
+	public GamePlayer(NettyTcpNetMessageSender nettyTcpNetMessageSender, long playerId, int udpToken) {
+		this.nettyTcpNetMessageSender = nettyTcpNetMessageSender;
+		this.playerId = playerId;
+		this.udpToken = udpToken;
+	}
 
-    @Override
-    public long getPlayerId() {
-        return playerId;
-    }
+	@Override
+	public long getPlayerId() {
+		return playerId;
+	}
 
-    @Override
-    public int getPlayerUdpTocken() {
-        return udpToken;
-    }
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
+	}
 
-    public void setPlayerId(long playerId) {
-        this.playerId = playerId;
-    }
+	@Override
+	public int getPlayerUdpTocken() {
+		return udpToken;
+	}
 
-    public int getUdpToken() {
-        return udpToken;
-    }
+	public int getUdpToken() {
+		return udpToken;
+	}
 
-    public void setUdpToken(int udpToken) {
-        this.udpToken = udpToken;
-    }
+	public void setUdpToken(int udpToken) {
+		this.udpToken = udpToken;
+	}
 
-    @Override
-    public long longId() {
-        return playerId;
-    }
+	@Override
+	public long longId() {
+		return playerId;
+	}
 
-    @Override
-    public NettyTcpNetMessageSender getNettyTcpNetMessageSender() {
-        return nettyTcpNetMessageSender;
-    }
+	@Override
+	public NettyTcpNetMessageSender getNettyTcpNetMessageSender() {
+		return nettyTcpNetMessageSender;
+	}
 
-    public void setNettyTcpNetMessageSender(NettyTcpNetMessageSender nettyTcpNetMessageSender) {
-        this.nettyTcpNetMessageSender = nettyTcpNetMessageSender;
-    }
+	public void setNettyTcpNetMessageSender(NettyTcpNetMessageSender nettyTcpNetMessageSender) {
+		this.nettyTcpNetMessageSender = nettyTcpNetMessageSender;
+	}
 }

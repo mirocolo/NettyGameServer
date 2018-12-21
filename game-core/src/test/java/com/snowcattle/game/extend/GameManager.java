@@ -7,31 +7,32 @@ import java.util.LinkedHashMap;
 /**
  * Created by jwp on 2017/5/6.
  */
-public class GameManager extends AbstractGameManager{
-    public static GameManager instance = new GameManager();
-    public GameManager() {
-        services = new LinkedHashMap<Class,Object>(40,0.5f);
-    }
-    public static GameManager getInstance(){
-        return instance;
-    }
+public class GameManager extends AbstractGameManager {
+	public static GameManager instance = new GameManager();
+	private LocalSpringBeanGameManager localSpringBeanGameManager;
+	private LocalSpringServiceGameManager localSpringServiceGameManager;
 
-    private LocalSpringBeanGameManager localSpringBeanGameManager;
-    private LocalSpringServiceGameManager localSpringServiceGameManager;
+	public GameManager() {
+		services = new LinkedHashMap<Class, Object>(40, 0.5f);
+	}
 
-    public LocalSpringBeanGameManager getLocalSpringBeanGameManager() {
-        return localSpringBeanGameManager;
-    }
+	public static GameManager getInstance() {
+		return instance;
+	}
 
-    public void setLocalSpringBeanGameManager(LocalSpringBeanGameManager localSpringBeanGameManager) {
-        this.localSpringBeanGameManager = localSpringBeanGameManager;
-    }
+	public LocalSpringBeanGameManager getLocalSpringBeanGameManager() {
+		return localSpringBeanGameManager;
+	}
 
-    public LocalSpringServiceGameManager getLocalSpringServiceGameManager() {
-        return localSpringServiceGameManager;
-    }
+	public void setLocalSpringBeanGameManager(LocalSpringBeanGameManager localSpringBeanGameManager) {
+		this.localSpringBeanGameManager = localSpringBeanGameManager;
+	}
 
-    public void setLocalSpringServiceGameManager(LocalSpringServiceGameManager localSpringServiceGameManager) {
-        this.localSpringServiceGameManager = localSpringServiceGameManager;
-    }
+	public LocalSpringServiceGameManager getLocalSpringServiceGameManager() {
+		return localSpringServiceGameManager;
+	}
+
+	public void setLocalSpringServiceGameManager(LocalSpringServiceGameManager localSpringServiceGameManager) {
+		this.localSpringServiceGameManager = localSpringServiceGameManager;
+	}
 }

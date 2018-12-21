@@ -9,18 +9,13 @@ import java.net.URL;
 
 /**
  * 资源工具类
- *
- *
  */
 public final class ResourceUtil {
-    private ResourceUtil() {
-    }
+	private ResourceUtil() {
+	}
 
-    /**
+	/**
 	 * 在类路径中查找指定的资源
-	 *
-	 * @param resource
-	 * @return
 	 */
 	public static URL getResourceURL(String resource) {
 		ClassLoader _classLoader = Thread.currentThread().getContextClassLoader();
@@ -29,10 +24,6 @@ public final class ResourceUtil {
 
 	/**
 	 * 取得指定的URL中文本内容
-	 *
-	 * @param url
-	 * @param charset
-	 * @return
 	 */
 	public static String getTextFormURL(final URL url, final String charset) {
 		Reader _r = null;
@@ -50,10 +41,6 @@ public final class ResourceUtil {
 
 	/**
 	 * 取得指定resource中文本内容
-	 *
-	 * @param resource
-	 * @param charset
-	 * @return
 	 */
 	public static String getTextFormResource(String resource, String charset) {
 		URL _url = getResourceURL(resource);
@@ -65,9 +52,6 @@ public final class ResourceUtil {
 
 	/**
 	 * 取得指定resource中文本内容 默认utf8
-	 *
-	 * @param resource
-	 * @return
 	 */
 	public static String getTextFormResource(String resource) {
 		URL _url = getResourceURL(resource);
@@ -79,9 +63,6 @@ public final class ResourceUtil {
 
 	/**
 	 * 取得指定resource中文本内容 默认utf8
-	 *
-	 * @param resource
-	 * @return
 	 */
 	public static String getTextFormResourceNoException(String resource) {
 		URL _url = getResourceURL(resource);

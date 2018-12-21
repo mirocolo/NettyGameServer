@@ -8,11 +8,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *特殊事件监听器
+ * 特殊事件监听器
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
 public @interface SpecialEventListenerAnnotation {
-    int listener();
+	int listener();
 }

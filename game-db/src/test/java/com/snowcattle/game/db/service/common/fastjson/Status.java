@@ -5,21 +5,21 @@ package com.snowcattle.game.db.service.common.fastjson;
  */
 public enum Status {
 
-    Ready(10),
+	Ready(10),
 
-    Completed(20);
+	Completed(20);
 
-    private final int value;
+	private final int value;
 
-    private Status(int value) {
-        this.value = value;
-    }
+	private Status(int value) {
+		this.value = value;
+	}
 
-    public static Status create(String value) {
-        return valueOf(value);
-    }
+	public static Status create(String value) {
+		return valueOf(value);
+	}
 
-    public static int value(Status status){
-        return status.value;
-    }
+	public static int value(Status status) {
+		return status.value;
+	}
 }

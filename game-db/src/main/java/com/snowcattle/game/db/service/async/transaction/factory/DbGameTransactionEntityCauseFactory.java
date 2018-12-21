@@ -1,6 +1,7 @@
 package com.snowcattle.game.db.service.async.transaction.factory;
 
 import com.redis.transaction.enums.GameTransactionEntityCause;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class DbGameTransactionEntityCauseFactory {
 
-    public final GameTransactionEntityCause asyncDbSave = new GameTransactionEntityCause("asyncDbSave");
+	public final GameTransactionEntityCause asyncDbSave = new GameTransactionEntityCause("asyncDbSave");
 
-    public GameTransactionEntityCause getAsyncDbSave() {
-        return asyncDbSave;
-    }
+	public GameTransactionEntityCause getAsyncDbSave() {
+		return asyncDbSave;
+	}
 }

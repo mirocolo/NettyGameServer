@@ -8,13 +8,13 @@ import java.lang.reflect.ParameterizedType;
 
 public abstract class JdbcDaoSupport<T> {
 
-    private final Class<T> clazz;
+	private final Class<T> clazz;
 
-    @SuppressWarnings("unchecked")
-    protected JdbcDaoSupport() {
-        Class classes = getClass();
-        clazz = (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
-        System.out.println(clazz.getSimpleName());
-    }
+	@SuppressWarnings("unchecked")
+	protected JdbcDaoSupport() {
+		Class classes = getClass();
+		clazz = (Class<T>) ((ParameterizedType) getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
+		System.out.println(clazz.getSimpleName());
+	}
 }

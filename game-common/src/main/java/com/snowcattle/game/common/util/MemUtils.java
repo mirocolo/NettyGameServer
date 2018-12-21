@@ -2,10 +2,10 @@ package com.snowcattle.game.common.util;
 
 public final class MemUtils {
 
-    private MemUtils() {
-    }
+	private MemUtils() {
+	}
 
-    public static long getUsedMemoryMB() {
+	public static long getUsedMemoryMB() {
 		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024;
 	}
 

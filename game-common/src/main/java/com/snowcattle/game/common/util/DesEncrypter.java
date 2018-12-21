@@ -25,8 +25,8 @@ public class DesEncrypter {
 	Cipher dcipher;
 
 	// 8-byte Salt
-	byte[] salt = { (byte) 0xB9, (byte) 0xAB, (byte) 0xD8, (byte) 0x42, (byte) 0x66, (byte) 0x45, (byte) 0xF3,
-			(byte) 0x13 };
+	byte[] salt = {(byte) 0xB9, (byte) 0xAB, (byte) 0xD8, (byte) 0x42, (byte) 0x66, (byte) 0x45, (byte) 0xF3,
+			(byte) 0x13};
 
 	// Iteration count
 	int iterationCount = 17;
@@ -54,7 +54,20 @@ public class DesEncrypter {
 			dcipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
 		} catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeySpecException e) {
 		}
-    }
+	}
+
+	public static void main(String[] args) {
+//		String token = encodeToken(1001, "127.0.0.1", System.currentTimeMillis(), "jackflit");
+//		String msg = decodeToken(token);
+//		System.out.println(msg);
+
+//		DesEncrypter encrypter = new DesEncrypter("4DP2bC5r");
+//		String message = "lool";
+//		String msg = encrypter.encrypt(message);
+//		System.out.println(msg);
+//		String msg2 = encrypter.decrypt(msg);
+//		System.out.println(msg2);
+	}
 
 	public String encrypt(String str) {
 		try {
@@ -68,8 +81,20 @@ public class DesEncrypter {
 			return new BASE64Encoder().encode(enc);
 		} catch (BadPaddingException | IOException | IllegalBlockSizeException e) {
 		}
-        return null;
+		return null;
 	}
+
+//	private static DesEncrypter encrypter = new DesEncrypter("4DP2bC5r",
+//			new byte[]{(byte)0x62, (byte)0xB1, (byte)0x35, (byte)0xF8, (byte)0xC6, (byte)0x5A, (byte)0x44, (byte)0xE2});
+//
+//	public static String encodeToken(long accountId, String ip, long timestamp, String name){
+//		return encrypter.encrypt(accountId+","+ip+","+timestamp+","+name);
+//	}
+//
+//	// 根据Token结出account和时间戳
+//	public static String decodeToken(String token){
+//		return encrypter.decrypt(token);
+//	}
 
 	public String decrypt(String str) {
 		try {
@@ -83,31 +108,6 @@ public class DesEncrypter {
 			return new String(utf8, "UTF8");
 		} catch (BadPaddingException | IOException | IllegalBlockSizeException e) {
 		}
-        return null;
-	}
-	
-//	private static DesEncrypter encrypter = new DesEncrypter("4DP2bC5r",
-//			new byte[]{(byte)0x62, (byte)0xB1, (byte)0x35, (byte)0xF8, (byte)0xC6, (byte)0x5A, (byte)0x44, (byte)0xE2});
-//
-//	public static String encodeToken(long accountId, String ip, long timestamp, String name){
-//		return encrypter.encrypt(accountId+","+ip+","+timestamp+","+name);
-//	}
-//
-//	// 根据Token结出account和时间戳
-//	public static String decodeToken(String token){
-//		return encrypter.decrypt(token);
-//	}
-
-	public static void main(String[] args){
-//		String token = encodeToken(1001, "127.0.0.1", System.currentTimeMillis(), "jackflit");
-//		String msg = decodeToken(token);
-//		System.out.println(msg);
-		
-//		DesEncrypter encrypter = new DesEncrypter("4DP2bC5r");
-//		String message = "lool";
-//		String msg = encrypter.encrypt(message);
-//		System.out.println(msg);
-//		String msg2 = encrypter.decrypt(msg);
-//		System.out.println(msg2);
+		return null;
 	}
 }

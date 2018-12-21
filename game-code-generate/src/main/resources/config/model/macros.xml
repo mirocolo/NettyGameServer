@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <macros>
-	<macro name="CommonPlayer" javaPackage="com.snowcattle.game.message.logicgenerate.enity" comment="玩家">
-		<field type="Long" name="id" comment="id"/>
-		<field type="String" name="name" comment="name"/>
-	</macro>
+    <macro name="CommonPlayer" javaPackage="com.snowcattle.game.message.logicgenerate.enity"
+           comment="玩家">
+        <field type="Long" name="id" comment="id"/>
+        <field type="String" name="name" comment="name"/>
+    </macro>
 </macros>

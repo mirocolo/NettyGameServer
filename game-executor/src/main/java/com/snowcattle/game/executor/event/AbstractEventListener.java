@@ -11,32 +11,33 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 public abstract class AbstractEventListener implements IEventListener {
 
-    private final Set<EventType> set;
+	private final Set<EventType> set;
 
-    public AbstractEventListener() {
-        this.set = new CopyOnWriteArraySet<EventType>();
-        initEventType();
-    }
+	public AbstractEventListener() {
+		this.set = new CopyOnWriteArraySet<EventType>();
+		initEventType();
+	}
 
-    public abstract  void initEventType();
-    public void register(EventType eventType) {
-        this.set.add(eventType);
-    }
+	public abstract void initEventType();
 
-    public void unRegister(EventType eventType) {
-        this.set.remove(eventType);
-    }
+	public void register(EventType eventType) {
+		this.set.add(eventType);
+	}
 
-    public boolean containEventType(EventType eventType) {
-        return set.contains(eventType);
-    }
+	public void unRegister(EventType eventType) {
+		this.set.remove(eventType);
+	}
 
-    public void fireEvent(IEvent event) {
-        event.call();
-    }
+	public boolean containEventType(EventType eventType) {
+		return set.contains(eventType);
+	}
 
-    public Set<EventType> getSet() {
-        return set;
-    }
+	public void fireEvent(IEvent event) {
+		event.call();
+	}
+
+	public Set<EventType> getSet() {
+		return set;
+	}
 
 }

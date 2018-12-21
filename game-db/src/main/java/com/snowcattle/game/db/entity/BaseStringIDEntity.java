@@ -10,18 +10,18 @@ import com.snowcattle.game.db.common.annotation.MethodSaveProxy;
 @EntitySave
 public class BaseStringIDEntity extends AbstractEntity<String> {
 
-    private static final long serialVersionUID = 4165629356522195369L;
-    @FieldSave
-    private String id;
+	private static final long serialVersionUID = 4165629356522195369L;
+	@FieldSave
+	private String id;
 
-    @Override
-    public String getId() {
-        return id;
-    }
+	@Override
+	public String getId() {
+		return id;
+	}
 
-    @MethodSaveProxy(proxy="id")
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
+	@MethodSaveProxy(proxy = "id")
+	@Override
+	public void setId(String id) {
+		this.id = id;
+	}
 }

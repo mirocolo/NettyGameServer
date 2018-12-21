@@ -1,27 +1,23 @@
 package com.snowcattle.game.common.util;
 
+import com.sun.management.OperatingSystemMXBean;
+
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 
 import javax.management.MBeanServer;
 
-import com.sun.management.OperatingSystemMXBean;
-
 /**
  * 通过JVM JMX Bean取得监测数据
- *
-  *
- *
  */
 public class JVMMonitor {
+	public static final JVMMonitor instance = new JVMMonitor();
 	private final MBeanServer server;
 	private final OperatingSystemMXBean osm;
 	private final RuntimeMXBean runtimeMXBean;
 	private long preUpTime;
 	private long preCpuTime = 0;
-
-	public static final JVMMonitor instance = new JVMMonitor();
 
 	private JVMMonitor() {
 		server = ManagementFactory.getPlatformMBeanServer();
@@ -42,8 +38,6 @@ public class JVMMonitor {
 
 	/**
 	 * 取得CPU的使用率 TODO 经测试,由JVM JMX BEAN算得出CPU使用率通常比Linux系统的TOP得到CPU使用率要大一些,比较奇怪
-	 *
-	 * @return
 	 */
 	public double getCpuUsage() {
 		if (osm == null) {
@@ -67,8 +61,6 @@ public class JVMMonitor {
 
 	/**
 	 * 取得JVM的可用CPU个数
-	 *
-	 * @return
 	 */
 	public int getAvailableProcessors() {
 		if (osm == null) {

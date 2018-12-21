@@ -7,12 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * 注释
- *
- *
- *
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD,ElementType.TYPE})
+@Target({ElementType.FIELD, ElementType.TYPE})
 public @interface Comment {
 
 	/**

@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public final class IOUtils {
-    private IOUtils() {
-    }
+	private IOUtils() {
+	}
 
-    public static void writeLengthString(DataOutput dout, String content,
-                                         String charset) throws IOException {
+	public static void writeLengthString(DataOutput dout, String content,
+	                                     String charset) throws IOException {
 		if (content == null) {
 			content = "";
 		}
@@ -20,7 +20,6 @@ public final class IOUtils {
 
 	/**
 	 * 关闭输入流，并忽略任何异常
-	 * @param in
 	 */
 	public static void closeInputStream(InputStream in) {
 		if (in != null) {

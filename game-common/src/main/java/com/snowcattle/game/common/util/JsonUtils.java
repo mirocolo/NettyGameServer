@@ -10,22 +10,20 @@ import java.util.Map;
  */
 public final class JsonUtils {
 
-    private JsonUtils() {
-    }
+	private JsonUtils() {
+	}
 
-    /**
-     * 获取json字符串
-     * @param map
-     * @return
-     */
-    public static String getJsonStr(Map<String, String> map){
-        return JSON.toJSONString(map);
-    }
+	/**
+	 * 获取json字符串
+	 */
+	public static String getJsonStr(Map<String, String> map) {
+		return JSON.toJSONString(map);
+	}
 
-    @SuppressWarnings("unchecked")
-    public static Map<String,String> getMapFromJson(String json){
-        return JSON.parseObject(json, Map.class);
-    }
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> getMapFromJson(String json) {
+		return JSON.parseObject(json, Map.class);
+	}
 
 }
 

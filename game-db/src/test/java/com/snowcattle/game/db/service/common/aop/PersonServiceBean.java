@@ -7,26 +7,26 @@ import org.springframework.stereotype.Service;
  */
 @Service("personService")
 public class PersonServiceBean implements PersonService {
-    private String user;
+	private String user;
 
-    public String getUser() {
-        return user;
-    }
+	public PersonServiceBean() {
+	}
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+	public PersonServiceBean(String user) {
+		super();
+		this.user = user;
+	}
 
-    public PersonServiceBean() {
-    }
+	public String getUser() {
+		return user;
+	}
 
-    public PersonServiceBean(String user) {
-        super();
-        this.user = user;
-    }
+	public void setUser(String user) {
+		this.user = user;
+	}
 
-    public void save(Person person) {
-        System.out.println("执行PerServiceBean的save方法");
-        //throw new RuntimeException("======");
-    }
+	public void save(Person person) {
+		System.out.println("执行PerServiceBean的save方法");
+		//throw new RuntimeException("======");
+	}
 }

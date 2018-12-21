@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.snowcattle.game.db.service.jdbc.mapper.MoreOrderMapper">
 
@@ -31,7 +32,7 @@
         where user_id=#{userId} and id=#{id};
     </update>
 
-    <delete id="deleteEntity" parameterType="moreOrder" >
+    <delete id="deleteEntity" parameterType="moreOrder">
         delete from `t_more_order_${sharding_table_index}` where user_id=#{userId} and id=#{id};
     </delete>
 

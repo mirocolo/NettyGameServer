@@ -3,7 +3,8 @@ package com.snowcattle.game.net.client.http;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.http.*;
+import io.netty.handler.codec.http.HttpRequestEncoder;
+import io.netty.handler.codec.http.HttpResponseDecoder;
 import io.netty.handler.ssl.SslContext;
 
 /**
@@ -11,34 +12,34 @@ import io.netty.handler.ssl.SslContext;
  */
 public class GameHttpClientInitializer extends ChannelInitializer<SocketChannel> {
 
-    private final SslContext sslCtx;
+	private final SslContext sslCtx;
 
-    public GameHttpClientInitializer(SslContext sslCtx) {
-        this.sslCtx = sslCtx;
-    }
+	public GameHttpClientInitializer(SslContext sslCtx) {
+		this.sslCtx = sslCtx;
+	}
 
-    @Override
-    public void initChannel(SocketChannel ch) {
-        ChannelPipeline p = ch.pipeline();
+	@Override
+	public void initChannel(SocketChannel ch) {
+		ChannelPipeline p = ch.pipeline();
 
-        // Enable HTTPS if necessary.
-        if (sslCtx != null) {
-            p.addLast(sslCtx.newHandler(ch.alloc()));
-        }
+		// Enable HTTPS if necessary.
+		if (sslCtx != null) {
+			p.addLast(sslCtx.newHandler(ch.alloc()));
+		}
 
 //        p.addLast(new HttpClientCodec());
 //
 //        // Remove the following line if you don't want automatic content decompression.
 //        p.addLast(new HttpContentDecompressor());
 
-        // Uncomment the following line if you don't want to handle HttpContents.
-        //p.addLast(new HttpObjectAggregator(1048576));
+		// Uncomment the following line if you don't want to handle HttpContents.
+		//p.addLast(new HttpObjectAggregator(1048576));
 
-        p.addLast("encoder", new HttpRequestEncoder());
+		p.addLast("encoder", new HttpRequestEncoder());
 //        p.addLast("trunk", new HttpObjectAggregator(1048576));
-        p.addLast("decoder", new HttpResponseDecoder());
+		p.addLast("decoder", new HttpResponseDecoder());
 
-        p.addLast(new GameHttpClientHandler());
-    }
+		p.addLast(new GameHttpClientHandler());
+	}
 }
 

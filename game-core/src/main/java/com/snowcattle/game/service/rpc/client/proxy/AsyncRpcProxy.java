@@ -1,8 +1,13 @@
 package com.snowcattle.game.service.rpc.client.proxy;
 
-import com.snowcattle.game.service.rpc.client.*;
 import com.snowcattle.game.bootstrap.manager.LocalMananger;
 import com.snowcattle.game.service.net.tcp.RpcRequest;
+import com.snowcattle.game.service.rpc.client.AbstractRpcConnectManager;
+import com.snowcattle.game.service.rpc.client.RPCFuture;
+import com.snowcattle.game.service.rpc.client.RpcClientConnectService;
+import com.snowcattle.game.service.rpc.client.RpcContextHolder;
+import com.snowcattle.game.service.rpc.client.RpcContextHolderObject;
+import com.snowcattle.game.service.rpc.client.RpcRequestFactory;
 import com.snowcattle.game.service.rpc.client.net.RpcClient;
 
 /**
@@ -10,25 +15,25 @@ import com.snowcattle.game.service.rpc.client.net.RpcClient;
  */
 
 
-public class AsyncRpcProxy<T> implements IAsyncRpcProxy{
+public class AsyncRpcProxy<T> implements IAsyncRpcProxy {
 
-    private final Class<T> clazz;
+	private final Class<T> clazz;
 
-    public AsyncRpcProxy(Class<T> clazz) {
-        this.clazz = clazz;
-    }
+	public AsyncRpcProxy(Class<T> clazz) {
+		this.clazz = clazz;
+	}
 
-    @Override
-    public RPCFuture call(String funcName, Object... args) {
-        RpcContextHolderObject rpcContextHolderObject = RpcContextHolder.getContext();
-        RpcClientConnectService rpcClientConnectService = LocalMananger.getInstance().getLocalSpringServicerAfterManager().getRpcClientConnectService();
-        AbstractRpcConnectManager abstractRpcConnectManager = rpcClientConnectService.getRpcConnectMannger(rpcContextHolderObject.getBoEnum());
-        RpcClient rpcClient = abstractRpcConnectManager.chooseClient(rpcContextHolderObject.getServerId());
-        RpcRequestFactory rpcRequestFactory = LocalMananger.getInstance().getLocalSpringBeanManager().getRequestFactory();
-        RpcRequest request = rpcRequestFactory.createRequest(this.clazz.getName(), funcName, args);
-        RPCFuture rpcFuture = rpcClient.sendRequest(request);
-        return rpcFuture;
-    }
+	@Override
+	public RPCFuture call(String funcName, Object... args) {
+		RpcContextHolderObject rpcContextHolderObject = RpcContextHolder.getContext();
+		RpcClientConnectService rpcClientConnectService = LocalMananger.getInstance().getLocalSpringServicerAfterManager().getRpcClientConnectService();
+		AbstractRpcConnectManager abstractRpcConnectManager = rpcClientConnectService.getRpcConnectMannger(rpcContextHolderObject.getBoEnum());
+		RpcClient rpcClient = abstractRpcConnectManager.chooseClient(rpcContextHolderObject.getServerId());
+		RpcRequestFactory rpcRequestFactory = LocalMananger.getInstance().getLocalSpringBeanManager().getRequestFactory();
+		RpcRequest request = rpcRequestFactory.createRequest(this.clazz.getName(), funcName, args);
+		RPCFuture rpcFuture = rpcClient.sendRequest(request);
+		return rpcFuture;
+	}
 
 
 }

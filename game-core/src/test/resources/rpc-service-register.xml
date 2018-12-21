@@ -2,8 +2,8 @@
 <services>
     <service boenum="world">
     </service>
-    <service boenum="game" >
+    <service boenum="game">
     </service>
-    <service boenum="db" >
+    <service boenum="db">
     </service>
 </services>

@@ -6,16 +6,12 @@ package com.snowcattle.game.service.json;
 public interface JsonSerializer {
 
 	/**
-	 * 序列化
-	 * 将obj对象中的相关数据取出，串行化为json字符串
-	 * @return
+	 * 序列化 将obj对象中的相关数据取出，串行化为json字符串
 	 */
 	String serialize();
 
 	/**
-	 * 反序列化
-	 * 将json字符串里的信息抽取，反馈到对象中
-	 * @param pack
+	 * 反序列化 将json字符串里的信息抽取，反馈到对象中
 	 */
 	void deserialize(String pack);
 }

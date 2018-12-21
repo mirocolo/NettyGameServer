@@ -8,23 +8,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
  * @author ZERO
- *
  */
 public final class CodecUtil {
-    private CodecUtil() {
-    }
+	private CodecUtil() {
+	}
 
-    /**
+	/**
 	 * 反序列化
-	 * @param <T>
-	 * @param bytes
-	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T decode(byte[] bytes){
-		if(bytes==null||bytes.length==0) {
+	public static <T> T decode(byte[] bytes) {
+		if (bytes == null || bytes.length == 0) {
 			return null;
 		}
 		ObjectInputStream objIn = null;
@@ -34,8 +29,8 @@ public final class CodecUtil {
 			return (T) object;
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} finally{
-			if(objIn!=null){
+		} finally {
+			if (objIn != null) {
 				try {
 					objIn.close();
 				} catch (IOException e) {
@@ -45,14 +40,12 @@ public final class CodecUtil {
 		}
 		return null;
 	}
+
 	/**
 	 * 序列化
-	 * @param <T>
-	 * @param object
-	 * @return
 	 */
-	public static <T> byte[] encode(T object){
-		if(object==null) {
+	public static <T> byte[] encode(T object) {
+		if (object == null) {
 			return null;
 		}
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -62,15 +55,15 @@ public final class CodecUtil {
 			objectOut.writeObject(object);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			if(out!=null){
+		} finally {
+			if (out != null) {
 				try {
 					out.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			if(objectOut!=null){
+			if (objectOut != null) {
 				try {
 					objectOut.close();
 				} catch (IOException e) {

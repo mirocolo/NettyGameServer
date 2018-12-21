@@ -9,49 +9,49 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class ProxyBackendHandler extends ChannelInboundHandlerAdapter {
 
-    private final Channel inboundChannel;
+	private final Channel inboundChannel;
 
-    public ProxyBackendHandler(Channel inboundChannel) {
-        this.inboundChannel = inboundChannel;
-    }
+	public ProxyBackendHandler(Channel inboundChannel) {
+		this.inboundChannel = inboundChannel;
+	}
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) {
-        ctx.read();
-    }
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) {
+		ctx.read();
+	}
 
-    @Override
-    public void channelRead(final ChannelHandlerContext ctx, Object msg) {
-        inboundChannel.writeAndFlush(msg).addListener(new ChannelFutureListener() {
-            @Override
-            public void operationComplete(ChannelFuture future) {
-                if (future.isSuccess()) {
-                    ctx.channel().read();
-                } else {
-                    future.channel().close();
-                }
-            }
-        });
-    }
+	@Override
+	public void channelRead(final ChannelHandlerContext ctx, Object msg) {
+		inboundChannel.writeAndFlush(msg).addListener(new ChannelFutureListener() {
+			@Override
+			public void operationComplete(ChannelFuture future) {
+				if (future.isSuccess()) {
+					ctx.channel().read();
+				} else {
+					future.channel().close();
+				}
+			}
+		});
+	}
 
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) {
-        closeOnFlush(inboundChannel);
-    }
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) {
+		closeOnFlush(inboundChannel);
+	}
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        closeOnFlush(ctx.channel());
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		closeOnFlush(ctx.channel());
+	}
 
-    /**
-     * Closes the specified channel after all queued write requests are flushed.
-     */
-    public void closeOnFlush(Channel ch) {
-        if (ch.isActive()) {
-            ch.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
-            ch.close();
-        }
-    }
+	/**
+	 * Closes the specified channel after all queued write requests are flushed.
+	 */
+	public void closeOnFlush(Channel ch) {
+		if (ch.isActive()) {
+			ch.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+			ch.close();
+		}
+	}
 }

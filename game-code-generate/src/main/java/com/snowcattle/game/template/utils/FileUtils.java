@@ -5,19 +5,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public final class FileUtils{
-    private FileUtils() {
-    }
+public final class FileUtils {
+	private FileUtils() {
+	}
 
-    public static void writeToFile(FileContent fileContent) throws IOException{
-		File file = new File(fileContent.getFilePath()+fileContent.getFileName());
-		if(!file.exists()){
+	public static void writeToFile(FileContent fileContent) throws IOException {
+		File file = new File(fileContent.getFilePath() + fileContent.getFileName());
+		if (!file.exists()) {
 			File folder = file.getParentFile();
-			if(!folder.exists()){
+			if (!folder.exists()) {
 				folder.mkdirs();
 			}
 			file.createNewFile();
-		}else{
+		} else {
 			file.delete();
 			file.createNewFile();
 		}

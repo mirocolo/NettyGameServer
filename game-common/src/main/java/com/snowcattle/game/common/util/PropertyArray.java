@@ -4,8 +4,6 @@ import java.util.BitSet;
 
 /**
  * 基于数组实现的对象属性值对象
- *
- *
  */
 public class PropertyArray {
 	private final Object[] values;
@@ -19,8 +17,7 @@ public class PropertyArray {
 	/**
 	 * 从指定的数值对象src拷贝数据到本实例
 	 *
-	 * @param src
-	 *            数据的来源
+	 * @param src 数据的来源
 	 */
 	public void copyFrom(PropertyArray src) {
 		System.arraycopy(src.values, 0, values, 0, values.length);
@@ -98,15 +95,15 @@ public class PropertyArray {
 	public void resetChanged() {
 		this.bitSet.clear();
 	}
-	
-	public void change(){
-		for(int i=0; i< this.values.length; i++){
-			if(this.values[i] != null){
+
+	public void change() {
+		for (int i = 0; i < this.values.length; i++) {
+			if (this.values[i] != null) {
 				this.bitSet.set(i);
 			}
 		}
 	}
-	
+
 	public void set(int index, Object val) {
 		Object _old = this.values[index];
 		boolean _changed = false;
@@ -126,10 +123,7 @@ public class PropertyArray {
 	/**
 	 * 取得index对应的int值
 	 *
-	 * @param index
-	 * @return
-	 * @throws ArrayIndexOutOfBoundsException
-	 *             如果index<0 或者 index>=size时会抛出此异常
+	 * @throws ArrayIndexOutOfBoundsException 如果index<0 或者 index>=size时会抛出此异常
 	 */
 	public Object get(int index) {
 		return values[index];
@@ -141,8 +135,6 @@ public class PropertyArray {
 
 	/**
 	 * 取得被修改过的的属性索引及其对应的值
-	 *
-	 * @return
 	 */
 	public Object[] getChanged() {
 		int[] _indexes = new int[bitSet.cardinality()];

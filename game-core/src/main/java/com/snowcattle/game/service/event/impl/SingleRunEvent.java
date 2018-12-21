@@ -10,24 +10,24 @@ import java.io.Serializable;
  * Created by jiangwenping on 2017/5/22.
  */
 public class SingleRunEvent extends SingleEvent {
-    public SingleRunEvent(EventType eventType, Serializable eventId, long shardingId, EventParam[] parms) {
-        super(eventType, eventId, shardingId, parms);
-    }
+	private long runId;
 
-    private long runId;
+	public SingleRunEvent(EventType eventType, Serializable eventId, long shardingId, EventParam[] parms) {
+		super(eventType, eventId, shardingId, parms);
+	}
 
-    public long getRunId() {
-        return runId;
-    }
+	public long getRunId() {
+		return runId;
+	}
 
-    public void setRunId(long runId) {
-        this.runId = runId;
-    }
+	public void setRunId(long runId) {
+		this.runId = runId;
+	}
 
-    @Override
-    public void call() {
-        runId++;
+	@Override
+	public void call() {
+		runId++;
 
-        System.out.println("runId" + runId + " Id" + getShardingId() );
-    }
+		System.out.println("runId" + runId + " Id" + getShardingId());
+	}
 }

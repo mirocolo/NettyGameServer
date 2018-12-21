@@ -8,8 +8,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class EchoSocketServerHandler extends ChannelInboundHandlerAdapter {
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+	private int counter;
+
+	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        String body=(String)msg;
 //        System.out.println("服务端收到："+body+"，次数:"+ ++counter);
 //        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -25,26 +27,21 @@ public class EchoSocketServerHandler extends ChannelInboundHandlerAdapter {
 //        String body=new String(req, CharsetUtil.UTF_8);
 //        System.out.println("body:" + body + ",响应次数:" + (++counter));
 //        ctx.writeAndFlush(buf);
-        Thread.sleep(1000L);
-        ctx.writeAndFlush(msg);
-        System.out.println("服务端收到："+msg);
-    }
+		Thread.sleep(1000L);
+		ctx.writeAndFlush(msg);
+		System.out.println("服务端收到：" + msg);
+	}
 
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) {
+		ctx.flush();
+	}
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        // Close the connection when an exception is raised.
-        cause.printStackTrace();
-        ctx.close();
-    }
-
-
-
-    private int counter;
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		// Close the connection when an exception is raised.
+		cause.printStackTrace();
+		ctx.close();
+	}
 
 }

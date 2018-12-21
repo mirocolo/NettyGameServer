@@ -11,15 +11,15 @@ import java.lang.reflect.Type;
  */
 public class StatusDeserializer implements ObjectDeserializer {
 
-    public <T> T deserialze(DefaultJSONParser parser, Type type,
-                            Object fieldName) {
-        JSONLexer lexer = parser.getLexer();
-        String value = lexer.stringVal();
-        return (T) Status.create(value);
-    }
+	public <T> T deserialze(DefaultJSONParser parser, Type type,
+	                        Object fieldName) {
+		JSONLexer lexer = parser.getLexer();
+		String value = lexer.stringVal();
+		return (T) Status.create(value);
+	}
 
-    public int getFastMatchToken() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	public int getFastMatchToken() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

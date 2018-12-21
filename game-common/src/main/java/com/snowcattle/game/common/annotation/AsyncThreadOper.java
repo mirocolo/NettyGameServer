@@ -7,12 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * 在异步线程中的操作
  *
-  *
  * @see {@link MainThreadOper}
- *
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

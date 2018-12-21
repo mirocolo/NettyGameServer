@@ -3,29 +3,38 @@ package com.snowcattle.game.common.util;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.LoggerFactory;
 
-import javax.script.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+import javax.script.Compilable;
+import javax.script.CompiledScript;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public final class JsScriptHelper {
+	public static final String STRING_CHARSET = "UTF-8";
 	private static final org.slf4j.Logger logger = LoggerFactory
 			.getLogger(JsScriptHelper.class);
-
 	private static final ScriptEngineManager manager = new ScriptEngineManager();
-	public static final String STRING_CHARSET = "UTF-8";
 
-    private JsScriptHelper() {
-    }
+	private JsScriptHelper() {
+	}
 
-    /**
+	/**
 	 * 执行一个脚本文件
 	 *
-	 * @param path		脚本文件的路径
-	 * @param params	执行参数
-	 * @return			脚本执行结果的返回值
+	 * @param path   脚本文件的路径
+	 * @param params 执行参数
+	 * @return 脚本执行结果的返回值
 	 */
 	public static Object executeScriptFile(String path,
-			Map<String, Object> params) {
+	                                       Map<String, Object> params) {
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		if (params != null) {
 			for (Map.Entry<String, Object> pair : params.entrySet()) {
@@ -52,7 +61,7 @@ public final class JsScriptHelper {
 	}
 
 	public static Object executeCompiledScriptFile(String path,
-			Map<String, Object> params) {
+	                                               Map<String, Object> params) {
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		if (params != null) {
 			for (Map.Entry<String, Object> pair : params.entrySet()) {
@@ -67,19 +76,19 @@ public final class JsScriptHelper {
 		} catch (IOException | ScriptException e) {
 			logger.error("", e);
 		}
-        return null;
+		return null;
 
 	}
 
 	/**
 	 * 执行指定的脚本内容
 	 *
-	 * @param content	脚本内容
-	 * @param params	执行参数
-	 * @return			脚本执行结果的返回值
+	 * @param content 脚本内容
+	 * @param params  执行参数
+	 * @return 脚本执行结果的返回值
 	 */
 	public static Object executeScriptContent(String content,
-			Map<String, Object> params) {
+	                                          Map<String, Object> params) {
 		ScriptEngine engine = manager.getEngineByName("JavaScript");
 		if (params != null) {
 			for (Map.Entry<String, Object> pair : params.entrySet()) {

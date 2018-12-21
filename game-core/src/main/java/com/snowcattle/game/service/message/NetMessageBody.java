@@ -5,16 +5,16 @@ package com.snowcattle.game.service.message;
  */
 public class NetMessageBody {
 
-    /**
-     * 存储数据
-     */
-    private byte[] bytes;
+	/**
+	 * 存储数据
+	 */
+	private byte[] bytes;
 
-    public byte[] getBytes() {
-        return bytes;
-    }
+	public byte[] getBytes() {
+		return bytes;
+	}
 
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
-    }
+	public void setBytes(byte[] bytes) {
+		this.bytes = bytes;
+	}
 }

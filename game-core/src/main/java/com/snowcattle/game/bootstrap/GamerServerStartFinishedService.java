@@ -5,33 +5,34 @@ import com.snowcattle.game.common.constant.ServiceName;
 import com.snowcattle.game.common.util.ThreadPool;
 import com.snowcattle.game.service.IService;
 import com.snowcattle.game.service.net.LocalNetService;
+
 import org.slf4j.Logger;
+
 /**
- * Created by jiangwenping on 17/3/13.
- * 服务器启动结束服务
+ * Created by jiangwenping on 17/3/13. 服务器启动结束服务
  */
-public class GamerServerStartFinishedService implements IService{
+public class GamerServerStartFinishedService implements IService {
 
-    private final Logger logger = Loggers.serverLogger;
-    private LocalNetService localNetService;
+	private final Logger logger = Loggers.serverLogger;
+	private LocalNetService localNetService;
 
-    private ThreadPool threadPool;
+	private ThreadPool threadPool;
 
-    public LocalNetService getLocalNetService() {
-        return localNetService;
-    }
+	public LocalNetService getLocalNetService() {
+		return localNetService;
+	}
 
-    public void setLocalNetService(LocalNetService localNetService) {
-        this.localNetService = localNetService;
-    }
+	public void setLocalNetService(LocalNetService localNetService) {
+		this.localNetService = localNetService;
+	}
 
-    @Override
-    public String getId() {
-        return ServiceName.GamerServerStartFinishedService;
-    }
+	@Override
+	public String getId() {
+		return ServiceName.GamerServerStartFinishedService;
+	}
 
-    @Override
-    public void startup() throws Exception {
+	@Override
+	public void startup() throws Exception {
 //        int coreSize = 3;
 //        ThreadNameFactory threadNameFactory = new ThreadNameFactory(GlobalConstants.Thread.START_FINISHED);
 //        localNetService = LocalMananger.getInstance().get(LocalNetService.class);
@@ -81,10 +82,10 @@ public class GamerServerStartFinishedService implements IService{
 
 //        logger.info("netty server sync start finished");
 
-    }
+	}
 
-    @Override
-    public void shutdown() throws Exception {
+	@Override
+	public void shutdown() throws Exception {
 //       threadPool.stop();
-    }
+	}
 }

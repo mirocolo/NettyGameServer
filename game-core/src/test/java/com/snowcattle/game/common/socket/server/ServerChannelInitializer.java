@@ -8,12 +8,12 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * Created by jwp on 2017/1/23.
  */
 public class ServerChannelInitializer extends ChannelInitializer<NioSocketChannel> {
-    @Override
-    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-        ChannelPipeline channelPipLine = nioSocketChannel.pipeline();
+	@Override
+	protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+		ChannelPipeline channelPipLine = nioSocketChannel.pipeline();
 //                            channelPipLine.addLast(new LineBasedFrameDecoder(1024));
 //                            channelPipLine.addLast(new StringDecoder());
 //                            channelPipLine.addLast(new StringEncoder());
-        channelPipLine.addLast(new EchoSocketServerHandler());
-    }
+		channelPipLine.addLast(new EchoSocketServerHandler());
+	}
 }

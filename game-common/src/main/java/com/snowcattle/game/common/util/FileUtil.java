@@ -10,18 +10,15 @@ import java.util.zip.ZipOutputStream;
 
 /**
  *
- *
  */
 public final class FileUtil {
-    private FileUtil() {
-    }
+	private FileUtil() {
+	}
 
-    /**
+	/**
 	 * 创建一个目录
 	 *
-	 * @param dir
-	 * @exception RuntimeException
-	 *                ,创建目录失败会抛出此异常
+	 * @throws RuntimeException ,创建目录失败会抛出此异常
 	 */
 	public static void createDir(File dir) {
 		if (!dir.exists() && !dir.mkdirs()) {
@@ -31,8 +28,6 @@ public final class FileUtil {
 
 	/**
 	 * 删除一个文件或者目录
-	 *
-	 * @param file
 	 */
 	public static void delete(File file) {
 		if (file.isFile()) {
@@ -48,18 +43,15 @@ public final class FileUtil {
 
 	/**
 	 * 删除一个目录下的除exculde指定的后缀名外的所有子文件或子目录
-	 *
-	 * @param file
 	 */
-	public static void cleanFolder(File file,String exculde)
-	{
-		if(!file.isDirectory()) {
+	public static void cleanFolder(File file, String exculde) {
+		if (!file.isDirectory()) {
 			return;
 		}
 
 		File[] _files = file.listFiles();
 		for (File _f : _files) {
-			if(_f.getName().endsWith(exculde)) {
+			if (_f.getName().endsWith(exculde)) {
 				continue;
 			}
 			delete(_f);
@@ -68,9 +60,6 @@ public final class FileUtil {
 
 	/**
 	 * 压缩zip文件
-	 * @param file
-	 * @param dest
-	 * @throws IOException
 	 */
 	public static void zip(File file, File dest) throws IOException {
 		ZipOutputStream _zip1 = new ZipOutputStream(new FileOutputStream(dest));
@@ -82,10 +71,10 @@ public final class FileUtil {
 		String _entryName = file.getAbsolutePath();
 		if (_entryName.equals(root)) {
 			//
-			_entryName="";
+			_entryName = "";
 		} else {
 			int _ri = _entryName.indexOf(root);
-			_entryName = _entryName.substring(_ri + root.length()+1);
+			_entryName = _entryName.substring(_ri + root.length() + 1);
 			_entryName = _entryName.replace('\\', '/');
 		}
 		if (file.isFile()) {
@@ -105,25 +94,22 @@ public final class FileUtil {
 			}
 		}
 	}
-	
-	public static URL getConfigURL(String fileName)
-	{
+
+	public static URL getConfigURL(String fileName) {
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
 		return classLoader.getResource(fileName);
 	}
-	
-	public static String getConfigPath(String fileName)
-	{
+
+	public static String getConfigPath(String fileName) {
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
 		return classLoader.getResource(fileName).getPath();
 	}
 
-	public static File getFile(String filePath)
-	{
-		URL url= getConfigURL(filePath);
-		if(url != null){
+	public static File getFile(String filePath) {
+		URL url = getConfigURL(filePath);
+		if (url != null) {
 			return new File(url.getFile());
 		}
 		return null;

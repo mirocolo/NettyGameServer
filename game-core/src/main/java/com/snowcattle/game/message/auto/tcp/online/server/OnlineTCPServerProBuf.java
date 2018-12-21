@@ -4,623 +4,669 @@
 package com.snowcattle.game.message.auto.tcp.online.server;
 
 public final class OnlineTCPServerProBuf {
-  private OnlineTCPServerProBuf() {}
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
+	private static final com.google.protobuf.Descriptors.Descriptor
+			internal_static_OnlineHeartTCPServerProBuf_descriptor;
+	private static final
+	com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+			internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable;
+	private static com.google.protobuf.Descriptors.FileDescriptor
+			descriptor;
 
-  public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
-  }
-  public interface OnlineHeartTCPServerProBufOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:OnlineHeartTCPServerProBuf)
-      com.google.protobuf.MessageOrBuilder {
+	static {
+		java.lang.String[] descriptorData = {
+				"\n\026tcponline-server.proto\">\n\032OnlineHeartT" +
+						"CPServerProBuf\022\020\n\010playerId\030\001 \002(\003\022\016\n\006tock" +
+						"en\030\002 \002(\005BK\n2com.snowcattle.game.message." +
+						"auto.tcp.online.serverB\025OnlineTCPServerP" +
+						"roBuf"
+		};
+		com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+				new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+					public com.google.protobuf.ExtensionRegistry assignDescriptors(
+							com.google.protobuf.Descriptors.FileDescriptor root) {
+						descriptor = root;
+						return null;
+					}
+				};
+		com.google.protobuf.Descriptors.FileDescriptor
+				.internalBuildGeneratedFileFrom(descriptorData,
+						new com.google.protobuf.Descriptors.FileDescriptor[]{
+						}, assigner);
+		internal_static_OnlineHeartTCPServerProBuf_descriptor =
+				getDescriptor().getMessageTypes().get(0);
+		internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable = new
+				com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+				internal_static_OnlineHeartTCPServerProBuf_descriptor,
+				new java.lang.String[]{"PlayerId", "Tocken",});
+	}
 
-    /**
-     * <code>required int64 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required int64 playerId = 1;</code>
-     */
-    long getPlayerId();
+	private OnlineTCPServerProBuf() {
+	}
 
-    /**
-     * <code>required int32 tocken = 2;</code>
-     */
-    boolean hasTocken();
-    /**
-     * <code>required int32 tocken = 2;</code>
-     */
-    int getTocken();
-  }
-  /**
-   * Protobuf type {@code OnlineHeartTCPServerProBuf}
-   */
-  public  static final class OnlineHeartTCPServerProBuf extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:OnlineHeartTCPServerProBuf)
-      OnlineHeartTCPServerProBufOrBuilder {
-    // Use OnlineHeartTCPServerProBuf.newBuilder() to construct.
-    private OnlineHeartTCPServerProBuf(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private OnlineHeartTCPServerProBuf() {
-      playerId_ = 0L;
-      tocken_ = 0;
-    }
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistryLite registry) {
+	}
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OnlineHeartTCPServerProBuf(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readInt64();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              tocken_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
-    }
+	public static void registerAllExtensions(
+			com.google.protobuf.ExtensionRegistry registry) {
+		registerAllExtensions(
+				(com.google.protobuf.ExtensionRegistryLite) registry);
+	}
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.class, com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.Builder.class);
-    }
+	public static com.google.protobuf.Descriptors.FileDescriptor
+	getDescriptor() {
+		return descriptor;
+	}
 
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private long playerId_;
-    /**
-     * <code>required int64 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int64 playerId = 1;</code>
-     */
-    public long getPlayerId() {
-      return playerId_;
-    }
+	public interface OnlineHeartTCPServerProBufOrBuilder extends
+			// @@protoc_insertion_point(interface_extends:OnlineHeartTCPServerProBuf)
+			com.google.protobuf.MessageOrBuilder {
 
-    public static final int TOCKEN_FIELD_NUMBER = 2;
-    private int tocken_;
-    /**
-     * <code>required int32 tocken = 2;</code>
-     */
-    public boolean hasTocken() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int32 tocken = 2;</code>
-     */
-    public int getTocken() {
-      return tocken_;
-    }
+		/**
+		 * <code>required int64 playerId = 1;</code>
+		 */
+		boolean hasPlayerId();
 
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+		/**
+		 * <code>required int64 playerId = 1;</code>
+		 */
+		long getPlayerId();
 
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasTocken()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
+		/**
+		 * <code>required int32 tocken = 2;</code>
+		 */
+		boolean hasTocken();
 
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, tocken_);
-      }
-      unknownFields.writeTo(output);
-    }
+		/**
+		 * <code>required int32 tocken = 2;</code>
+		 */
+		int getTocken();
+	}
 
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
+	/**
+	 * Protobuf type {@code OnlineHeartTCPServerProBuf}
+	 */
+	public static final class OnlineHeartTCPServerProBuf extends
+			com.google.protobuf.GeneratedMessageV3 implements
+			// @@protoc_insertion_point(message_implements:OnlineHeartTCPServerProBuf)
+			OnlineHeartTCPServerProBufOrBuilder {
+		public static final int PLAYERID_FIELD_NUMBER = 1;
+		public static final int TOCKEN_FIELD_NUMBER = 2;
+		@java.lang.Deprecated
+		public static final com.google.protobuf.Parser<OnlineHeartTCPServerProBuf>
+				PARSER = new com.google.protobuf.AbstractParser<OnlineHeartTCPServerProBuf>() {
+			public OnlineHeartTCPServerProBuf parsePartialFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws com.google.protobuf.InvalidProtocolBufferException {
+				return new OnlineHeartTCPServerProBuf(input, extensionRegistry);
+			}
+		};
+		private static final long serialVersionUID = 0L;
+		// @@protoc_insertion_point(class_scope:OnlineHeartTCPServerProBuf)
+		private static final com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf DEFAULT_INSTANCE;
 
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, tocken_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
+		static {
+			DEFAULT_INSTANCE = new com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf();
+		}
 
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf)) {
-        return super.equals(obj);
-      }
-      com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf other = (com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) obj;
+		private int bitField0_;
+		private long playerId_;
+		private int tocken_;
+		private byte memoizedIsInitialized = -1;
 
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasTocken() == other.hasTocken());
-      if (hasTocken()) {
-        result = result && (getTocken()
-            == other.getTocken());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
+		// Use OnlineHeartTCPServerProBuf.newBuilder() to construct.
+		private OnlineHeartTCPServerProBuf(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+			super(builder);
+		}
 
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getPlayerId());
-      }
-      if (hasTocken()) {
-        hash = (37 * hash) + TOCKEN_FIELD_NUMBER;
-        hash = (53 * hash) + getTocken();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
+		private OnlineHeartTCPServerProBuf() {
+			playerId_ = 0L;
+			tocken_ = 0;
+		}
 
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
+		private OnlineHeartTCPServerProBuf(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			this();
+			int mutable_bitField0_ = 0;
+			com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+					com.google.protobuf.UnknownFieldSet.newBuilder();
+			try {
+				boolean done = false;
+				while (!done) {
+					int tag = input.readTag();
+					switch (tag) {
+						case 0:
+							done = true;
+							break;
+						default: {
+							if (!parseUnknownField(input, unknownFields,
+									extensionRegistry, tag)) {
+								done = true;
+							}
+							break;
+						}
+						case 8: {
+							bitField0_ |= 0x00000001;
+							playerId_ = input.readInt64();
+							break;
+						}
+						case 16: {
+							bitField0_ |= 0x00000002;
+							tocken_ = input.readInt32();
+							break;
+						}
+					}
+				}
+			} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+				throw e.setUnfinishedMessage(this);
+			} catch (java.io.IOException e) {
+				throw new com.google.protobuf.InvalidProtocolBufferException(
+						e).setUnfinishedMessage(this);
+			} finally {
+				this.unknownFields = unknownFields.build();
+				makeExtensionsImmutable();
+			}
+		}
 
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+		public static final com.google.protobuf.Descriptors.Descriptor
+		getDescriptor() {
+			return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
+		}
 
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code OnlineHeartTCPServerProBuf}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:OnlineHeartTCPServerProBuf)
-        com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBufOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				com.google.protobuf.ByteString data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.class, com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.Builder.class);
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				com.google.protobuf.ByteString data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
 
-      // Construct using com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(byte[] data)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data);
+		}
 
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        tocken_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				byte[] data,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws com.google.protobuf.InvalidProtocolBufferException {
+			return PARSER.parseFrom(data, extensionRegistry);
+		}
 
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(java.io.InputStream input)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseWithIOException(PARSER, input);
+		}
 
-      public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstanceForType() {
-        return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.getDefaultInstance();
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseWithIOException(PARSER, input, extensionRegistry);
+		}
 
-      public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf build() {
-        com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseDelimitedFrom(java.io.InputStream input)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseDelimitedWithIOException(PARSER, input);
+		}
 
-      public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf buildPartial() {
-        com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf result = new com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.tocken_ = tocken_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseDelimitedFrom(
+				java.io.InputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+		}
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) {
-          return mergeFrom((com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				com.google.protobuf.CodedInputStream input)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseWithIOException(PARSER, input);
+		}
 
-      public Builder mergeFrom(com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf other) {
-        if (other == com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasTocken()) {
-          setTocken(other.getTocken());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parseFrom(
+				com.google.protobuf.CodedInputStream input,
+				com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+				throws java.io.IOException {
+			return com.google.protobuf.GeneratedMessageV3
+					.parseWithIOException(PARSER, input, extensionRegistry);
+		}
 
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasTocken()) {
-          return false;
-        }
-        return true;
-      }
+		public static Builder newBuilder() {
+			return DEFAULT_INSTANCE.toBuilder();
+		}
 
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
+		public static Builder newBuilder(com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf prototype) {
+			return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+		}
 
-      private long playerId_ ;
-      /**
-       * <code>required int64 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int64 playerId = 1;</code>
-       */
-      public long getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required int64 playerId = 1;</code>
-       */
-      public Builder setPlayerId(long value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 playerId = 1;</code>
-       */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0L;
-        onChanged();
-        return this;
-      }
+		public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstance() {
+			return DEFAULT_INSTANCE;
+		}
 
-      private int tocken_ ;
-      /**
-       * <code>required int32 tocken = 2;</code>
-       */
-      public boolean hasTocken() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 tocken = 2;</code>
-       */
-      public int getTocken() {
-        return tocken_;
-      }
-      /**
-       * <code>required int32 tocken = 2;</code>
-       */
-      public Builder setTocken(int value) {
-        bitField0_ |= 0x00000002;
-        tocken_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 tocken = 2;</code>
-       */
-      public Builder clearTocken() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        tocken_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
+		public static com.google.protobuf.Parser<OnlineHeartTCPServerProBuf> parser() {
+			return PARSER;
+		}
 
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
+		@java.lang.Override
+		public final com.google.protobuf.UnknownFieldSet
+		getUnknownFields() {
+			return this.unknownFields;
+		}
+
+		protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+		internalGetFieldAccessorTable() {
+			return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable
+					.ensureFieldAccessorsInitialized(
+							com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.class, com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.Builder.class);
+		}
+
+		/**
+		 * <code>required int64 playerId = 1;</code>
+		 */
+		public boolean hasPlayerId() {
+			return ((bitField0_ & 0x00000001) == 0x00000001);
+		}
+
+		/**
+		 * <code>required int64 playerId = 1;</code>
+		 */
+		public long getPlayerId() {
+			return playerId_;
+		}
+
+		/**
+		 * <code>required int32 tocken = 2;</code>
+		 */
+		public boolean hasTocken() {
+			return ((bitField0_ & 0x00000002) == 0x00000002);
+		}
+
+		/**
+		 * <code>required int32 tocken = 2;</code>
+		 */
+		public int getTocken() {
+			return tocken_;
+		}
+
+		public final boolean isInitialized() {
+			byte isInitialized = memoizedIsInitialized;
+			if (isInitialized == 1) return true;
+			if (isInitialized == 0) return false;
+
+			if (!hasPlayerId()) {
+				memoizedIsInitialized = 0;
+				return false;
+			}
+			if (!hasTocken()) {
+				memoizedIsInitialized = 0;
+				return false;
+			}
+			memoizedIsInitialized = 1;
+			return true;
+		}
+
+		public void writeTo(com.google.protobuf.CodedOutputStream output)
+				throws java.io.IOException {
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				output.writeInt64(1, playerId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				output.writeInt32(2, tocken_);
+			}
+			unknownFields.writeTo(output);
+		}
+
+		public int getSerializedSize() {
+			int size = memoizedSize;
+			if (size != -1) return size;
+
+			size = 0;
+			if (((bitField0_ & 0x00000001) == 0x00000001)) {
+				size += com.google.protobuf.CodedOutputStream
+						.computeInt64Size(1, playerId_);
+			}
+			if (((bitField0_ & 0x00000002) == 0x00000002)) {
+				size += com.google.protobuf.CodedOutputStream
+						.computeInt32Size(2, tocken_);
+			}
+			size += unknownFields.getSerializedSize();
+			memoizedSize = size;
+			return size;
+		}
+
+		@java.lang.Override
+		public boolean equals(final java.lang.Object obj) {
+			if (obj == this) {
+				return true;
+			}
+			if (!(obj instanceof com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf)) {
+				return super.equals(obj);
+			}
+			com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf other = (com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) obj;
+
+			boolean result = true;
+			result = result && (hasPlayerId() == other.hasPlayerId());
+			if (hasPlayerId()) {
+				result = result && (getPlayerId()
+						== other.getPlayerId());
+			}
+			result = result && (hasTocken() == other.hasTocken());
+			if (hasTocken()) {
+				result = result && (getTocken()
+						== other.getTocken());
+			}
+			result = result && unknownFields.equals(other.unknownFields);
+			return result;
+		}
+
+		@java.lang.Override
+		public int hashCode() {
+			if (memoizedHashCode != 0) {
+				return memoizedHashCode;
+			}
+			int hash = 41;
+			hash = (19 * hash) + getDescriptor().hashCode();
+			if (hasPlayerId()) {
+				hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+				hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+						getPlayerId());
+			}
+			if (hasTocken()) {
+				hash = (37 * hash) + TOCKEN_FIELD_NUMBER;
+				hash = (53 * hash) + getTocken();
+			}
+			hash = (29 * hash) + unknownFields.hashCode();
+			memoizedHashCode = hash;
+			return hash;
+		}
+
+		public Builder newBuilderForType() {
+			return newBuilder();
+		}
+
+		public Builder toBuilder() {
+			return this == DEFAULT_INSTANCE
+					? new Builder() : new Builder().mergeFrom(this);
+		}
+
+		@java.lang.Override
+		protected Builder newBuilderForType(
+				com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+			Builder builder = new Builder(parent);
+			return builder;
+		}
+
+		@java.lang.Override
+		public com.google.protobuf.Parser<OnlineHeartTCPServerProBuf> getParserForType() {
+			return PARSER;
+		}
+
+		public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstanceForType() {
+			return DEFAULT_INSTANCE;
+		}
+
+		/**
+		 * Protobuf type {@code OnlineHeartTCPServerProBuf}
+		 */
+		public static final class Builder extends
+				com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+				// @@protoc_insertion_point(builder_implements:OnlineHeartTCPServerProBuf)
+				com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBufOrBuilder {
+			private int bitField0_;
+			private long playerId_;
+			private int tocken_;
+
+			// Construct using com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.newBuilder()
+			private Builder() {
+				maybeForceBuilderInitialization();
+			}
+
+			private Builder(
+					com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+				super(parent);
+				maybeForceBuilderInitialization();
+			}
+
+			public static final com.google.protobuf.Descriptors.Descriptor
+			getDescriptor() {
+				return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
+			}
+
+			protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+			internalGetFieldAccessorTable() {
+				return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable
+						.ensureFieldAccessorsInitialized(
+								com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.class, com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.Builder.class);
+			}
+
+			private void maybeForceBuilderInitialization() {
+				if (com.google.protobuf.GeneratedMessageV3
+						.alwaysUseFieldBuilders) {
+				}
+			}
+
+			public Builder clear() {
+				super.clear();
+				playerId_ = 0L;
+				bitField0_ = (bitField0_ & ~0x00000001);
+				tocken_ = 0;
+				bitField0_ = (bitField0_ & ~0x00000002);
+				return this;
+			}
+
+			public com.google.protobuf.Descriptors.Descriptor
+			getDescriptorForType() {
+				return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.internal_static_OnlineHeartTCPServerProBuf_descriptor;
+			}
+
+			public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstanceForType() {
+				return com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.getDefaultInstance();
+			}
+
+			public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf build() {
+				com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf result = buildPartial();
+				if (!result.isInitialized()) {
+					throw newUninitializedMessageException(result);
+				}
+				return result;
+			}
+
+			public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf buildPartial() {
+				com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf result = new com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf(this);
+				int from_bitField0_ = bitField0_;
+				int to_bitField0_ = 0;
+				if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+					to_bitField0_ |= 0x00000001;
+				}
+				result.playerId_ = playerId_;
+				if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+					to_bitField0_ |= 0x00000002;
+				}
+				result.tocken_ = tocken_;
+				result.bitField0_ = to_bitField0_;
+				onBuilt();
+				return result;
+			}
+
+			public Builder clone() {
+				return (Builder) super.clone();
+			}
+
+			public Builder setField(
+					com.google.protobuf.Descriptors.FieldDescriptor field,
+					Object value) {
+				return (Builder) super.setField(field, value);
+			}
+
+			public Builder clearField(
+					com.google.protobuf.Descriptors.FieldDescriptor field) {
+				return (Builder) super.clearField(field);
+			}
+
+			public Builder clearOneof(
+					com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+				return (Builder) super.clearOneof(oneof);
+			}
+
+			public Builder setRepeatedField(
+					com.google.protobuf.Descriptors.FieldDescriptor field,
+					int index, Object value) {
+				return (Builder) super.setRepeatedField(field, index, value);
+			}
+
+			public Builder addRepeatedField(
+					com.google.protobuf.Descriptors.FieldDescriptor field,
+					Object value) {
+				return (Builder) super.addRepeatedField(field, value);
+			}
+
+			public Builder mergeFrom(com.google.protobuf.Message other) {
+				if (other instanceof com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) {
+					return mergeFrom((com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) other);
+				} else {
+					super.mergeFrom(other);
+					return this;
+				}
+			}
+
+			public Builder mergeFrom(com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf other) {
+				if (other == com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf.getDefaultInstance())
+					return this;
+				if (other.hasPlayerId()) {
+					setPlayerId(other.getPlayerId());
+				}
+				if (other.hasTocken()) {
+					setTocken(other.getTocken());
+				}
+				this.mergeUnknownFields(other.unknownFields);
+				onChanged();
+				return this;
+			}
+
+			public final boolean isInitialized() {
+				if (!hasPlayerId()) {
+					return false;
+				}
+				if (!hasTocken()) {
+					return false;
+				}
+				return true;
+			}
+
+			public Builder mergeFrom(
+					com.google.protobuf.CodedInputStream input,
+					com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+					throws java.io.IOException {
+				com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf parsedMessage = null;
+				try {
+					parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+				} catch (com.google.protobuf.InvalidProtocolBufferException e) {
+					parsedMessage = (com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf) e.getUnfinishedMessage();
+					throw e.unwrapIOException();
+				} finally {
+					if (parsedMessage != null) {
+						mergeFrom(parsedMessage);
+					}
+				}
+				return this;
+			}
+
+			/**
+			 * <code>required int64 playerId = 1;</code>
+			 */
+			public boolean hasPlayerId() {
+				return ((bitField0_ & 0x00000001) == 0x00000001);
+			}
+
+			/**
+			 * <code>required int64 playerId = 1;</code>
+			 */
+			public long getPlayerId() {
+				return playerId_;
+			}
+
+			/**
+			 * <code>required int64 playerId = 1;</code>
+			 */
+			public Builder setPlayerId(long value) {
+				bitField0_ |= 0x00000001;
+				playerId_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>required int64 playerId = 1;</code>
+			 */
+			public Builder clearPlayerId() {
+				bitField0_ = (bitField0_ & ~0x00000001);
+				playerId_ = 0L;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>required int32 tocken = 2;</code>
+			 */
+			public boolean hasTocken() {
+				return ((bitField0_ & 0x00000002) == 0x00000002);
+			}
+
+			/**
+			 * <code>required int32 tocken = 2;</code>
+			 */
+			public int getTocken() {
+				return tocken_;
+			}
+
+			/**
+			 * <code>required int32 tocken = 2;</code>
+			 */
+			public Builder setTocken(int value) {
+				bitField0_ |= 0x00000002;
+				tocken_ = value;
+				onChanged();
+				return this;
+			}
+
+			/**
+			 * <code>required int32 tocken = 2;</code>
+			 */
+			public Builder clearTocken() {
+				bitField0_ = (bitField0_ & ~0x00000002);
+				tocken_ = 0;
+				onChanged();
+				return this;
+			}
+
+			public final Builder setUnknownFields(
+					final com.google.protobuf.UnknownFieldSet unknownFields) {
+				return super.setUnknownFields(unknownFields);
+			}
+
+			public final Builder mergeUnknownFields(
+					final com.google.protobuf.UnknownFieldSet unknownFields) {
+				return super.mergeUnknownFields(unknownFields);
+			}
 
 
-      // @@protoc_insertion_point(builder_scope:OnlineHeartTCPServerProBuf)
-    }
+			// @@protoc_insertion_point(builder_scope:OnlineHeartTCPServerProBuf)
+		}
 
-    // @@protoc_insertion_point(class_scope:OnlineHeartTCPServerProBuf)
-    private static final com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf();
-    }
+	}
 
-    public static com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnlineHeartTCPServerProBuf>
-        PARSER = new com.google.protobuf.AbstractParser<OnlineHeartTCPServerProBuf>() {
-      public OnlineHeartTCPServerProBuf parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new OnlineHeartTCPServerProBuf(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<OnlineHeartTCPServerProBuf> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<OnlineHeartTCPServerProBuf> getParserForType() {
-      return PARSER;
-    }
-
-    public com.snowcattle.game.message.auto.tcp.online.server.OnlineTCPServerProBuf.OnlineHeartTCPServerProBuf getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_OnlineHeartTCPServerProBuf_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable;
-
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
-  static {
-    java.lang.String[] descriptorData = {
-      "\n\026tcponline-server.proto\">\n\032OnlineHeartT" +
-      "CPServerProBuf\022\020\n\010playerId\030\001 \002(\003\022\016\n\006tock" +
-      "en\030\002 \002(\005BK\n2com.snowcattle.game.message." +
-      "auto.tcp.online.serverB\025OnlineTCPServerP" +
-      "roBuf"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
-    internal_static_OnlineHeartTCPServerProBuf_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_OnlineHeartTCPServerProBuf_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_OnlineHeartTCPServerProBuf_descriptor,
-        new java.lang.String[] { "PlayerId", "Tocken", });
-  }
-
-  // @@protoc_insertion_point(outer_class_scope)
+	// @@protoc_insertion_point(outer_class_scope)
 }

@@ -2,14 +2,10 @@ package com.snowcattle.game.service.time;
 
 /**
  * 提供时间相关的服务
- *
- *
  */
 public interface TimeService {
 	/**
 	 * 当前时间
-	 *
-	 * @return
 	 */
 	public long now();
 
@@ -20,25 +16,16 @@ public interface TimeService {
 
 	/**
 	 * 是否到达某个时间
-	 *
-	 * @param sometime
-	 * @return
 	 */
 	public boolean timeUp(long sometime);
 
 	/**
 	 * 获取指定时间与当前时间的时间差
-	 *
-	 * @param sometime
-	 * @return
 	 */
 	public long getInterval(long sometime);
 
 	/**
 	 * 获取时间偏移量
-	 *
-	 * @return
-	 *
 	 */
 	public long getOffset();
 

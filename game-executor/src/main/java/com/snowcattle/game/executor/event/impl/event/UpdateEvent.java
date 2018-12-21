@@ -7,10 +7,9 @@ import com.snowcattle.game.executor.event.EventType;
 import java.io.Serializable;
 
 /**
- * Created by jiangwenping on 17/1/11.
- *  disptach线程使用
+ * Created by jiangwenping on 17/1/11. disptach线程使用
  */
-public class UpdateEvent <ID extends Serializable> extends CycleEvent {
+public class UpdateEvent<ID extends Serializable> extends CycleEvent {
 //    //是否进行过初始化
 //    private boolean initFlag;
 //
@@ -20,23 +19,23 @@ public class UpdateEvent <ID extends Serializable> extends CycleEvent {
 //    //对象是否存活
 //    private boolean updateAliveFlag;
 
-    public UpdateEvent(){
+	public UpdateEvent() {
 
-    }
+	}
 
-    public UpdateEvent(EventType eventType, ID eventId, EventParam... parms){
+	public UpdateEvent(EventType eventType, ID eventId, EventParam... parms) {
 //        setEventType(eventType);
 //        setParams(parms);
-        super(eventType, eventId, parms);
-        setUpdateAliveFlag(true);
-    }
+		super(eventType, eventId, parms);
+		setUpdateAliveFlag(true);
+	}
 
-    public void call() {
+	public void call() {
 //        if(Loggers.gameExecutorUtil.isDebugEnabled()){
 //            EventParam[] eventParams = getParams();
 //            Loggers.gameExecutorUtil.debug("update event " + eventParams[0].getT());
 //        }
-    }
+	}
 
 //    public boolean isInitFlag() {
 //        return initFlag;

@@ -1,18 +1,16 @@
 package com.snowcattle.game.common.util;
 
 import com.snowcattle.game.common.constant.Loggers;
+
 import org.slf4j.Logger;
 
 /**
  * 时间监测器,用于调试过程
- *
- *
  */
 public class TimeMonitor {
+	public static final TimeMonitor DEBUG = new TimeMonitor(true);
 	private final Logger logger = Loggers.timeMonitorLogger;
 	private final boolean isDebug;
-	public static final TimeMonitor DEBUG = new TimeMonitor(true);
-
 	private long start = 0;
 
 	public TimeMonitor(boolean isDebug) {
@@ -28,7 +26,7 @@ public class TimeMonitor {
 	public void _e(String p) {
 		if (isDebug) {
 			long e = System.currentTimeMillis();
-			if(logger.isDebugEnabled()) {
+			if (logger.isDebugEnabled()) {
 				logger.debug(p + " time:" + (e - start) + "ms");
 			}
 		}

@@ -8,27 +8,26 @@ import io.netty.channel.SimpleChannelInboundHandler;
  */
 public class CodeSocketServerHandler extends SimpleChannelInboundHandler<String> {
 
-    @Override
-    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        Thread.sleep(1000L);
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+		Thread.sleep(1000L);
 //        ctx.writeAndFlush(msg);
-        System.out.println("服务端收到："+msg);
-        ctx.fireChannelRead("转发" + msg);
-    }
+		System.out.println("服务端收到：" + msg);
+		ctx.fireChannelRead("转发" + msg);
+	}
 
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) {
+		ctx.flush();
+	}
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        // Close the connection when an exception is raised.
-        cause.printStackTrace();
-        ctx.close();
-    }
-
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		// Close the connection when an exception is raised.
+		cause.printStackTrace();
+		ctx.close();
+	}
 
 
 }

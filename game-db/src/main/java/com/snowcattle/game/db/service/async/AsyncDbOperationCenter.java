@@ -8,6 +8,7 @@ import com.snowcattle.game.db.service.common.service.IDbService;
 import com.snowcattle.game.db.service.config.DbConfig;
 import com.snowcattle.game.db.service.entity.AsyncOperationRegistry;
 import com.snowcattle.game.thread.executor.NonOrderedQueuePoolExecutor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,52 +21,52 @@ import java.util.concurrent.TimeUnit;
  * Created by jwp on 2017/4/12.
  */
 @Service
-public class AsyncDbOperationCenter implements IDbService{
+public class AsyncDbOperationCenter implements IDbService {
 
-    /**
-     * 执行db落得第线程数量
-     */
-    private NonOrderedQueuePoolExecutor operationExecutor;
+	/**
+	 * 执行db落得第线程数量
+	 */
+	private NonOrderedQueuePoolExecutor operationExecutor;
 
-    private ScheduledExecutorService scheduledExecutorService;
+	private ScheduledExecutorService scheduledExecutorService;
 
-    @Autowired
-    private DbConfig dbConfig;
+	@Autowired
+	private DbConfig dbConfig;
 
-    @Autowired
-    private AsyncOperationRegistry asyncOperationRegistry;
+	@Autowired
+	private AsyncOperationRegistry asyncOperationRegistry;
 
-    @Override
-    public String getDbServiceName() {
-        return DbServiceName.asyncDbOperationCenter;
-    }
+	@Override
+	public String getDbServiceName() {
+		return DbServiceName.asyncDbOperationCenter;
+	}
 
-    @Override
-    public void startup() throws Exception {
-        int coreSize =  dbConfig.getAsyncDbOperationSaveWorkerSize();
-        String name = getDbServiceName();
+	@Override
+	public void startup() throws Exception {
+		int coreSize = dbConfig.getAsyncDbOperationSaveWorkerSize();
+		String name = getDbServiceName();
 
 //        operationExecutor = new NonOrderedQueuePoolExecutor(name, coreSize);
-        int selectSize = dbConfig.getAsyncDbOperationSaveWorkerSize();
-        scheduledExecutorService = Executors.newScheduledThreadPool(selectSize);
+		int selectSize = dbConfig.getAsyncDbOperationSaveWorkerSize();
+		scheduledExecutorService = Executors.newScheduledThreadPool(selectSize);
 
-        //开始调度线程
-        asyncOperationRegistry.startup();
+		//开始调度线程
+		asyncOperationRegistry.startup();
 
-        Collection<AsyncDbOperation> collection = asyncOperationRegistry.getAllAsyncEntityOperation();
-        for(AsyncDbOperation asyncDbOperation: collection){
+		Collection<AsyncDbOperation> collection = asyncOperationRegistry.getAllAsyncEntityOperation();
+		for (AsyncDbOperation asyncDbOperation : collection) {
 //            scheduledExecutorService.scheduleAtFixedRate(asyncDbOperation, 0, 60, TimeUnit.SECONDS);
-            AsyncDbOperationMonitor  asyncDbOperationMonitor = new AsyncDbOperationMonitor();
-            asyncDbOperation.setAsyncDbOperationMonitor(asyncDbOperationMonitor);
+			AsyncDbOperationMonitor asyncDbOperationMonitor = new AsyncDbOperationMonitor();
+			asyncDbOperation.setAsyncDbOperationMonitor(asyncDbOperationMonitor);
 
-            scheduledExecutorService.scheduleAtFixedRate(asyncDbOperation, 0, 5, TimeUnit.SECONDS);
-        }
-    }
+			scheduledExecutorService.scheduleAtFixedRate(asyncDbOperation, 0, 5, TimeUnit.SECONDS);
+		}
+	}
 
-    @Override
-    public void shutdown() throws Exception {
-        if(scheduledExecutorService != null){
-            ExecutorUtil.shutdownAndAwaitTermination(scheduledExecutorService, 60, TimeUnit.SECONDS);
-        }
-    }
+	@Override
+	public void shutdown() throws Exception {
+		if (scheduledExecutorService != null) {
+			ExecutorUtil.shutdownAndAwaitTermination(scheduledExecutorService, 60, TimeUnit.SECONDS);
+		}
+	}
 }

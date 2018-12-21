@@ -2,51 +2,51 @@ package com.snowcattle.game.service.message;
 
 import com.snowcattle.game.common.annotation.MessageCommandAnnotation;
 import com.snowcattle.game.common.exception.CodecException;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * Created by jiangwenping on 17/2/3.
- * 需要重新读取body
+ * Created by jiangwenping on 17/2/3. 需要重新读取body
  */
-public abstract  class AbstractNetProtoBufMessage extends AbstractNetMessage {
+public abstract class AbstractNetProtoBufMessage extends AbstractNetMessage {
 
-    public AbstractNetProtoBufMessage(){
-        setNetMessageHead(new NetMessageHead());
-        setNetMessageBody(new NetMessageBody());
-    }
+	public AbstractNetProtoBufMessage() {
+		setNetMessageHead(new NetMessageHead());
+		setNetMessageBody(new NetMessageBody());
+	}
 
-    protected void initHeadCmd(){
-        //设置包头
-        MessageCommandAnnotation messageCommandAnnotation = this.getClass().getAnnotation(MessageCommandAnnotation.class);
-        if(messageCommandAnnotation != null){
-            getNetMessageHead().setCmd((short) messageCommandAnnotation.command());
-        }
-    }
-    /*解析protobuf协议*/
-    public abstract void decoderNetProtoBufMessageBody() throws Exception;
+	protected void initHeadCmd() {
+		//设置包头
+		MessageCommandAnnotation messageCommandAnnotation = this.getClass().getAnnotation(MessageCommandAnnotation.class);
+		if (messageCommandAnnotation != null) {
+			getNetMessageHead().setCmd((short) messageCommandAnnotation.command());
+		}
+	}
 
-    /*释放message的body*/
-    public  void releaseMessageBody() throws Exception{
-        getNetMessageBody().setBytes(null);
-    }
+	/*解析protobuf协议*/
+	public abstract void decoderNetProtoBufMessageBody() throws Exception;
 
-    public abstract void release() throws CodecException;
+	/*释放message的body*/
+	public void releaseMessageBody() throws Exception {
+		getNetMessageBody().setBytes(null);
+	}
 
-    public abstract  void encodeNetProtoBufMessageBody() throws Exception;
+	public abstract void release() throws CodecException;
 
-    public void setSerial(int serial){
-        getNetMessageHead().setSerial(serial);
-    }
+	public abstract void encodeNetProtoBufMessageBody() throws Exception;
 
-    @Override
-    public String toString()
-    {
-        return getClass().getSimpleName() + ": commandId=" + getNetMessageHead().getCmd();
-    }
+	public void setSerial(int serial) {
+		getNetMessageHead().setSerial(serial);
+	}
 
-    public String toAllInfoString(){
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE).replaceAll("\n", "");
-    }
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + ": commandId=" + getNetMessageHead().getCmd();
+	}
+
+	public String toAllInfoString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE).replaceAll("\n", "");
+	}
 
 }

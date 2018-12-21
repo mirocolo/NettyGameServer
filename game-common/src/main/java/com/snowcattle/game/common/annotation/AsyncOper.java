@@ -7,11 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
  * 异步操作
- *
-  *
- *
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

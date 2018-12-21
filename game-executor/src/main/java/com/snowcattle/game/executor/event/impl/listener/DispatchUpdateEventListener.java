@@ -16,39 +16,40 @@ import com.snowcattle.game.executor.update.thread.dispatch.DispatchThread;
  * Created by jiangwenping on 17/1/11.
  */
 public class DispatchUpdateEventListener extends UpdateEventListener {
-    private final DispatchThread dispatchThread;
-    private final UpdateService updateService;
-    public DispatchUpdateEventListener(DispatchThread dispatchThread, UpdateService updateService) {
-        this.dispatchThread = dispatchThread;
-        this.updateService = updateService;
-    }
+	private final DispatchThread dispatchThread;
+	private final UpdateService updateService;
+
+	public DispatchUpdateEventListener(DispatchThread dispatchThread, UpdateService updateService) {
+		this.dispatchThread = dispatchThread;
+		this.updateService = updateService;
+	}
 
 
-    public void fireEvent(IEvent event) {
+	public void fireEvent(IEvent event) {
 //        if(Loggers.gameExecutorUtil.isDebugEnabled()){
 //            Loggers.gameExecutorUtil.debug("处理update");
 //        }
-        super.fireEvent(event);
+		super.fireEvent(event);
 
-        //提交执行线程
-        CycleEvent cycleEvent = (CycleEvent) event;
-        EventParam[] eventParams = event.getParams();
-        for(EventParam eventParam: eventParams) {
-            IUpdate iUpdate = (IUpdate) eventParam.getT();
-            boolean aliveFlag = cycleEvent.isUpdateAliveFlag();
-            if (aliveFlag) {
-                IUpdateExecutor iUpdateExecutor = dispatchThread.getiUpdateExecutor();
-                iUpdateExecutor.executorUpdate(dispatchThread, iUpdate, cycleEvent.isInitFlag(), cycleEvent.getUpdateExcutorIndex());
-            } else {
-                FinishEvent finishEvent = new FinishEvent(Constants.EventTypeConstans.finishEventType, iUpdate.getUpdateId(), eventParams);
-                dispatchThread.addFinishEvent(finishEvent);
-            }
-        }
+		//提交执行线程
+		CycleEvent cycleEvent = (CycleEvent) event;
+		EventParam[] eventParams = event.getParams();
+		for (EventParam eventParam : eventParams) {
+			IUpdate iUpdate = (IUpdate) eventParam.getT();
+			boolean aliveFlag = cycleEvent.isUpdateAliveFlag();
+			if (aliveFlag) {
+				IUpdateExecutor iUpdateExecutor = dispatchThread.getiUpdateExecutor();
+				iUpdateExecutor.executorUpdate(dispatchThread, iUpdate, cycleEvent.isInitFlag(), cycleEvent.getUpdateExcutorIndex());
+			} else {
+				FinishEvent finishEvent = new FinishEvent(Constants.EventTypeConstans.finishEventType, iUpdate.getUpdateId(), eventParams);
+				dispatchThread.addFinishEvent(finishEvent);
+			}
+		}
 
-        //如果是update，需要释放cache
-        if(cycleEvent instanceof UpdateEvent){
-            UpdateEvent updateEvent = (UpdateEvent) cycleEvent;
-            UpdateEventCacheService.releaseUpdateEvent(updateEvent);
-        }
-    }
+		//如果是update，需要释放cache
+		if (cycleEvent instanceof UpdateEvent) {
+			UpdateEvent updateEvent = (UpdateEvent) cycleEvent;
+			UpdateEventCacheService.releaseUpdateEvent(updateEvent);
+		}
+	}
 }

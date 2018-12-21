@@ -3,35 +3,48 @@ package com.snowcattle.game.common.util;
 import java.lang.reflect.Array;
 
 /**
- *
  * 二元组
- *
  */
-public class KeyValuePair<K,V> {
+public class KeyValuePair<K, V> {
 
-	/**key值*/
-    K key;
+	/**
+	 * key值
+	 */
+	K key;
 
-    /**value值*/
-    V value;
+	/**
+	 * value值
+	 */
+	V value;
 
-    public KeyValuePair()
-    {
+	public KeyValuePair() {
 
-    }
+	}
 
-    public KeyValuePair(K k,V v)
-    {
-    	 this.key=k;
-    	 this.value=v;
-    }
+	public KeyValuePair(K k, V v) {
+		this.key = k;
+		this.value = v;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <K, V> KeyValuePair<K, V>[] newKeyValuePairArray(int size) {
+		return (KeyValuePair<K, V>[]) Array.newInstance(KeyValuePair.class, size);
+	}
 
 	public K getKey() {
 		return key;
 	}
 
+	public void setKey(K key) {
+		this.key = key;
+	}
+
 	public V getValue() {
 		return value;
+	}
+
+	public void setValue(V value) {
+		this.value = value;
 	}
 
 	@Override
@@ -55,7 +68,7 @@ public class KeyValuePair<K,V> {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		KeyValuePair<K,V> other = (KeyValuePair<K,V>) obj;
+		KeyValuePair<K, V> other = (KeyValuePair<K, V>) obj;
 		if (key == null) {
 			if (other.key != null) {
 				return false;
@@ -73,21 +86,8 @@ public class KeyValuePair<K,V> {
 		return true;
 	}
 
-	public void setKey(K key) {
-		this.key = key;
-	}
-
-	public void setValue(V value) {
-		this.value = value;
-	}
-
 	@Override
 	public String toString() {
 		return "KeyValuePair [key=" + key + ", value=" + value + ']';
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <K, V> KeyValuePair<K, V>[] newKeyValuePairArray(int size) {
-		return (KeyValuePair<K, V>[])Array.newInstance(KeyValuePair.class, size);
 	}
 }

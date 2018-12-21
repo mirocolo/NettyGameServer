@@ -1,17 +1,16 @@
 package com.snowcattle.game.common.util;
 
 
+import org.apache.log4j.Logger;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.log4j.Logger;
-
 
 /**
- * This program generates a AES key, retrieves its raw bytes, and then
- * reinstantiates a AES key from the key bytes. The reinstantiated key is used
- * to initialize a AES cipher for encryption and decryption.
+ * This program generates a AES key, retrieves its raw bytes, and then reinstantiates a AES key from
+ * the key bytes. The reinstantiated key is used to initialize a AES cipher for encryption and
+ * decryption.
  */
 public final class AES {
 
@@ -25,10 +24,6 @@ public final class AES {
 
 	/**
 	 * 加密
-	 * 
-	 * @param src
-     * @param key
-	 * @return
 	 */
 	public static byte[] encrypt(byte[] src, String key) throws Exception {
 		Cipher cipher = Cipher.getInstance(AES);
@@ -39,11 +34,6 @@ public final class AES {
 
 	/**
 	 * 解密
-	 * 
-	 * @param src
-	 * @param key
-	 * @return
-	 * @throws Exception
 	 */
 	public static byte[] decrypt(byte[] src, String key) throws Exception {
 		Cipher cipher = Cipher.getInstance(AES);
@@ -54,21 +44,18 @@ public final class AES {
 
 	/**
 	 * 二行制转十六进制字符串
-	 * 
-	 * @param b
-	 * @return
 	 */
 	public static String byte2hex(byte[] b) {
 		StringBuilder hs = new StringBuilder();
 		String stmp;
-        for (byte aB : b) {
-            stmp = (Integer.toHexString(aB & 0XFF));
-            if (stmp.length() == 1) {
-                hs.append('0').append(stmp);
-            } else {
-                hs.append(stmp);
-            }
-        }
+		for (byte aB : b) {
+			stmp = (Integer.toHexString(aB & 0XFF));
+			if (stmp.length() == 1) {
+				hs.append('0').append(stmp);
+			} else {
+				hs.append(stmp);
+			}
+		}
 		return hs.toString().toUpperCase();
 	}
 
@@ -86,17 +73,13 @@ public final class AES {
 
 	/**
 	 * 解密
-	 * 
-	 * @param data
-	 * @return
-	 * @throws Exception
 	 */
 	public static String decrypt(String data) {
 		return decrypt(data, CRYPT_KEY);
 	}
 
 	public static String decrypt(String data, String pass) {
-		if (data == null||data.isEmpty()) {
+		if (data == null || data.isEmpty()) {
 			return "";
 		}
 		try {
@@ -109,10 +92,6 @@ public final class AES {
 
 	/**
 	 * 加密
-	 * 
-	 * @param data
-	 * @return
-	 * @throws Exception
 	 */
 	public static String encrypt(String data) {
 		return encrypt(data, CRYPT_KEY);
@@ -130,7 +109,7 @@ public final class AES {
 		return "";
 	}
 
-	
+
 //	public static void main(String[] args) {
 //		String aesKey = "hsylgwk-20120101";
 //		// 头信息部分长度

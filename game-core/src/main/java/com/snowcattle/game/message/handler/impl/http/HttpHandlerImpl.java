@@ -11,10 +11,10 @@ import com.snowcattle.game.service.message.command.MessageCommandIndex;
  */
 public class HttpHandlerImpl extends AbstractMessageHandler {
 
-    @MessageCommandAnnotation(command = MessageCommandIndex.ONLINE_HEART_HTTP_CLIENT_MESSAGE)
-    public AbstractNetMessage handleOnlineLoginClientHttpMessage(OnlineHeartClientHttpMessage message) throws Exception {
-        OnlineHeartClientHttpMessage onlineHeartClientHttpMessage = new OnlineHeartClientHttpMessage();
-        onlineHeartClientHttpMessage.setId(8);
+	@MessageCommandAnnotation(command = MessageCommandIndex.ONLINE_HEART_HTTP_CLIENT_MESSAGE)
+	public AbstractNetMessage handleOnlineLoginClientHttpMessage(OnlineHeartClientHttpMessage message) throws Exception {
+		OnlineHeartClientHttpMessage onlineHeartClientHttpMessage = new OnlineHeartClientHttpMessage();
+		onlineHeartClientHttpMessage.setId(8);
 //        OnlineHeartClientHttpMessage onlineLoginServerTcpMessage = new OnlineLoginServerTcpMessage();
 //        long playerId = 6666;
 //        int tocken = 333;
@@ -29,6 +29,6 @@ public class HttpHandlerImpl extends AbstractMessageHandler {
 //        gamePlayerLoopUpService.addT(gamePlayer);
 //        return onlineLoginServerTcpMessage;
 
-        return onlineHeartClientHttpMessage;
-    }
+		return onlineHeartClientHttpMessage;
+	}
 }

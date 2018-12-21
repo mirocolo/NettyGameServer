@@ -9,33 +9,29 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by jwp on 2017/5/5.
- * updateservice的唤醒服务
+ * Created by jwp on 2017/5/5. updateservice的唤醒服务
  */
 public class UpdateNotifyService {
 
-    private ScheduledExecutorService scheduledExecutorService;
+	private final UpdateService updateService;
+	/**
+	 * 单位毫秒
+	 */
+	private final int notifyTime;
+	private ScheduledExecutorService scheduledExecutorService;
 
+	public UpdateNotifyService(UpdateService updateService, int notifyTime) {
+		this.updateService = updateService;
+		this.notifyTime = notifyTime;
+	}
 
-    private final UpdateService updateService;
+	public void startup() throws Exception {
+		ThreadNameFactory threadNameFactory = new ThreadNameFactory(Constants.Thread.UpdateNotifyService);
+		scheduledExecutorService = Executors.newScheduledThreadPool(1, threadNameFactory);
+		scheduledExecutorService.scheduleAtFixedRate(new NotifyTask(updateService), notifyTime, 1, TimeUnit.MICROSECONDS);
+	}
 
-    /**
-     * 单位毫秒
-     */
-    private final int notifyTime;
-
-    public UpdateNotifyService(UpdateService updateService, int notifyTime) {
-        this.updateService = updateService;
-        this.notifyTime = notifyTime;
-    }
-
-    public void startup() throws Exception {
-        ThreadNameFactory threadNameFactory = new ThreadNameFactory(Constants.Thread.UpdateNotifyService);
-        scheduledExecutorService = Executors.newScheduledThreadPool(1, threadNameFactory);
-        scheduledExecutorService.scheduleAtFixedRate(new NotifyTask(updateService), notifyTime, 1, TimeUnit.MICROSECONDS);
-    }
-
-    public void shutdown() throws Exception {
-        ExecutorUtil.shutdownAndAwaitTermination(scheduledExecutorService, 60L, TimeUnit.MILLISECONDS);
-    }
+	public void shutdown() throws Exception {
+		ExecutorUtil.shutdownAndAwaitTermination(scheduledExecutorService, 60L, TimeUnit.MILLISECONDS);
+	}
 }

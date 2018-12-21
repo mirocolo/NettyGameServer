@@ -3,7 +3,12 @@ package com.snowcattle.game.common.zookeeper.Carutor;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.api.ACLProvider;
-import org.apache.curator.framework.recipes.cache.*;
+import org.apache.curator.framework.recipes.cache.ChildData;
+import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.cache.NodeCacheListener;
+import org.apache.curator.framework.recipes.cache.TreeCache;
+import org.apache.curator.framework.recipes.cache.TreeCacheEvent;
+import org.apache.curator.framework.recipes.cache.TreeCacheListener;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooDefs.Perms;
@@ -18,12 +23,14 @@ import java.util.concurrent.Executors;
 public final class CuratorListenerUtils {
 
 	public static String connectString = "127.0.0.1:2181";
+
 	public static void main(String[] args) throws Exception {
 		CuratorFramework client = creatClient();
 		setListenter(client);
 		setListenterThreeTwo(client);
 		Thread.sleep(99999999999L);
 	}
+
 	private static CuratorFramework creatClient() {
 
 		ACLProvider aclProvider = new ACLProvider() {
@@ -70,21 +77,21 @@ public final class CuratorListenerUtils {
 				ChildData data = event.getData();
 				if (data != null) {
 					switch (event.getType()) {
-					case NODE_ADDED:
-						System.err.println("NODE_ADDED : " + data.getPath()
-								+ "  数据:" + new String(data.getData()));
-						break;
-					case NODE_REMOVED:
-						System.err.println("NODE_REMOVED : " + data.getPath()
-								+ "  数据:" + new String(data.getData()));
-						break;
-					case NODE_UPDATED:
-						System.err.println("NODE_UPDATED : " + data.getPath()
-								+ "  数据:" + new String(data.getData()));
-						break;
+						case NODE_ADDED:
+							System.err.println("NODE_ADDED : " + data.getPath()
+									+ "  数据:" + new String(data.getData()));
+							break;
+						case NODE_REMOVED:
+							System.err.println("NODE_REMOVED : " + data.getPath()
+									+ "  数据:" + new String(data.getData()));
+							break;
+						case NODE_UPDATED:
+							System.err.println("NODE_UPDATED : " + data.getPath()
+									+ "  数据:" + new String(data.getData()));
+							break;
 
-					default:
-						break;
+						default:
+							break;
 					}
 				} else {
 					//CONNECTION_SUSPENDED CONNECTION_RECONNECTED CONNECTION_LOST
@@ -95,6 +102,7 @@ public final class CuratorListenerUtils {
 		// 开始监听
 		cache.start();
 	}
+
 	private static void setListenterThreeTwo(CuratorFramework client)
 			throws Exception {
 		ExecutorService pool = Executors.newCachedThreadPool();
@@ -103,9 +111,9 @@ public final class CuratorListenerUtils {
 			@Override
 			public void nodeChanged() throws Exception {
 				System.err.println("the test node is change and result is :");
-				System.err.println("path : "+ nodeCache.getCurrentData().getPath());
-				System.err.println("data : "+ new String(nodeCache.getCurrentData().getData()));
-				System.err.println("stat : "+ nodeCache.getCurrentData().getStat());
+				System.err.println("path : " + nodeCache.getCurrentData().getPath());
+				System.err.println("data : " + new String(nodeCache.getCurrentData().getData()));
+				System.err.println("stat : " + nodeCache.getCurrentData().getStat());
 			}
 		});
 		nodeCache.start();

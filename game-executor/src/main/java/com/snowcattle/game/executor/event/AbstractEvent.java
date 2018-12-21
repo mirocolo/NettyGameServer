@@ -7,33 +7,33 @@ import java.io.Serializable;
 /**
  * Created by jiangwenping on 17/1/9.
  */
-public abstract  class AbstractEvent<ID extends Serializable> implements IEvent {
+public abstract class AbstractEvent<ID extends Serializable> implements IEvent {
 
-    private EventType eventType;
-    private EventParam[] eventParamps;
-    private ID id;
+	private EventType eventType;
+	private EventParam[] eventParamps;
+	private ID id;
 
-    public void setEventType(EventType eventType) {
-        this.eventType = eventType;
-    }
+	public EventType getEventType() {
+		return this.eventType;
+	}
 
-    public EventType getEventType() {
-        return this.eventType;
-    }
+	public void setEventType(EventType eventType) {
+		this.eventType = eventType;
+	}
 
-    public EventParam[] getParams() {
-        return this.eventParamps;
-    }
+	public EventParam[] getParams() {
+		return this.eventParamps;
+	}
 
-    public void setParams(EventParam... eventParams) {
-        this.eventParamps = eventParams;
-    }
+	public void setParams(EventParam... eventParams) {
+		this.eventParamps = eventParams;
+	}
 
-    public ID getId() {
-        return id;
-    }
+	public ID getId() {
+		return id;
+	}
 
-    public void setId(ID id) {
-        this.id = id;
-    }
+	public void setId(ID id) {
+		this.id = id;
+	}
 }

@@ -2,6 +2,7 @@ package com.snowcattle.game.common.udp.server;
 
 
 import com.snowcattle.game.TestStartUp;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelOption;
@@ -15,7 +16,7 @@ import io.netty.handler.logging.LoggingHandler;
  * Created by jwp on 2017/1/20.
  */
 public final class EchoServer {
-    public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 //        LocalSpringServiceManager localSpringServiceManager = new LocalSpringServiceManager();
 //        MessageCommandFactory messageCommandFactory = new MessageCommandFactory();
 //        localSpringBeanManager.setMessageCommandFactory(messageCommandFactory);
@@ -23,22 +24,22 @@ public final class EchoServer {
 //        localSpringServiceManager.setMessageRegistry(LocalMananger.getInstance().get(MessageRegistry.class));
 //        LocalMananger.getInstance().setLocalSpringServiceManager(localSpringServiceManager);
 
-        TestStartUp.startUpWithSpring();
-        Bootstrap b = new Bootstrap();
-        EventLoopGroup group = new NioEventLoopGroup();
-        b.group(group)
-                .channel(NioDatagramChannel.class)
-                .option(ChannelOption.SO_BROADCAST, false)
+		TestStartUp.startUpWithSpring();
+		Bootstrap b = new Bootstrap();
+		EventLoopGroup group = new NioEventLoopGroup();
+		b.group(group)
+				.channel(NioDatagramChannel.class)
+				.option(ChannelOption.SO_BROADCAST, false)
 //                .option(ChannelOption.DATAGRAM_CHANNEL_ACTIVE_ON_REGISTRATION,true)
-                .option(ChannelOption.SO_REUSEADDR, true) //重用地址
-                .option(ChannelOption.SO_RCVBUF, 65536)
-                .option(ChannelOption.SO_SNDBUF, 65536)
-                .option(ChannelOption.ALLOCATOR, new PooledByteBufAllocator(false))  // heap buf 's better
-                .handler(new LoggingHandler(LogLevel.DEBUG))
+				.option(ChannelOption.SO_REUSEADDR, true) //重用地址
+				.option(ChannelOption.SO_RCVBUF, 65536)
+				.option(ChannelOption.SO_SNDBUF, 65536)
+				.option(ChannelOption.ALLOCATOR, new PooledByteBufAllocator(false))  // heap buf 's better
+				.handler(new LoggingHandler(LogLevel.DEBUG))
 //                .handler(new UdpChannelInitializer());
-                .handler(new UdpProtoBufServerChannelInitializer());
+				.handler(new UdpProtoBufServerChannelInitializer());
 
-        // 服务端监听在9999端口
-        b.bind(9999).sync().channel().closeFuture().sync();
-    }
+		// 服务端监听在9999端口
+		b.bind(9999).sync().channel().closeFuture().sync();
+	}
 }

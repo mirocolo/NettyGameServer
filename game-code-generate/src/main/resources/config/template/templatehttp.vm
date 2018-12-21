@@ -1,5 +1,7 @@
 #macro( smallType $type)
-    #if($type == "Short")short#elseif( $type == "Integer" )int#elseif( $type == "Byte" )byte#elseif( $type == "Long" )long#elseif( $type == "Float" )float#elseif( $type == "Double" )double#elseif( $type == "Boolean" )boolean#else$type#end
+    #if($type == "Short")short#elseif( $type == "Integer" )int#elseif( $type ==
+        "Byte" )byte#elseif( $type == "Long" )long#elseif( $type == "Float" )float#elseif( $type ==
+        "Double" )double#elseif( $type == "Boolean" )boolean#else$type#end
 #end
 #macro( bigType $type)
     #if( $type == "String" )UTF#elseif( $type == "Integer" )Int#else$type#end
@@ -15,7 +17,9 @@
         #end
         ${field.name}.add(tmp);
     }
-    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} == "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} == "Double" || ${field.type} == "String" || ${field.type} == "Byte")
+    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} ==
+        "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} ==
+        "Double" || ${field.type} == "String" || ${field.type} == "Byte")
         ${field.name} = dis.read#bigType(${field.type})();
     #else
         ${field.name} = new ${field.selfObj.clazz}();
@@ -38,7 +42,9 @@
         #end
     }
     }
-    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} == "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} == "Double" || ${field.type} == "String" || ${field.type} == "Byte")
+    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} ==
+        "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} ==
+        "Double" || ${field.type} == "String" || ${field.type} == "Byte")
     dos.write#bigType(${field.type})(${field.name});
     #else
         #foreach( ${subField} in ${field.selfObj.fieldList})
@@ -58,7 +64,9 @@
     ##	public java.util.List<${field.genericObj.clazz}> get#upperFirstChar(${field.name} )(){
     ##		return this.${field.name};
     ##	}
-    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} == "Long" || ${field.type} == "Float" || ${field.type} == "Double" || ${field.type} == "String" || ${field.type} == "Byte")
+    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} ==
+        "Long" || ${field.type} == "Float" || ${field.type} == "Double" || ${field.type} ==
+        "String" || ${field.type} == "Byte")
     ##	public void set#upperFirstChar(${field.name} )(#smallType(${field.type}) ${field.name}){
     ##		this.${field.name} = ${field.name};
     ##	}
@@ -100,7 +108,9 @@ public class ${msg.className} extends AbstractNetProtoBufHttpMessage {
 /**${field.comment}*/
     #if(${field.type} == "List")
     ##	private java.util.List#generic($field) ${field.name} = new java.util.ArrayList#generic($field)() ;
-    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} == "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} == "Double" || ${field.type} == "String" || ${field.type} == "Byte")
+    #elseif(${field.type} == "Integer" || ${field.type} == "Short" || ${field.type} ==
+        "Long" || ${field.type} == "Boolean" || ${field.type} == "Float" || ${field.type} ==
+        "Double" || ${field.type} == "String" || ${field.type} == "Byte")
     ##	private #smallType(${field.type}) ${field.name};
     #else
     private ${field.type} ${field.name};

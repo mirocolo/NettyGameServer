@@ -1,9 +1,9 @@
 package com.snowcattle.game.message.logicgenerate.tcp.room.client;
 
 import com.snowcattle.game.common.annotation.MessageCommandAnnotation;
+import com.snowcattle.game.message.protogenerate.tcp.room.client.GameRoomTCPClientProBuf.RoomHeartTCPClientProBuf;
 import com.snowcattle.game.service.message.AbstractNetProtoBufTcpMessage;
 import com.snowcattle.game.service.net.GameMessageCommandIndex;
-import com.snowcattle.game.message.protogenerate.tcp.room.client.GameRoomTCPClientProBuf.*;
 
 /**
  * room tcp 心跳协议
@@ -13,7 +13,9 @@ import com.snowcattle.game.message.protogenerate.tcp.room.client.GameRoomTCPClie
 @MessageCommandAnnotation(command = GameMessageCommandIndex.ONLINE_HEART_CLIENT_TCP_MESSAGE)
 public class RoomHeartClientMessage extends AbstractNetProtoBufTcpMessage {
 
-	/**请求*/
+	/**
+	 * 请求
+	 */
 	private RoomHeartTCPClientProBuf req;
 
 
@@ -21,10 +23,10 @@ public class RoomHeartClientMessage extends AbstractNetProtoBufTcpMessage {
 	public void decoderNetProtoBufMessageBody() throws Exception {
 		byte[] bytes = getNetMessageBody().getBytes();
 		RoomHeartTCPClientProBuf req = RoomHeartTCPClientProBuf.parseFrom(bytes);
-		this.req=req;
+		this.req = req;
 	}
 
-	
+
 	//以下为客户端专用代码======================================================
 	@Override
 	public void encodeNetProtoBufMessageBody() throws Exception {
@@ -36,10 +38,12 @@ public class RoomHeartClientMessage extends AbstractNetProtoBufTcpMessage {
 	public void release() {
 
 	}
-        public void setReq(RoomHeartTCPClientProBuf req){
-    this.req = req;
-    }
-    public RoomHeartTCPClientProBuf getReq(){
-    return this.req;
-    }
-    }
+
+	public RoomHeartTCPClientProBuf getReq() {
+		return this.req;
+	}
+
+	public void setReq(RoomHeartTCPClientProBuf req) {
+		this.req = req;
+	}
+}

@@ -2,6 +2,7 @@ package com.snowcattle.game.template.xml;
 
 
 import org.jdom2.Element;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,11 @@ public class MessageObject {
 	private String vm;
 	private List<FieldObject> fieldList = new ArrayList<FieldObject>();
 	private String importPackage;
-	public MessageObject(){}
 
-	public MessageObject(Element element){
+	public MessageObject() {
+	}
+
+	public MessageObject(Element element) {
 		this.comment = element.getAttributeValue("comment");
 
 		this.namespace = element.getAttributeValue("javaPackage");
@@ -24,21 +27,21 @@ public class MessageObject {
 		this.importPackage = element.getAttributeValue("importPackage");
 		this.cmdType = element.getAttributeValue("cmdType");
 		this.vm = element.getAttributeValue("vm");
-		for(Element child : element.getChildren()){
+		for (Element child : element.getChildren()) {
 			fieldList.add(new FieldObject(child));
 		}
 	}
 
-	
-	public String getVmFileName(){
-		return this.vm+ ".vm";
+
+	public String getVmFileName() {
+		return this.vm + ".vm";
 	}
-	
-	public String getOutputFileName(){
-		return this.className +".java";
+
+	public String getOutputFileName() {
+		return this.className + ".java";
 	}
-	
-	public String getPackPath(){
+
+	public String getPackPath() {
 		return this.namespace.replace('.', '/');
 	}
 
@@ -69,9 +72,11 @@ public class MessageObject {
 	public String getNamespace() {
 		return namespace;
 	}
+
 	public void setNamespace(String namespace) {
 		this.namespace = namespace;
 	}
+
 	public List<FieldObject> getFieldList() {
 		return fieldList;
 	}

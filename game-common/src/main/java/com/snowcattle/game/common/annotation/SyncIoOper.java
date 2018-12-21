@@ -8,9 +8,6 @@ import java.lang.annotation.Target;
 
 /**
  * 同步操作
- *
-  *
- *
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

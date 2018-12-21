@@ -1,6 +1,4 @@
 package com.snowcattle.game.common.zookeeper.Carutor;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -11,16 +9,21 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooDefs.Perms;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Id;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Carutor2 {
 	public static void main(String[] args) throws Exception {
 		CuratorFramework client = clientTwo();
 		client.create().withMode(CreateMode.EPHEMERAL).forPath("/test", "111".getBytes());
 		byte[] data = client.getData().forPath("/test");
-		System.err.println("data>>>>>>>>>"+new String(data));
-		client.setData().forPath("/test","222".getBytes());
-		client.setData().forPath("/test","222-update".getBytes());
+		System.err.println("data>>>>>>>>>" + new String(data));
+		client.setData().forPath("/test", "222".getBytes());
+		client.setData().forPath("/test", "222-update".getBytes());
 		client.delete().forPath("/test");
 	}
+
 	private static CuratorFramework clientTwo() {
 
 		ACLProvider aclProvider = new ACLProvider() {

@@ -6,12 +6,11 @@ import com.snowcattle.game.service.event.SingleEventConstants;
 
 /**
  * Created by jiangwenping on 2017/5/22.
- *
  */
 @GlobalEventListenerAnnotation
 public class SingleRunEventListener extends AbstractEventListener {
-    @Override
-    public void initEventType() {
-        register(SingleEventConstants.singleRunEventType);
-    }
+	@Override
+	public void initEventType() {
+		register(SingleEventConstants.singleRunEventType);
+	}
 }

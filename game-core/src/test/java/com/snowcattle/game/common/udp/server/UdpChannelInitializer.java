@@ -8,15 +8,15 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 /**
  * Created by jiangwenping on 17/2/16.
  */
-public class UdpChannelInitializer  extends ChannelInitializer<NioDatagramChannel> {
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
-    }
+public class UdpChannelInitializer extends ChannelInitializer<NioDatagramChannel> {
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		super.channelActive(ctx);
+	}
 
-    @Override
-    protected void initChannel(NioDatagramChannel ch) throws Exception {
-        ChannelPipeline cp = ch.pipeline();
+	@Override
+	protected void initChannel(NioDatagramChannel ch) throws Exception {
+		ChannelPipeline cp = ch.pipeline();
 //        cp.addLast("framer", new MessageToMessageDecoder<DatagramPacket>() {
 //            @Override
 //            protected void decode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out) throws Exception {
@@ -25,6 +25,6 @@ public class UdpChannelInitializer  extends ChannelInitializer<NioDatagramChanne
 //                System.out.println(string);
 //            }
 //        });
-        cp.addLast("handler", new EchoServerHandler());
-    }
+		cp.addLast("handler", new EchoServerHandler());
+	}
 }

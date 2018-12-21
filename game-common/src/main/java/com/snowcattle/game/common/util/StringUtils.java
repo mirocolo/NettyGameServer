@@ -1,5 +1,8 @@
 package com.snowcattle.game.common.util;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -9,13 +12,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 public final class StringUtils {
-	
-	/**默认的文本分隔符 */
-	public static final String Default_Split= "#";
+
+	/**
+	 * 默认的文本分隔符
+	 */
+	public static final String Default_Split = "#";
 
 	private StringUtils() {
 	}
@@ -61,14 +63,14 @@ public final class StringUtils {
 	public static int[] getIntArray(String str, String sep) {
 		String[] prop = getStringList(str, sep);
 		List<Integer> tmp = new ArrayList<Integer>();
-        for (String aProp : prop) {
-            try {
-                int r = Integer.parseInt(aProp);
-                tmp.add(r);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+		for (String aProp : prop) {
+			try {
+				int r = Integer.parseInt(aProp);
+				tmp.add(r);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
 		int[] ints = new int[tmp.size()];
 		for (int i = 0; i < tmp.size(); i++) {
 			ints[i] = tmp.get(i);
@@ -82,14 +84,14 @@ public final class StringUtils {
 			return tmp;
 		}
 		String[] prop = getStringList(str, sep);
-        for (String aProp : prop) {
-            try {
-                int r = Integer.parseInt(aProp);
-                tmp.add(r);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+		for (String aProp : prop) {
+			try {
+				int r = Integer.parseInt(aProp);
+				tmp.add(r);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return tmp;
 	}
 
@@ -137,16 +139,16 @@ public final class StringUtils {
 	public static int[] getIntList(String str) {
 		String[] prop = getStringList(str);
 		List<Integer> tmp = new ArrayList<Integer>();
-        for (String aProp : prop) {
-            try {
-                String sInt = aProp.trim();
-                if (sInt.length() < 20) {
-                    int r = Integer.parseInt(aProp.trim());
-                    tmp.add(r);
-                }
-            } catch (Exception e) {
-            }
-        }
+		for (String aProp : prop) {
+			try {
+				String sInt = aProp.trim();
+				if (sInt.length() < 20) {
+					int r = Integer.parseInt(aProp.trim());
+					tmp.add(r);
+				}
+			} catch (Exception e) {
+			}
+		}
 		int[] ints = new int[tmp.size()];
 		for (int i = 0; i < tmp.size(); i++) {
 			ints[i] = tmp.get(i);
@@ -160,7 +162,7 @@ public final class StringUtils {
 			return "null";
 		} else {
 			return obj.getClass().getName() + '@' + obj.hashCode() + "[\r\n"
-				   + content + "\r\n]";
+					+ content + "\r\n]";
 		}
 	}
 
@@ -187,14 +189,14 @@ public final class StringUtils {
 	public static boolean hasExcludeChar(String str) {
 		if (str != null) {
 			char[] chs = str.toCharArray();
-            for (char ch : chs) {
+			for (char ch : chs) {
 
-                if (Character.getType(ch) == Character.PRIVATE_USE) {
+				if (Character.getType(ch) == Character.PRIVATE_USE) {
 
-                    return true;
-                }
+					return true;
+				}
 
-            }
+			}
 		}
 		return false;
 	}
@@ -210,9 +212,7 @@ public final class StringUtils {
 	/**
 	 * 判断两个字符串是否相等
 	 *
-	 * @param s1
-	 * @param s2
-	 * @return true,字符串相等;false,字符串不相等
+	 * @return true, 字符串相等;false,字符串不相等
 	 */
 	public static boolean isEquals(String s1, String s2) {
 		if (s1 != null) {
@@ -227,10 +227,6 @@ public final class StringUtils {
 
 	/**
 	 * 将obj转变为String表示
-	 *
-	 * @param obj
-	 * @param excludes
-	 * @return
 	 */
 	public static String obj2String(Object obj, Map<String, Boolean> excludes) {
 		BaseReflectionToStringBuilder _builder = new BaseReflectionToStringBuilder(
@@ -239,36 +235,7 @@ public final class StringUtils {
 	}
 
 	/**
-	 * 重载ReflectionToStringBuilder,用于将BaseMessage用字符串表示,但是不处理buf字段
-	 *
-	  *
-	 *
-	 */
-	private static class BaseReflectionToStringBuilder extends
-			ReflectionToStringBuilder {
-		private final Map<String, Boolean> excludes;
-
-		private BaseReflectionToStringBuilder(Object object,
-											  ToStringStyle style, Map<String, Boolean> excludes) {
-			super(object, style);
-			this.excludes = excludes;
-		}
-
-		@Override
-		protected boolean accept(Field field) {
-			boolean _accepted = true;
-			if (this.excludes != null) {
-				_accepted = this.excludes.get(field.getName()) == null;
-			}
-			return super.accept(field) && _accepted;
-		}
-	}
-
-	/**
 	 * 判断字符串是否时数字
-	 *
-	 * @param text
-	 * @return
 	 */
 	public static boolean isDigit(String text) {
 		String reg = "[-]*[\\d]+[\\.\\d+]*";
@@ -279,9 +246,6 @@ public final class StringUtils {
 
 	/**
 	 * 判断一句话是否是汉语
-	 *
-	 * @param text
-	 * @return
 	 */
 	public static boolean isChiness(String text) {
 		String reg = "[\\w]*[\\u4e00-\\u9fa5]+[\\w]*";
@@ -293,9 +257,6 @@ public final class StringUtils {
 
 	/**
 	 * 判断单个字符是否是汉语
-	 *
-	 * @param cha
-	 * @return
 	 */
 	public static boolean isChineseChar(char cha) {
 		String reg = "[\\u4e00-\\u9fa5]";
@@ -308,9 +269,6 @@ public final class StringUtils {
 
 	/**
 	 * 判断字符是否是字母(包括大小写)或者数字
-	 *
-	 * @param cha
-	 * @return
 	 */
 	public static boolean isLetterAndDigit(String cha) {
 		String reg = "[\\w]+";
@@ -322,9 +280,6 @@ public final class StringUtils {
 
 	/**
 	 * 返回字符串中汉字的数量
-	 *
-	 * @param test
-	 * @return
 	 */
 	public static int getChineseCount(String test) {
 		int count = 0;
@@ -341,9 +296,6 @@ public final class StringUtils {
 
 	/**
 	 * 返回字符串中字母和数字的个数，其中字母包括大小写
-	 *
-	 * @param text
-	 * @return
 	 */
 	public static int getLetterAndDigitCount(String text) {
 		int count = 0;
@@ -360,8 +312,7 @@ public final class StringUtils {
 	/**
 	 * 判断字符串是否为空
 	 *
-	 * @param str
-	 * @return true,字符串是空的;false,字符串不是空的
+	 * @return true, 字符串是空的;false,字符串不是空的
 	 */
 	public static boolean isEmpty(String str) {
 		if (str == null || (str.trim().length() == 0)) {
@@ -372,9 +323,6 @@ public final class StringUtils {
 
 	/**
 	 * 将字符串首字母大写
-	 *
-	 * @param s
-	 * @return
 	 */
 	public static String upperCaseFirstCharOnly(String s) {
 		if (s == null || s.length() < 1) {
@@ -382,39 +330,34 @@ public final class StringUtils {
 		}
 		return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 	}
-	  /**
-     * 数组转化为String
-     * @param s
-     * @param sep
-     * @return
-     */
-    public static String arrayToString(String[] s, char sep) {
-        if (s == null || s.length == 0){
-        	return "";
-        }
-        StringBuilder buf = new StringBuilder();
-        if (s != null) {
-            for (int i = 0; i < s.length; i++) {
-                if (i > 0) {
+
+	/**
+	 * 数组转化为String
+	 */
+	public static String arrayToString(String[] s, char sep) {
+		if (s == null || s.length == 0) {
+			return "";
+		}
+		StringBuilder buf = new StringBuilder();
+		if (s != null) {
+			for (int i = 0; i < s.length; i++) {
+				if (i > 0) {
 					buf.append(sep);
 				}
-                buf.append(s[i]);
-            }
-        }
-        return buf.toString();
-    }
-    
+				buf.append(s[i]);
+			}
+		}
+		return buf.toString();
+	}
+
 	/**
 	 * 获取拼起来的key
-	 * @param splitString
-	 * @param strings
-	 * @return
 	 */
-	public static String getString(String splitString, String... strings){
+	public static String getString(String splitString, String... strings) {
 		StringBuilder stringBuffer = new StringBuilder();
-		for(int i = 0; i < strings.length; i++){
+		for (int i = 0; i < strings.length; i++) {
 			stringBuffer.append(strings[i]);
-			if(i == strings.length - 1){
+			if (i == strings.length - 1) {
 				break;
 			}
 			stringBuffer.append(splitString);
@@ -422,18 +365,14 @@ public final class StringUtils {
 		return stringBuffer.toString();
 	}
 
-    
 	/**
 	 * 获取拼起来的key
-	 * @param splitString
-	 * @param strings
-	 * @return
 	 */
-	public static String getString(String splitString, int start, Serializable... strings){
+	public static String getString(String splitString, int start, Serializable... strings) {
 		StringBuilder stringBuffer = new StringBuilder();
-		for(int i = start; i < strings.length; i++){
+		for (int i = start; i < strings.length; i++) {
 			stringBuffer.append(strings[i]);
-			if(i == strings.length - 1){
+			if (i == strings.length - 1) {
 				break;
 			}
 			stringBuffer.append(splitString);
@@ -442,11 +381,34 @@ public final class StringUtils {
 	}
 
 	//首字母转小写
-	public static String toLowerCaseFirstOne(String s){
-		if(Character.isLowerCase(s.charAt(0))) {
+	public static String toLowerCaseFirstOne(String s) {
+		if (Character.isLowerCase(s.charAt(0))) {
 			return s;
 		} else {
 			return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+		}
+	}
+
+	/**
+	 * 重载ReflectionToStringBuilder,用于将BaseMessage用字符串表示,但是不处理buf字段
+	 */
+	private static class BaseReflectionToStringBuilder extends
+			ReflectionToStringBuilder {
+		private final Map<String, Boolean> excludes;
+
+		private BaseReflectionToStringBuilder(Object object,
+		                                      ToStringStyle style, Map<String, Boolean> excludes) {
+			super(object, style);
+			this.excludes = excludes;
+		}
+
+		@Override
+		protected boolean accept(Field field) {
+			boolean _accepted = true;
+			if (this.excludes != null) {
+				_accepted = this.excludes.get(field.getName()) == null;
+			}
+			return super.accept(field) && _accepted;
 		}
 	}
 }

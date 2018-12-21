@@ -1,35 +1,34 @@
 package com.snowcattle.game.db.service.redis;
 
 
-
 /**
  * 缓存键值
  */
 public enum RedisKeyEnum {
-	
+
 	PLAYER("pr#"),
 	TOCKEN("tk#"),
 	ASYNC_PLAYER("ay_pr"),
 	;
-	
+
 	private final String key;
-	
-	RedisKeyEnum(String key){
+
+	RedisKeyEnum(String key) {
 		this.key = key;
 	}
-	
-	public static RedisKeyEnum geRedisKeyEnum(String key){
+
+	public static RedisKeyEnum geRedisKeyEnum(String key) {
 		RedisKeyEnum result = null;
-		for(RedisKeyEnum temp: RedisKeyEnum.values()){
-			if(temp.getKey().equals(key)){
+		for (RedisKeyEnum temp : RedisKeyEnum.values()) {
+			if (temp.getKey().equals(key)) {
 				result = temp;
 				break;
 			}
 		}
 		return result;
 	}
-	
-	public String getKey(){
+
+	public String getKey() {
 		return this.key;
 	}
 }

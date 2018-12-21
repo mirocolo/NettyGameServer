@@ -14,31 +14,31 @@ import io.netty.handler.logging.LoggingHandler;
  */
 public final class EchoServer {
 
-    public static  final int Port = 9999;
+	public static final int Port = 9999;
 
-    public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+	public static void main(String[] args) {
+		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        try{
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap = serverBootstrap.group(bossGroup, bossGroup);
-            serverBootstrap.channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 1024)
-                    .option(ChannelOption.TCP_NODELAY, true)
-                    .handler(new LoggingHandler(LogLevel.INFO))
+		try {
+			ServerBootstrap serverBootstrap = new ServerBootstrap();
+			serverBootstrap = serverBootstrap.group(bossGroup, bossGroup);
+			serverBootstrap.channel(NioServerSocketChannel.class)
+					.option(ChannelOption.SO_BACKLOG, 1024)
+					.option(ChannelOption.TCP_NODELAY, true)
+					.handler(new LoggingHandler(LogLevel.INFO))
 //                    .childHandler(new ServerChannelInitializer());
 //                    .childHandler(new StringServerChannelInitializer());
 //                    .childHandler(new LengthStringServerChannelInitializer());
-                    .childHandler(new NetMessageServerChannleInitializer());
-            ChannelFuture serverChannelFuture = serverBootstrap.bind(Port).sync();
+					.childHandler(new NetMessageServerChannleInitializer());
+			ChannelFuture serverChannelFuture = serverBootstrap.bind(Port).sync();
 
-            serverChannelFuture.channel().closeFuture().sync();
-        }catch (Exception e){
+			serverChannelFuture.channel().closeFuture().sync();
+		} catch (Exception e) {
 
-        }finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
-    }
+		} finally {
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
+		}
+	}
 }

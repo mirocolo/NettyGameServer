@@ -11,12 +11,12 @@ import io.netty.handler.codec.string.StringEncoder;
  * Created by jwp on 2017/1/23.
  */
 public class StringServerChannelInitializer extends ChannelInitializer<NioSocketChannel> {
-    @Override
-    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-        ChannelPipeline channelPipLine = nioSocketChannel.pipeline();
-        channelPipLine.addLast(new LineBasedFrameDecoder(1024));
-        channelPipLine.addLast(new StringDecoder());
-        channelPipLine.addLast(new StringEncoder());
-        channelPipLine.addLast(new EchoSocketServerHandler());
-    }
+	@Override
+	protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+		ChannelPipeline channelPipLine = nioSocketChannel.pipeline();
+		channelPipLine.addLast(new LineBasedFrameDecoder(1024));
+		channelPipLine.addLast(new StringDecoder());
+		channelPipLine.addLast(new StringEncoder());
+		channelPipLine.addLast(new EchoSocketServerHandler());
+	}
 }

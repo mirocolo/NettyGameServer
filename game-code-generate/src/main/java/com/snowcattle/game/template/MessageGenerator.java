@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 
-
 public final class MessageGenerator {
 
 	private static final String xmlPath = "config/model/";
@@ -28,19 +27,19 @@ public final class MessageGenerator {
 
 	public static List<MacroObject> formats = new ArrayList<>();
 
-    private MessageGenerator() {
-    }
+	private MessageGenerator() {
+	}
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		generateMacroObject();
 		generateTemplate();
 	}
 
-	public static void generateMacroObject(){
+	public static void generateMacroObject() {
 		try {
 			XmlsLoader.loadMacro(xmlPath);
 //			formats = XmlsLoader.loadFormat(xmlPath);
-			for(Entry<String, MacroObject> entry: MacroObject.getAllMacros().entrySet()){
+			for (Entry<String, MacroObject> entry : MacroObject.getAllMacros().entrySet()) {
 				formats.add(entry.getValue());
 			}
 		} catch (Exception e) {
@@ -48,19 +47,19 @@ public final class MessageGenerator {
 		}
 
 		Converter converter = new Converter(vmPath, encode);
-		for(MacroObject msgObj : formats){
-            FileContent fileContent = fileConentFactory.create(msgObj.getOutputFileName(), converter.convert(msgObj),
-                                                               outputProjectPath + msgObj.getPackPath() + '/');
+		for (MacroObject msgObj : formats) {
+			FileContent fileContent = fileConentFactory.create(msgObj.getOutputFileName(), converter.convert(msgObj),
+					outputProjectPath + msgObj.getPackPath() + '/');
 			try {
 				FileUtils.writeToFile(fileContent);
-				System.out.println("已生成"+msgObj.getOutputFileName());
+				System.out.println("已生成" + msgObj.getOutputFileName());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static void generateTemplate(){
+	public static void generateTemplate() {
 		List<MessageObject> templateformats = new ArrayList<>();
 		try {
 			XmlsLoader.loadFormat(xmlPath, templateformats);
@@ -69,12 +68,12 @@ public final class MessageGenerator {
 		}
 
 		Converter converter = new Converter(vmPath, encode);
-		for(MessageObject msgObj : templateformats){
-            FileContent fileContent = fileConentFactory.create(msgObj.getOutputFileName(), converter.convert(msgObj),
-                                                               outputProjectPath + msgObj.getPackPath() + '/');
+		for (MessageObject msgObj : templateformats) {
+			FileContent fileContent = fileConentFactory.create(msgObj.getOutputFileName(), converter.convert(msgObj),
+					outputProjectPath + msgObj.getPackPath() + '/');
 			try {
 				FileUtils.writeToFile(fileContent);
-				System.out.println("已生成"+msgObj.getOutputFileName());
+				System.out.println("已生成" + msgObj.getOutputFileName());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

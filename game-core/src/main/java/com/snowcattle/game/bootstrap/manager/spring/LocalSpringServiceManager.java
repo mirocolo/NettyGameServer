@@ -22,248 +22,248 @@ import com.snowcattle.game.service.rpc.server.RemoteRpcHandlerService;
 import com.snowcattle.game.service.rpc.server.RpcMethodRegistry;
 import com.snowcattle.game.service.rpc.server.zookeeper.ZookeeperRpcServiceRegistry;
 import com.snowcattle.game.service.time.SystemTimeService;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by jiangwenping on 17/3/1.
- * 本地spring会话服务
+ * Created by jiangwenping on 17/3/1. 本地spring会话服务
  */
 @Repository
-public class LocalSpringServiceManager extends AbstractSpringStart{
-    private final Logger logger = Loggers.serverLogger;
+public class LocalSpringServiceManager extends AbstractSpringStart {
+	private final Logger logger = Loggers.serverLogger;
 
-    @Autowired
-    private DefaultClassLoader defaultClassLoader;
+	@Autowired
+	private DefaultClassLoader defaultClassLoader;
 
-    @Autowired
-    private NetTcpSessionLoopUpService netTcpSessionLoopUpService;
+	@Autowired
+	private NetTcpSessionLoopUpService netTcpSessionLoopUpService;
 
-    @Autowired
-    private GamePlayerLoopUpService gamePlayerLoopUpService;
+	@Autowired
+	private GamePlayerLoopUpService gamePlayerLoopUpService;
 
-    @Autowired
-    private GameServerConfigService gameServerConfigService;
+	@Autowired
+	private GameServerConfigService gameServerConfigService;
 
-    @Autowired
-    private MessageRegistry messageRegistry;
+	@Autowired
+	private MessageRegistry messageRegistry;
 
-    @Autowired
-    private GameFacade gameFacade;
+	@Autowired
+	private GameFacade gameFacade;
 
-    @Autowired
-    private SystemTimeService systemTimeService;
+	@Autowired
+	private SystemTimeService systemTimeService;
 
-    @Autowired
-    private RpcMethodRegistry rpcMethodRegistry;
+	@Autowired
+	private RpcMethodRegistry rpcMethodRegistry;
 
-    @Autowired
-    private RemoteRpcHandlerService remoteRpcHandlerService;
+	@Autowired
+	private RemoteRpcHandlerService remoteRpcHandlerService;
 
-    @Autowired
-    private RpcProxyService rpcProxyService;
-    
-    @Autowired
-    private RPCFutureService RPCFutureService;
+	@Autowired
+	private RpcProxyService rpcProxyService;
 
-    @Autowired
-    private ZookeeperRpcServiceRegistry zookeeperRpcServiceRegistry;
+	@Autowired
+	private RPCFutureService RPCFutureService;
 
-    @Autowired
-    private AsyncThreadService asyncThreadService;
+	@Autowired
+	private ZookeeperRpcServiceRegistry zookeeperRpcServiceRegistry;
 
-    @Autowired
-    private DictService dictService;
+	@Autowired
+	private AsyncThreadService asyncThreadService;
 
-    @Autowired
-    private AsyncNettyTcpHandlerService asyncNettyTcpHandlerService;
+	@Autowired
+	private DictService dictService;
 
-    @Autowired
-    private GameAsyncEventService gameAsyncEventService;
+	@Autowired
+	private AsyncNettyTcpHandlerService asyncNettyTcpHandlerService;
 
-    @Autowired
-    private SSLService sslService;
+	@Autowired
+	private GameAsyncEventService gameAsyncEventService;
 
-    @Autowired
-    private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
+	@Autowired
+	private SSLService sslService;
 
-    @Autowired
-    private AsyncNettyWebSocketHandlerExecutorService asyncNettyWebSocketHandlerExecutorService;
+	@Autowired
+	private AsyncNettyHttpHandlerService asyncNettyHttpHandlerService;
 
-    @Autowired
-    private GameTcpBroadCastService gameTcpBroadCastService;
+	@Autowired
+	private AsyncNettyWebSocketHandlerExecutorService asyncNettyWebSocketHandlerExecutorService;
 
-    @Autowired
-    private LifeCycleCheckService lifeCycleCheckService;
+	@Autowired
+	private GameTcpBroadCastService gameTcpBroadCastService;
 
-    public RPCFutureService getRPCFutureService() {
+	@Autowired
+	private LifeCycleCheckService lifeCycleCheckService;
+
+	public RPCFutureService getRPCFutureService() {
 		return RPCFutureService;
 	}
 
 	public void setRPCFutureService(
-            RPCFutureService RPCFutureService) {
+			RPCFutureService RPCFutureService) {
 		this.RPCFutureService = RPCFutureService;
 	}
 
-    public RemoteRpcHandlerService getRemoteRpcHandlerService() {
-        return remoteRpcHandlerService;
-    }
+	public RemoteRpcHandlerService getRemoteRpcHandlerService() {
+		return remoteRpcHandlerService;
+	}
 
-    public void setRemoteRpcHandlerService(RemoteRpcHandlerService remoteRpcHandlerService) {
-        this.remoteRpcHandlerService = remoteRpcHandlerService;
-    }
+	public void setRemoteRpcHandlerService(RemoteRpcHandlerService remoteRpcHandlerService) {
+		this.remoteRpcHandlerService = remoteRpcHandlerService;
+	}
 
-    public RpcMethodRegistry getRpcMethodRegistry() {
-        return rpcMethodRegistry;
-    }
+	public RpcMethodRegistry getRpcMethodRegistry() {
+		return rpcMethodRegistry;
+	}
 
-    public void setRpcMethodRegistry(RpcMethodRegistry rpcMethodRegistry) {
-        this.rpcMethodRegistry = rpcMethodRegistry;
-    }
+	public void setRpcMethodRegistry(RpcMethodRegistry rpcMethodRegistry) {
+		this.rpcMethodRegistry = rpcMethodRegistry;
+	}
 
-    public NetTcpSessionLoopUpService getNetTcpSessionLoopUpService() {
-        return netTcpSessionLoopUpService;
-    }
+	public NetTcpSessionLoopUpService getNetTcpSessionLoopUpService() {
+		return netTcpSessionLoopUpService;
+	}
 
-    public void setNetTcpSessionLoopUpService(NetTcpSessionLoopUpService netTcpSessionLoopUpService) {
-        this.netTcpSessionLoopUpService = netTcpSessionLoopUpService;
-    }
+	public void setNetTcpSessionLoopUpService(NetTcpSessionLoopUpService netTcpSessionLoopUpService) {
+		this.netTcpSessionLoopUpService = netTcpSessionLoopUpService;
+	}
 
-    public GameServerConfigService getGameServerConfigService() {
-        return gameServerConfigService;
-    }
+	public GameServerConfigService getGameServerConfigService() {
+		return gameServerConfigService;
+	}
 
-    public void setGameServerConfigService(GameServerConfigService gameServerConfigService) {
-        this.gameServerConfigService = gameServerConfigService;
-    }
+	public void setGameServerConfigService(GameServerConfigService gameServerConfigService) {
+		this.gameServerConfigService = gameServerConfigService;
+	}
 
-    public GamePlayerLoopUpService getGamePlayerLoopUpService() {
-        return gamePlayerLoopUpService;
-    }
+	public GamePlayerLoopUpService getGamePlayerLoopUpService() {
+		return gamePlayerLoopUpService;
+	}
 
-    public void setGamePlayerLoopUpService(GamePlayerLoopUpService gamePlayerLoopUpService) {
-        this.gamePlayerLoopUpService = gamePlayerLoopUpService;
-    }
+	public void setGamePlayerLoopUpService(GamePlayerLoopUpService gamePlayerLoopUpService) {
+		this.gamePlayerLoopUpService = gamePlayerLoopUpService;
+	}
 
-    public MessageRegistry getMessageRegistry() {
-        return messageRegistry;
-    }
+	public MessageRegistry getMessageRegistry() {
+		return messageRegistry;
+	}
 
-    public void setMessageRegistry(MessageRegistry messageRegistry) {
-        this.messageRegistry = messageRegistry;
-    }
+	public void setMessageRegistry(MessageRegistry messageRegistry) {
+		this.messageRegistry = messageRegistry;
+	}
 
-    public GameFacade getGameFacade() {
-        return gameFacade;
-    }
+	public GameFacade getGameFacade() {
+		return gameFacade;
+	}
 
-    public void setGameFacade(GameFacade gameFacade) {
-        this.gameFacade = gameFacade;
-    }
+	public void setGameFacade(GameFacade gameFacade) {
+		this.gameFacade = gameFacade;
+	}
 
-    public SystemTimeService getSystemTimeService() {
-        return systemTimeService;
-    }
+	public SystemTimeService getSystemTimeService() {
+		return systemTimeService;
+	}
 
-    public void setSystemTimeService(SystemTimeService systemTimeService) {
-        this.systemTimeService = systemTimeService;
-    }
+	public void setSystemTimeService(SystemTimeService systemTimeService) {
+		this.systemTimeService = systemTimeService;
+	}
 
-    public DefaultClassLoader getDefaultClassLoader() {
-        return defaultClassLoader;
-    }
+	public DefaultClassLoader getDefaultClassLoader() {
+		return defaultClassLoader;
+	}
 
-    public void setDefaultClassLoader(DefaultClassLoader defaultClassLoader) {
-        this.defaultClassLoader = defaultClassLoader;
-    }
+	public void setDefaultClassLoader(DefaultClassLoader defaultClassLoader) {
+		this.defaultClassLoader = defaultClassLoader;
+	}
 
-    public RpcProxyService getRpcProxyService() {
-        return rpcProxyService;
-    }
+	public RpcProxyService getRpcProxyService() {
+		return rpcProxyService;
+	}
 
-    public void setRpcProxyService(RpcProxyService rpcProxyService) {
-        this.rpcProxyService = rpcProxyService;
-    }
+	public void setRpcProxyService(RpcProxyService rpcProxyService) {
+		this.rpcProxyService = rpcProxyService;
+	}
 
 
-    public ZookeeperRpcServiceRegistry getZookeeperRpcServiceRegistry() {
-        return zookeeperRpcServiceRegistry;
-    }
+	public ZookeeperRpcServiceRegistry getZookeeperRpcServiceRegistry() {
+		return zookeeperRpcServiceRegistry;
+	}
 
-    public void setZookeeperRpcServiceRegistry(ZookeeperRpcServiceRegistry zookeeperRpcServiceRegistry) {
-        this.zookeeperRpcServiceRegistry = zookeeperRpcServiceRegistry;
-    }
+	public void setZookeeperRpcServiceRegistry(ZookeeperRpcServiceRegistry zookeeperRpcServiceRegistry) {
+		this.zookeeperRpcServiceRegistry = zookeeperRpcServiceRegistry;
+	}
 
-    public AsyncThreadService getAsyncThreadService() {
-        return asyncThreadService;
-    }
+	public AsyncThreadService getAsyncThreadService() {
+		return asyncThreadService;
+	}
 
-    public void setAsyncThreadService(AsyncThreadService asyncThreadService) {
-        this.asyncThreadService = asyncThreadService;
-    }
+	public void setAsyncThreadService(AsyncThreadService asyncThreadService) {
+		this.asyncThreadService = asyncThreadService;
+	}
 
-    public DictService getDictService() {
-        return dictService;
-    }
+	public DictService getDictService() {
+		return dictService;
+	}
 
-    public void setDictService(DictService dictService) {
-        this.dictService = dictService;
-    }
+	public void setDictService(DictService dictService) {
+		this.dictService = dictService;
+	}
 
-    public AsyncNettyTcpHandlerService getAsyncNettyTcpHandlerService() {
-        return asyncNettyTcpHandlerService;
-    }
+	public AsyncNettyTcpHandlerService getAsyncNettyTcpHandlerService() {
+		return asyncNettyTcpHandlerService;
+	}
 
-    public void setAsyncNettyTcpHandlerService(AsyncNettyTcpHandlerService asyncNettyTcpHandlerService) {
-        this.asyncNettyTcpHandlerService = asyncNettyTcpHandlerService;
-    }
+	public void setAsyncNettyTcpHandlerService(AsyncNettyTcpHandlerService asyncNettyTcpHandlerService) {
+		this.asyncNettyTcpHandlerService = asyncNettyTcpHandlerService;
+	}
 
-    public GameAsyncEventService getGameAsyncEventService() {
-        return gameAsyncEventService;
-    }
+	public GameAsyncEventService getGameAsyncEventService() {
+		return gameAsyncEventService;
+	}
 
-    public void setGameAsyncEventService(GameAsyncEventService gameAsyncEventService) {
-        this.gameAsyncEventService = gameAsyncEventService;
-    }
+	public void setGameAsyncEventService(GameAsyncEventService gameAsyncEventService) {
+		this.gameAsyncEventService = gameAsyncEventService;
+	}
 
-    public SSLService getSslService() {
-        return sslService;
-    }
+	public SSLService getSslService() {
+		return sslService;
+	}
 
-    public void setSslService(SSLService sslService) {
-        this.sslService = sslService;
-    }
+	public void setSslService(SSLService sslService) {
+		this.sslService = sslService;
+	}
 
-    public AsyncNettyHttpHandlerService getAsyncNettyHttpHandlerService() {
-        return asyncNettyHttpHandlerService;
-    }
+	public AsyncNettyHttpHandlerService getAsyncNettyHttpHandlerService() {
+		return asyncNettyHttpHandlerService;
+	}
 
-    public void setAsyncNettyHttpHandlerService(AsyncNettyHttpHandlerService asyncNettyHttpHandlerService) {
-        this.asyncNettyHttpHandlerService = asyncNettyHttpHandlerService;
-    }
+	public void setAsyncNettyHttpHandlerService(AsyncNettyHttpHandlerService asyncNettyHttpHandlerService) {
+		this.asyncNettyHttpHandlerService = asyncNettyHttpHandlerService;
+	}
 
-    public AsyncNettyWebSocketHandlerExecutorService getAsyncNettyWebSocketHandlerExecutorService() {
-        return asyncNettyWebSocketHandlerExecutorService;
-    }
+	public AsyncNettyWebSocketHandlerExecutorService getAsyncNettyWebSocketHandlerExecutorService() {
+		return asyncNettyWebSocketHandlerExecutorService;
+	}
 
-    public void setAsyncNettyWebSocketHandlerExecutorService(AsyncNettyWebSocketHandlerExecutorService asyncNettyWebSocketHandlerExecutorService) {
-        this.asyncNettyWebSocketHandlerExecutorService = asyncNettyWebSocketHandlerExecutorService;
-    }
+	public void setAsyncNettyWebSocketHandlerExecutorService(AsyncNettyWebSocketHandlerExecutorService asyncNettyWebSocketHandlerExecutorService) {
+		this.asyncNettyWebSocketHandlerExecutorService = asyncNettyWebSocketHandlerExecutorService;
+	}
 
-    public GameTcpBroadCastService getGameTcpBroadCastService() {
-        return gameTcpBroadCastService;
-    }
+	public GameTcpBroadCastService getGameTcpBroadCastService() {
+		return gameTcpBroadCastService;
+	}
 
-    public void setGameTcpBroadCastService(GameTcpBroadCastService gameTcpBroadCastService) {
-        this.gameTcpBroadCastService = gameTcpBroadCastService;
-    }
+	public void setGameTcpBroadCastService(GameTcpBroadCastService gameTcpBroadCastService) {
+		this.gameTcpBroadCastService = gameTcpBroadCastService;
+	}
 
-    public LifeCycleCheckService getLifeCycleCheckService() {
-        return lifeCycleCheckService;
-    }
+	public LifeCycleCheckService getLifeCycleCheckService() {
+		return lifeCycleCheckService;
+	}
 
-    public void setLifeCycleCheckService(LifeCycleCheckService lifeCycleCheckService) {
-        this.lifeCycleCheckService = lifeCycleCheckService;
-    }
+	public void setLifeCycleCheckService(LifeCycleCheckService lifeCycleCheckService) {
+		this.lifeCycleCheckService = lifeCycleCheckService;
+	}
 }

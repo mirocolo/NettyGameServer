@@ -5,20 +5,26 @@ import com.snowcattle.game.common.config.GameServerConfig;
 import com.snowcattle.game.service.config.GameServerConfigService;
 import com.snowcattle.game.service.net.websocket.NetWebSocketServerConfig;
 import com.snowcattle.game.service.net.websocket.SdWebSocketServerConfig;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.codec.http.*;
-import io.netty.handler.codec.http.websocketx.*;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.handler.codec.http.DefaultFullHttpResponse;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpHeaderNames;
+import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.HttpUtil;
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
+import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 
 import static io.netty.handler.codec.http.HttpMethod.GET;
-import static io.netty.handler.codec.http.HttpResponseStatus.*;
+import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static io.netty.handler.codec.http.HttpResponseStatus.FORBIDDEN;
+import static io.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 /**
@@ -26,36 +32,74 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  */
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<HttpRequest> {
 
-    private static final String WEBSOCKET_PATH = "/websocket";
+	private static final String WEBSOCKET_PATH = "/websocket";
 
-    private WebSocketServerHandshaker handshaker;
+	private WebSocketServerHandshaker handshaker;
 
-    @Override
-    public void channelRead0(ChannelHandlerContext ctx, HttpRequest msg) {
+	private static void sendHttpResponse(
+			ChannelHandlerContext ctx, HttpRequest req, FullHttpResponse res) {
+		// Generate an error page if response getStatus code is not OK (200).
+		if (res.status().code() != 200) {
+			ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
+			res.content().writeBytes(buf);
+			buf.release();
+			HttpUtil.setContentLength(res, res.content().readableBytes());
+		}
+
+		// Send the response and close the connection if necessary.
+		ChannelFuture f = ctx.channel().writeAndFlush(res);
+		if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
+			f.addListener(ChannelFutureListener.CLOSE);
+		}
+	}
+
+	private static String getWebSocketLocation(HttpRequest req) {
+		String location = req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
+		boolean sslFlag = false;
+		GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
+		GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
+		NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
+		if (netWebSocketServerConfig != null) {
+			SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
+			if (sdWebSocketServerConfig != null) {
+				sslFlag = sdWebSocketServerConfig.isSsl();
+
+			}
+		}
+
+		if (sslFlag) {
+			return "wss://" + location;
+		} else {
+			return "ws://" + location;
+		}
+	}
+
+	@Override
+	public void channelRead0(ChannelHandlerContext ctx, HttpRequest msg) {
 //        if (msg instanceof HttpRequest) {
-            handleHttpRequest(ctx, msg);
+		handleHttpRequest(ctx, msg);
 //        } else if (msg instanceof WebSocketFrame) {
 //            handleWebSocketFrame(ctx, (WebSocketFrame) msg);
 //        }
-    }
+	}
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) {
+		ctx.flush();
+	}
 
-    private void handleHttpRequest(ChannelHandlerContext ctx, HttpRequest req) {
-        // Handle a bad request.
-        if (!req.decoderResult().isSuccess()) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
-            return;
-        }
+	private void handleHttpRequest(ChannelHandlerContext ctx, HttpRequest req) {
+		// Handle a bad request.
+		if (!req.decoderResult().isSuccess()) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST));
+			return;
+		}
 
-        // Allow only GET methods.
-        if (req.method() != GET) {
-            sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
-            return;
-        }
+		// Allow only GET methods.
+		if (req.method() != GET) {
+			sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HTTP_1_1, FORBIDDEN));
+			return;
+		}
 
 //        // Send the demo page and favicon.ico
 //        if ("/".equals(req.uri())) {
@@ -68,74 +112,35 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<HttpRequ
 //            sendHttpResponse(ctx, req, res);
 //            return;
 //        }
-        if ("/favicon.ico".equals(req.uri()) || "/".equals(req.uri())) {
-            FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND);
-            sendHttpResponse(ctx, req, res);
-            return;
-        }
+		if ("/favicon.ico".equals(req.uri()) || "/".equals(req.uri())) {
+			FullHttpResponse res = new DefaultFullHttpResponse(HTTP_1_1, NOT_FOUND);
+			sendHttpResponse(ctx, req, res);
+			return;
+		}
 
-        // Handshake
-        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
-                getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
-        handshaker = wsFactory.newHandshaker(req);
-        if (handshaker == null) {
-            WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
-        } else {
-            handshaker.handshake(ctx.channel(), req);
-        }
-    }
+		// Handshake
+		WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
+				getWebSocketLocation(req), null, true, 5 * 1024 * 1024);
+		handshaker = wsFactory.newHandshaker(req);
+		if (handshaker == null) {
+			WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
+		} else {
+			handshaker.handshake(ctx.channel(), req);
+		}
+	}
 
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		ctx.close();
+	}
 
-    private static void sendHttpResponse(
-            ChannelHandlerContext ctx, HttpRequest req, FullHttpResponse res) {
-        // Generate an error page if response getStatus code is not OK (200).
-        if (res.status().code() != 200) {
-            ByteBuf buf = Unpooled.copiedBuffer(res.status().toString(), CharsetUtil.UTF_8);
-            res.content().writeBytes(buf);
-            buf.release();
-            HttpUtil.setContentLength(res, res.content().readableBytes());
-        }
+	public WebSocketServerHandshaker getHandshaker() {
+		return handshaker;
+	}
 
-        // Send the response and close the connection if necessary.
-        ChannelFuture f = ctx.channel().writeAndFlush(res);
-        if (!HttpUtil.isKeepAlive(req) || res.status().code() != 200) {
-            f.addListener(ChannelFutureListener.CLOSE);
-        }
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
-
-    private static String getWebSocketLocation(HttpRequest req) {
-        String location =  req.headers().get(HttpHeaderNames.HOST) + WEBSOCKET_PATH;
-        boolean sslFlag = false;
-        GameServerConfigService gameServerConfigService = LocalMananger.getInstance().getLocalSpringServiceManager().getGameServerConfigService();
-        GameServerConfig gameServerConfig = gameServerConfigService.getGameServerConfig();
-        NetWebSocketServerConfig netWebSocketServerConfig = gameServerConfigService.getNetWebSocketServerConfig();
-        if(netWebSocketServerConfig  != null){
-            SdWebSocketServerConfig sdWebSocketServerConfig = netWebSocketServerConfig.getSdWebSocketServerConfig();
-            if(sdWebSocketServerConfig != null) {
-                sslFlag  = sdWebSocketServerConfig.isSsl();
-
-            }
-        }
-
-        if (sslFlag) {
-            return "wss://" + location;
-        } else {
-            return "ws://" + location;
-        }
-    }
-
-    public WebSocketServerHandshaker getHandshaker() {
-        return handshaker;
-    }
-
-    public void setHandshaker(WebSocketServerHandshaker handshaker) {
-        this.handshaker = handshaker;
-    }
+	public void setHandshaker(WebSocketServerHandshaker handshaker) {
+		this.handshaker = handshaker;
+	}
 }
 

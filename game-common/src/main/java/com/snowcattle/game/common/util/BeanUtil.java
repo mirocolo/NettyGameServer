@@ -11,20 +11,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class BeanUtil implements ApplicationContextAware {
 
-    private static ApplicationContext ctx;
-    @Override
-    public void setApplicationContext(ApplicationContext arg0)throws BeansException {
-        ctx = arg0;
-    }
+	private static ApplicationContext ctx;
 
-    public static Object getBean(String beanName) {
-        if(ctx == null){
-            throw new NullPointerException();
-        }
-        return ctx.getBean(beanName);
-    }
+	public static Object getBean(String beanName) {
+		if (ctx == null) {
+			throw new NullPointerException();
+		}
+		return ctx.getBean(beanName);
+	}
 
-
+	@Override
+	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
+		ctx = arg0;
+	}
 
 
 }

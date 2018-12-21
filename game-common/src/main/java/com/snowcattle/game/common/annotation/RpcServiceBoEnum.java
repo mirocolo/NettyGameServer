@@ -1,6 +1,7 @@
 package com.snowcattle.game.common.annotation;
 
 import com.snowcattle.game.common.enums.BOEnum;
+
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
@@ -15,5 +16,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Component
 public @interface RpcServiceBoEnum {
-    BOEnum bo();
+	BOEnum bo();
 }

@@ -11,34 +11,34 @@ import com.snowcattle.game.service.message.command.MessageCommandIndex;
 @MessageCommandAnnotation(command = MessageCommandIndex.ONLINE_LOGIN_TCP_CLIENT_MESSAGE)
 public class OnlineLoginClientTcpMessage extends AbstractNetProtoBufTcpMessage {
 
-    private int id;
+	private int id;
 
-    @Override
-    public void decoderNetProtoBufMessageBody() throws Exception {
-        byte[] bytes = getNetMessageBody().getBytes();
-        OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf req = OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.parseFrom(bytes);
-        setId(req.getId());
-    }
+	@Override
+	public void decoderNetProtoBufMessageBody() throws Exception {
+		byte[] bytes = getNetMessageBody().getBytes();
+		OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf req = OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.parseFrom(bytes);
+		setId(req.getId());
+	}
 
-    @Override
-    public void release() {
+	@Override
+	public void release() {
 
-    }
+	}
 
-    @Override
-    public void encodeNetProtoBufMessageBody() throws Exception {
-        OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.Builder builder = OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.newBuilder();
-        builder.setId(getId());
-        byte[] bytes = builder.build().toByteArray();
-        getNetMessageBody().setBytes(bytes);
-    }
+	@Override
+	public void encodeNetProtoBufMessageBody() throws Exception {
+		OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.Builder builder = OnlineTCPClientProBuf.OnlineLoginTCPClientProBuf.newBuilder();
+		builder.setId(getId());
+		byte[] bytes = builder.build().toByteArray();
+		getNetMessageBody().setBytes(bytes);
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 }
 

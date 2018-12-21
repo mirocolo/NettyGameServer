@@ -10,19 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * 简单的用于连接字符串操作的对象,相对于StringBuilder有以下改进:
  * <ul>
  * <li>
- * append方法,延迟组装结果(在调用{@link #end()}
- * 的时候才进行内存拷贝操作),避免使用StringBuilder时如果字符串较长时造成的较多的重复内存拷贝</li>
+ * append方法,延迟组装结果(在调用{@link #end()} 的时候才进行内存拷贝操作),避免使用StringBuilder时如果字符串较长时造成的较多的重复内存拷贝</li>
  * <li>
  * getBytes方法,直接对value进行编码,避免String.getBytes的内存拷贝操作</li>
  * </ul>
  * 该类适用于将字符串作为网络数据包发送的场合(即只需要得到byte[]数据,而不需要连接完成后的String对象),同时每次append时字符串较长
- *
-  *
- *
  */
 public class ConactString {
 	private List<String> buffers;

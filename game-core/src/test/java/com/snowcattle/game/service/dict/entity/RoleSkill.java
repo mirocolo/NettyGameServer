@@ -6,54 +6,60 @@ import com.snowcattle.game.service.dict.IDict;
 
 public class RoleSkill implements IDict {
 
-    private int        ID;        // 编号
-    private String     desc;      // 描述
-    private int        lvl;       // 等级
-    private int        emitterID; // 发射器id
-    private String     skills;    // 技能列表
-    private int        mpStage;   // 能量百分比
+	private int ID;        // 编号
+	private String desc;      // 描述
+	private int lvl;       // 等级
+	private int emitterID; // 发射器id
+	private String skills;    // 技能列表
+	private int mpStage;   // 能量百分比
 
-    public int getID() {
-        return ID;
-    }
-    public void setID(int ID) {
-        this.ID = ID;
-    }
+	public int getID() {
+		return ID;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 
-    public int getLvl() {
-        return lvl;
-    }
-    public void setLvl(int lvl) {
-        this.lvl = lvl;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public int getEmitterID() {
-        return emitterID;
-    }
-    public void setEmitterID(int emitterID) {
-        this.emitterID = emitterID;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 
-    public String getSkills() {
-        return skills;
-    }
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
+	public int getLvl() {
+		return lvl;
+	}
 
-    public int getMpStage() {
-        return mpStage;
-    }
-    public void setMpStage(int mpStage) {
-        this.mpStage = mpStage;
-    }
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
+	}
+
+	public int getEmitterID() {
+		return emitterID;
+	}
+
+	public void setEmitterID(int emitterID) {
+		this.emitterID = emitterID;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public int getMpStage() {
+		return mpStage;
+	}
+
+	public void setMpStage(int mpStage) {
+		this.mpStage = mpStage;
+	}
 
 
 };

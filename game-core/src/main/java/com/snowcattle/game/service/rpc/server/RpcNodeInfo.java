@@ -5,38 +5,38 @@ package com.snowcattle.game.service.rpc.server;
  */
 public class RpcNodeInfo {
 
-    /**
-     * 服务器id
-     */
-    private String serverId;
-    private String host;
-    private String port;
+	/**
+	 * 服务器id
+	 */
+	private String serverId;
+	private String host;
+	private String port;
 
-    public String getServerId() {
-        return serverId;
-    }
+	public String getServerId() {
+		return serverId;
+	}
 
-    public void setServerId(String serverId) {
-        this.serverId = serverId;
-    }
+	public void setServerId(String serverId) {
+		this.serverId = serverId;
+	}
 
-    public String getHost() {
-        return host;
-    }
+	public String getHost() {
+		return host;
+	}
 
-    public void setHost(String host) {
-        this.host = host;
-    }
+	public void setHost(String host) {
+		this.host = host;
+	}
 
-    public String getPort() {
-        return port;
-    }
+	public String getPort() {
+		return port;
+	}
 
-    public void setPort(String port) {
-        this.port = port;
-    }
+	public void setPort(String port) {
+		this.port = port;
+	}
 
-    public int getIntPort(){
-        return Integer.parseInt(port);
-    }
+	public int getIntPort() {
+		return Integer.parseInt(port);
+	}
 }

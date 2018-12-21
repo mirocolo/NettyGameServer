@@ -5,23 +5,30 @@ package com.snowcattle.game.message.logicgenerate.enity;
  *
  * @author CodeGenerator, don't modify this file please.
  */
- 
+
 public class CommonPlayer {
-	/**id*/
+	/**
+	 * id
+	 */
 	private long id;
-	/**name*/
+	/**
+	 * name
+	 */
 	private String name;
 
-	public void setId(long id){
-		this.id = id;
-	}
-	public long getId(){
+	public long getId() {
 		return this.id;
 	}
-	public void setName(String name){
-		this.name = name;
+
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getName(){
+
+	public String getName() {
 		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
